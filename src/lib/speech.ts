@@ -26,7 +26,11 @@ if (isSpeechSupported()) {
   }
 }
 
-export function speak(text: string, _language: SpeechLanguage = 'embera'): boolean {
+export function speak(
+  text: string,
+  _language: SpeechLanguage = 'embera',
+  callbacks?: { onStart?: () => void; onEnd?: () => void },
+): boolean {
   if (!isSpeechSupported() || !text.trim()) return false
   const synth = window.speechSynthesis
   synth.cancel()
@@ -42,6 +46,11 @@ export function speak(text: string, _language: SpeechLanguage = 'embera'): boole
   utterance.rate = 0.78
   utterance.pitch = 1
   utterance.volume = 1
+  if (callbacks?.onStart) utterance.onstart = callbacks.onStart
+  if (callbacks?.onEnd) {
+    utterance.onend = callbacks.onEnd
+    utterance.onerror = callbacks.onEnd
+  }
   synth.speak(utterance)
   return true
 }

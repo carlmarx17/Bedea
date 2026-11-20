@@ -5,24 +5,20 @@ import { getWords, buildTranslationOptions, buildMatchPairs } from '../lib/vocab
 import { getSentences } from '../data/sentences'
 import { useProgress } from '../lib/progress'
 import { Button, Badge, StepProgress, AudioButton, EmptyState } from '../components/ui'
+import { TextileBorder } from '../components/TextilePattern'
 import { Icon } from '../components/Icon'
 import { cn, shuffle } from '../lib/utils'
 import type { VocabularyEntry } from '../types'
 
 type Mode = 'flashcards' | 'quiz' | 'match' | 'sentence'
 
-const MODE_META: Record<Mode, { title: string; icon: string; description: string }> = {
-  flashcards: { title: 'Tarjetas', icon: 'layers', description: 'Voltea cada tarjeta, di la palabra en voz alta y marca si la recordaste.' },
-  quiz: { title: 'Quiz', icon: 'target', description: 'Elige la traducción correcta. Siempre verás una explicación después de responder.' },
-  match: { title: 'Emparejar', icon: 'puzzle', description: 'Conecta cada palabra nativa con su significado en español.' },
-  sentence: { title: 'Oraciones', icon: 'pen', description: 'Ordena las palabras para formar la expresión correcta.' },
-}
-
 export function PracticePage() {
   const { languageId = '', mode = '' } = useParams()
   const navigate = useNavigate()
+  const [sessionKey, setSessionKey] = useState(0)
   const language = LANGUAGE_MAP[languageId]
   const normalizedMode = (['flashcards', 'quiz', 'match', 'sentence'].includes(mode) ? mode : 'flashcards') as Mode
+  const restart = () => setSessionKey((k) => k + 1)
 
   if (!language || language.status !== 'available') {
     return (
@@ -40,10 +36,18 @@ export function PracticePage() {
   return (
     <div className="min-h-dvh bg-sand-50">
       <div className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col px-4 py-5 sm:px-6 sm:py-8">
-        {normalizedMode === 'flashcards' && <FlashcardsMode languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} />}
-        {normalizedMode === 'quiz' && <QuizMode languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} />}
-        {normalizedMode === 'match' && <MatchMode languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} />}
-        {normalizedMode === 'sentence' && <SentenceMode languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} />}
+        {normalizedMode === 'flashcards' && (
+          <FlashcardsMode key={`fc-${sessionKey}`} languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} onRestart={restart} />
+        )}
+        {normalizedMode === 'quiz' && (
+          <QuizMode key={`qz-${sessionKey}`} languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} onRestart={restart} />
+        )}
+        {normalizedMode === 'match' && (
+          <MatchMode key={`mt-${sessionKey}`} languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} onRestart={restart} />
+        )}
+        {normalizedMode === 'sentence' && (
+          <SentenceMode key={`st-${sessionKey}`} languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} onRestart={restart} />
+        )}
       </div>
     </div>
   )
@@ -53,7 +57,7 @@ export function PracticePage() {
 /* Flashcards                                                          */
 /* ------------------------------------------------------------------ */
 
-function FlashcardsMode({ languageId, onExit }: { languageId: string; onExit: () => void }) {
+function FlashcardsMode({ languageId, onExit, onRestart }: { languageId: string; onExit: () => void; onRestart: () => void }) {
   const words = useMemo(() => shuffle(getWords(languageId)).slice(0, 10), [languageId])
   const { addXp, markWordsSeen } = useProgress()
   const [index, setIndex] = useState(0)
@@ -88,7 +92,7 @@ function FlashcardsMode({ languageId, onExit }: { languageId: string; onExit: ()
           { label: 'XP', value: `+${10 + Math.round((known / words.length) * 10)}` },
         ]}
         onExit={onExit}
-        onRetry={() => window.location.reload()}
+        onRetry={onRestart}
       />
     )
   }
@@ -162,7 +166,7 @@ interface QuizQuestion {
   options: string[]
 }
 
-function QuizMode({ languageId, onExit }: { languageId: string; onExit: () => void }) {
+function QuizMode({ languageId, onExit, onRestart }: { languageId: string; onExit: () => void; onRestart: () => void }) {
   const questions = useMemo<QuizQuestion[]>(
     () =>
       shuffle(getWords(languageId))
@@ -196,13 +200,13 @@ function QuizMode({ languageId, onExit }: { languageId: string; onExit: () => vo
       setSelected(null)
       setAnswered(false)
     } else {
-      addXp(5 * correct + (selected === question.entry.traduccion_espanol ? 5 : 0))
+      addXp(Math.max(5, 5 * correct))
       setDone(true)
     }
   }
 
   if (done) {
-    const gained = 5 * correct
+    const gained = Math.max(5, 5 * correct)
     return (
       <Completion
         title={correct >= questions.length * 0.7 ? '¡Buen trabajo!' : 'Sigue practicando'}
@@ -212,7 +216,7 @@ function QuizMode({ languageId, onExit }: { languageId: string; onExit: () => vo
           { label: 'XP', value: `+${gained}` },
         ]}
         onExit={onExit}
-        onRetry={() => window.location.reload()}
+        onRetry={onRestart}
       />
     )
   }
@@ -291,7 +295,7 @@ interface MatchCard {
   text: string
 }
 
-function MatchMode({ languageId, onExit }: { languageId: string; onExit: () => void }) {
+function MatchMode({ languageId, onExit, onRestart }: { languageId: string; onExit: () => void; onRestart: () => void }) {
   const entries = useMemo(() => buildMatchPairs(languageId, 6), [languageId])
   const cards = useMemo<MatchCard[]>(() => {
     const native: MatchCard[] = entries.map((entry) => ({ key: `n-${entry.id}`, entryId: entry.id, kind: 'native', text: entry.palabra_nativa }))
@@ -352,7 +356,7 @@ function MatchMode({ languageId, onExit }: { languageId: string; onExit: () => v
           { label: 'XP', value: '+20' },
         ]}
         onExit={onExit}
-        onRetry={() => window.location.reload()}
+        onRetry={onRestart}
       />
     )
   }
@@ -398,7 +402,7 @@ function MatchMode({ languageId, onExit }: { languageId: string; onExit: () => v
 /* Sentence builder                                                    */
 /* ------------------------------------------------------------------ */
 
-function SentenceMode({ languageId, onExit }: { languageId: string; onExit: () => void }) {
+function SentenceMode({ languageId, onExit, onRestart }: { languageId: string; onExit: () => void; onRestart: () => void }) {
   const sentences = useMemo(() => shuffle(getSentences(languageId)).slice(0, 5), [languageId])
   const { addXp } = useProgress()
   const [index, setIndex] = useState(0)
@@ -451,13 +455,13 @@ function SentenceMode({ languageId, onExit }: { languageId: string; onExit: () =
     if (index < sentences.length - 1) {
       resetFor(index + 1)
     } else {
-      addXp(correct * 6 + (checked === 'correct' ? 6 : 0))
+      addXp(Math.max(6, correct * 6))
       setDone(true)
     }
   }
 
   if (done) {
-    const gained = correct * 6
+    const gained = Math.max(6, correct * 6)
     return (
       <Completion
         title={correct === sentences.length ? '¡Perfecto!' : 'Buen intento'}
@@ -467,7 +471,7 @@ function SentenceMode({ languageId, onExit }: { languageId: string; onExit: () =
           { label: 'XP', value: `+${gained}` },
         ]}
         onExit={onExit}
-        onRetry={() => window.location.reload()}
+        onRetry={onRestart}
       />
     )
   }
@@ -574,23 +578,26 @@ function Completion({
 }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center py-10 text-center animate-pop-in">
-      <div className="surface w-full max-w-lg p-8 sm:p-10">
-        <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-4xl bg-ochre-100 text-ochre-600">
-          <Icon name="trophy" size={38} />
-        </span>
-        <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-muted">{subtitle}</p>
-        <h1 className="mt-1 font-display text-3xl font-semibold text-ink">{title}</h1>
-        <div className={cn('mt-6 grid gap-3', stats.length === 3 ? 'grid-cols-3' : 'grid-cols-2')}>
-          {stats.map((stat) => (
-            <div key={stat.label} className="rounded-2xl bg-sand-50 p-4">
-              <p className="font-display text-2xl font-semibold text-ink">{stat.value}</p>
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <Button size="lg" onClick={onExit}>Volver</Button>
-          <Button variant="outline" size="lg" onClick={onRetry}><Icon name="refresh" size={16} /> Repetir</Button>
+      <div className="surface w-full max-w-lg overflow-hidden">
+        <TextileBorder tone="gold" />
+        <div className="p-8 sm:p-10">
+          <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-4xl bg-ochre-100 text-ochre-600 shadow-soft">
+            <Icon name="trophy" size={38} />
+          </span>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-muted">{subtitle}</p>
+          <h1 className="mt-1 font-display text-3xl font-semibold text-ink">{title}</h1>
+          <div className={cn('mt-6 grid gap-3', stats.length === 3 ? 'grid-cols-3' : 'grid-cols-2')}>
+            {stats.map((stat) => (
+              <div key={stat.label} className="rounded-2xl bg-sand-50 p-4">
+                <p className="font-display text-2xl font-semibold text-ink">{stat.value}</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button size="lg" onClick={onExit}>Volver</Button>
+            <Button variant="outline" size="lg" onClick={onRetry}><Icon name="refresh" size={16} /> Repetir</Button>
+          </div>
         </div>
       </div>
     </div>

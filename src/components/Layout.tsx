@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { BrandLockup } from './BrandMark'
 import { Icon } from './Icon'
+import { TextileBorder } from './TextilePattern'
 import { ProgressBar } from './ui'
 import { useBrand } from '../lib/brand'
 import { useProgress } from '../lib/progress'
@@ -46,7 +47,8 @@ export function Layout() {
       {/* ---------------------------------------------------------- */}
       {/* Barra lateral de escritorio                                 */}
       {/* ---------------------------------------------------------- */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[17.5rem] flex-col border-r border-sand-200/80 bg-cream/80 px-5 py-7 backdrop-blur-xl lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[17.5rem] flex-col border-r border-sand-200/80 bg-cream/85 px-5 pb-6 pt-0 backdrop-blur-xl lg:flex">
+        <TextileBorder tone="gold" className="-mx-5 mb-6 w-[calc(100%+2.5rem)] opacity-75" />
         <Link to="/" aria-label={`${brand.name}, ir al inicio`} className="mb-8 block">
           <BrandLockup />
         </Link>
@@ -151,7 +153,10 @@ export function Layout() {
       {/* Contenido                                                   */}
       {/* ---------------------------------------------------------- */}
       <div className="lg:pl-[17.5rem]">
-        <main className="container-app min-h-[calc(100dvh-4rem)] pb-28 pt-6 sm:pt-8 lg:pb-14 lg:pt-10">
+        <main
+          key={location.pathname}
+          className="container-app min-h-[calc(100dvh-4rem)] animate-fade-in pb-28 pt-6 sm:pt-8 lg:pb-14 lg:pt-10"
+        >
           <Outlet />
         </main>
 

@@ -1,4 +1,4 @@
-import { useEffect, type ButtonHTMLAttributes, type ReactNode } from 'react'
+import { useEffect, useState, type ButtonHTMLAttributes, type ReactNode } from 'react'
 import { Icon } from './Icon'
 import { isSpeechSupported, speak } from '../lib/speech'
 import { cn } from '../lib/utils'
@@ -235,7 +235,15 @@ export function AudioButton({
   className?: string
 }) {
   const supported = isSpeechSupported()
-  const handleClick = () => speak(text)
+  const [speaking, setSpeaking] = useState(false)
+
+  const handleClick = () => {
+    setSpeaking(true)
+    const started = speak(text, 'embera', {
+      onEnd: () => setSpeaking(false),
+    })
+    if (!started) setSpeaking(false)
+  }
 
   return (
     <button
@@ -249,13 +257,16 @@ export function AudioButton({
       }
       aria-label={`Escuchar pronunciación aproximada de ${text}`}
       className={cn(
-        'inline-flex items-center justify-center gap-1.5 rounded-full border border-jungle-200 bg-jungle-50 font-semibold text-jungle-700 transition-colors hover:border-jungle-300 hover:bg-jungle-100 disabled:cursor-not-allowed disabled:opacity-40',
-        compact ? 'h-8 w-8' : 'px-3 py-1.5 text-xs',
+        'inline-flex items-center justify-center gap-1.5 rounded-full border font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40',
+        speaking
+          ? 'border-jungle-500 bg-jungle-700 text-cream animate-pulse-ring'
+          : 'border-jungle-200 bg-jungle-50 text-jungle-700 hover:border-jungle-300 hover:bg-jungle-100',
+        compact ? 'h-9 w-9' : 'px-3.5 py-1.5 text-xs',
         className,
       )}
     >
-      <Icon name="volume" size={compact ? 15 : 14} />
-      {!compact && <span>Escuchar</span>}
+      <Icon name="volume" size={compact ? 15 : 14} className={speaking ? 'animate-pulse' : undefined} />
+      {!compact && <span>{speaking ? 'Escuchando…' : 'Escuchar'}</span>}
     </button>
   )
 }

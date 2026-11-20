@@ -1,17 +1,25 @@
+import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { LANGUAGE_MAP, CATEGORIES } from '../data/languages'
+import { AVAILABLE_LANGUAGES, LANGUAGE_MAP, CATEGORIES } from '../data/languages'
 import { getCurriculum } from '../data/curriculum'
 import { getWords, getWordOfTheDay, getLanguageCategoryCounts } from '../lib/vocabulary'
 import { useProgress } from '../lib/progress'
 import { Button, Badge, ProgressBar, SectionHeading, AudioButton, EmptyState } from '../components/ui'
+import { TextileBorder } from '../components/TextilePattern'
 import { Icon } from '../components/Icon'
 import { cn } from '../lib/utils'
 
 export function LanguagePage() {
   const { languageId = '' } = useParams()
-  const { progress } = useProgress()
+  const { progress, setLastLanguage } = useProgress()
   const language = LANGUAGE_MAP[languageId]
   const curriculum = getCurriculum(languageId)
+
+  useEffect(() => {
+    if (language && language.status === 'available') {
+      setLastLanguage(language.id)
+    }
+  }, [language, setLastLanguage])
 
   if (!language) {
     return (
@@ -56,12 +64,40 @@ export function LanguagePage() {
   }
 
   const accent = language.accent === 'wayuu' ? 'ochre' : 'jungle'
+  const nextActiveLessonId = orderedLessons.find((l) => !completed.includes(l.id))?.id
 
   return (
     <div className="space-y-8 sm:space-y-10">
+      {/* Selector rápido de lengua */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="inline-flex rounded-full border border-sand-200 bg-cream p-1 shadow-soft">
+          {AVAILABLE_LANGUAGES.map((lang) => {
+            const active = lang.id === language.id
+            return (
+              <Link
+                key={lang.id}
+                to={`/lengua/${lang.id}`}
+                className={cn(
+                  'rounded-full px-4 py-1.5 text-sm font-semibold transition-all',
+                  active
+                    ? 'bg-jungle-700 text-cream shadow-sm'
+                    : 'text-muted hover:text-ink',
+                )}
+              >
+                {lang.name}
+              </Link>
+            )
+          })}
+        </div>
+        <Link to={`/diccionario?lang=${language.id}`} className="inline-flex items-center gap-1.5 text-xs font-semibold text-jungle-700 hover:underline">
+          <Icon name="book" size={14} />
+          Ver diccionario de {language.name}
+        </Link>
+      </div>
+
       {/* Encabezado de la lengua */}
       <section className="surface overflow-hidden">
-        <div className={cn('h-2 w-full bg-gradient-to-r', language.accent === 'wayuu' ? 'from-ochre-400 to-ochre-600' : 'from-terracotta-500 to-jungle-700')} />
+        <TextileBorder tone={language.accent === 'wayuu' ? 'gold' : 'terracotta'} />
         <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-start">
           <div>
             <p className="eyebrow">{language.family}</p>
@@ -178,18 +214,52 @@ export function LanguagePage() {
                   </div>
                   {unitDone && <Badge tone="jungle">Completada</Badge>}
                 </div>
-                <div className="divide-y divide-sand-200/70">
-                  {lessons.map((lesson) => {
+                <div className="divide-y divide-sand-200/60">
+                  {lessons.map((lesson, lessonIdx) => {
                     const isDone = completed.includes(lesson.id)
                     const unlocked = isLessonUnlocked(lesson.id)
+                    const isNext = lesson.id === nextActiveLessonId
+                    const isLast = lessonIdx === lessons.length - 1
                     const wordCount = getWords(languageId, lesson.category).length
                     return (
-                      <div key={lesson.id} className={cn('flex items-center gap-4 p-4 sm:p-5', !unlocked && 'opacity-60')}>
-                        <span className={cn('flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2', isDone ? 'border-jungle-600 bg-jungle-600 text-cream' : unlocked ? 'border-ochre-300 bg-ochre-50 text-ochre-700' : 'border-sand-300 bg-sand-100 text-muted')}>
-                          {isDone ? <Icon name="check" size={18} /> : unlocked ? <Icon name="play" size={17} /> : <Icon name="lock" size={16} />}
-                        </span>
+                      <div
+                        key={lesson.id}
+                        className={cn(
+                          'relative flex items-center gap-4 p-4 transition-colors sm:p-5',
+                          isNext && 'bg-ochre-50/45',
+                          !unlocked && 'opacity-60',
+                        )}
+                      >
+                        <div className="relative flex flex-col items-center self-stretch">
+                          <span
+                            className={cn(
+                              'relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 transition-transform',
+                              isDone
+                                ? 'border-jungle-600 bg-jungle-600 text-cream'
+                                : isNext
+                                  ? 'border-ochre-400 bg-ochre-100 text-ochre-800 shadow-glow'
+                                  : unlocked
+                                    ? 'border-ochre-300 bg-ochre-50 text-ochre-700'
+                                    : 'border-sand-300 bg-sand-100 text-muted',
+                            )}
+                          >
+                            {isDone ? <Icon name="check" size={18} /> : unlocked ? <Icon name="play" size={17} /> : <Icon name="lock" size={16} />}
+                          </span>
+                          {!isLast && (
+                            <span
+                              aria-hidden="true"
+                              className={cn(
+                                'mt-1 w-0.5 flex-1 rounded-full',
+                                isDone ? 'bg-jungle-400' : 'border-l-2 border-dashed border-sand-300',
+                              )}
+                            />
+                          )}
+                        </div>
                         <div className="min-w-0 flex-1">
-                          <p className="font-display text-base font-semibold text-ink">{lesson.title}</p>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <p className="font-display text-base font-semibold text-ink">{lesson.title}</p>
+                            {isNext && <Badge tone="ochre">Siguiente</Badge>}
+                          </div>
                           <p className="native-word text-xs text-muted">{lesson.subtitle}</p>
                           <p className="mt-0.5 text-xs text-muted">{lesson.description}</p>
                           <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[0.68rem] font-semibold text-muted">

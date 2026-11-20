@@ -4,6 +4,7 @@ import { useBrand } from '../lib/brand'
 import { MEDALS } from '../data/medals'
 import { AVAILABLE_LANGUAGES } from '../data/languages'
 import { getCurriculum } from '../data/curriculum'
+import { getWords } from '../lib/vocabulary'
 import { SectionHeading, StatCard, ProgressBar, Badge, Button } from '../components/ui'
 import { Icon } from '../components/Icon'
 import { cn, dateKey, formatNumber } from '../lib/utils'
@@ -84,12 +85,16 @@ export function ProgressPage() {
                 const total = curriculum?.lessons.length ?? 0
                 const done = progress.completedLessons[language.id]?.length ?? 0
                 const percent = total === 0 ? 0 : (done / total) * 100
+                const langWordIds = new Set(getWords(language.id).map((w) => w.id))
+                const seenInLang = progress.seenWords.filter((id) => langWordIds.has(id)).length
                 return (
                   <div key={language.id}>
                     <div className="flex items-center justify-between gap-3">
                       <div>
                         <p className="font-display text-base font-semibold text-ink">{language.name}</p>
-                        <p className="text-xs text-muted">{done} de {total} lecciones · {progress.seenWords.length > 0 ? '' : ''}</p>
+                        <p className="text-xs text-muted">
+                          {done} de {total} lecciones · {seenInLang} de {langWordIds.size} palabras vistas
+                        </p>
                       </div>
                       <span className="text-sm font-semibold tabular-nums text-muted">{Math.round(percent)}%</span>
                     </div>
@@ -108,9 +113,20 @@ export function ProgressPage() {
 
         {/* Medallas */}
         <section className="surface p-6">
-          <p className="eyebrow">Medallas</p>
-          <h3 className="mt-1 font-display text-xl font-semibold text-ink">Tus logros</h3>
-          <p className="mt-1 text-sm text-muted">{earnedMedals.length} de {MEDALS.length} medallas conseguidas</p>
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="eyebrow">Medallas</p>
+              <h3 className="mt-1 font-display text-xl font-semibold text-ink">Tus logros</h3>
+            </div>
+            <Badge tone="ochre">{earnedMedals.length}/{MEDALS.length}</Badge>
+          </div>
+          <ProgressBar
+            value={MEDALS.length === 0 ? 0 : (earnedMedals.length / MEDALS.length) * 100}
+            tone="ochre"
+            height="h-2"
+            className="mt-3"
+          />
+          <p className="mt-2 text-xs text-muted">{earnedMedals.length} de {MEDALS.length} medallas conseguidas</p>
 
           <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
             {MEDALS.map((medal) => {

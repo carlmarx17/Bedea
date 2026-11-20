@@ -95,6 +95,10 @@ export function LanguageCard({ language }: { language: LanguageInfo }) {
             <span className="tabular-nums">{Math.round(percent)}%</span>
           </div>
           <ProgressBar value={percent} tone={language.accent === 'wayuu' ? 'ochre' : 'jungle'} height="h-2" />
+          <div className="mt-3.5 flex items-center justify-between text-xs font-semibold text-jungle-700">
+            <span>{completed === 0 ? 'Comenzar lección 1' : 'Continuar camino'}</span>
+            <Icon name="arrow-right" size={15} className="transition-transform group-hover:translate-x-1" />
+          </div>
         </div>
       </div>
     </Link>
@@ -103,20 +107,25 @@ export function LanguageCard({ language }: { language: LanguageInfo }) {
 
 /** Tarjeta de una lengua que llegará próximamente. */
 export function UpcomingLanguageCard({ language }: { language: LanguageInfo }) {
+  const accent = ACCENTS[language.accent] ?? ACCENTS.nasa
   return (
-    <div className="surface-muted relative flex flex-col overflow-hidden p-5">
+    <div className="surface-muted relative flex flex-col overflow-hidden p-5 transition-colors hover:border-sand-300 hover:bg-cream/80">
+      <div className={cn('absolute inset-x-0 top-0 h-1 bg-gradient-to-r opacity-45', accent.bar)} />
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-muted">
             {language.family}
           </p>
-          <h3 className="mt-1.5 font-display text-lg font-semibold text-ink/80">{language.name}</h3>
-          <p className="text-xs font-medium text-muted">{language.nativeName}</p>
+          <h3 className="mt-1.5 font-display text-lg font-semibold text-ink/90">{language.name}</h3>
+          <p className="native-word text-xs font-medium text-muted">{language.nativeName}</p>
         </div>
         <Badge tone="outline">Próximamente</Badge>
       </div>
       <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-muted">{language.description}</p>
-      <p className="mt-3 text-[0.68rem] font-medium text-muted/80">{language.region}</p>
+      <p className="mt-auto flex items-center gap-1.5 pt-3 text-[0.68rem] font-medium text-muted/85">
+        <Icon name="map-pin" size={12} className={accent.text} />
+        {language.region}
+      </p>
     </div>
   )
 }

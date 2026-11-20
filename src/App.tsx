@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { BrandProvider } from './lib/brand'
 import { ProgressProvider } from './lib/progress'
@@ -16,7 +16,7 @@ export default function App() {
   return (
     <BrandProvider>
       <ProgressProvider>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             {/* La lección y los juegos ocupan toda la pantalla, sin barra lateral. */}
             <Route path="/lengua/:languageId/leccion/:lessonId" element={<LessonPage />} />
@@ -33,7 +33,7 @@ export default function App() {
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </ProgressProvider>
     </BrandProvider>
   )

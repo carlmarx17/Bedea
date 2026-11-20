@@ -1,5 +1,5 @@
 import { Badge, AudioButton } from './ui'
-import { CATEGORY_MAP } from '../data/languages'
+import { CATEGORY_MAP, LANGUAGE_MAP } from '../data/languages'
 import type { VocabularyEntry } from '../types'
 import { cn } from '../lib/utils'
 
@@ -12,13 +12,24 @@ interface WordCardProps {
 /** Tarjeta de palabra usada en el diccionario y en resultados de búsqueda. */
 export function WordCard({ entry, onOpen, className }: WordCardProps) {
   const category = CATEGORY_MAP[entry.category]
+  const language = LANGUAGE_MAP[entry.language]
   const content = (
     <>
       <div className="flex items-start justify-between gap-3">
-        <Badge tone={entry.source === 'manual' ? 'jungle' : 'ochre'}>
-          {entry.source === 'manual' ? 'Manual' : 'Complemento'}
-        </Badge>
-        <AudioButton text={entry.palabra_nativa} compact />
+        <div className="flex flex-wrap items-center gap-1.5">
+          <Badge tone={entry.language === 'embera' ? 'terracotta' : 'ochre'}>
+            {language?.name ?? entry.language}
+          </Badge>
+          <Badge tone={entry.source === 'manual' ? 'jungle' : 'sand'}>
+            {entry.source === 'manual' ? 'Manual' : 'Complemento'}
+          </Badge>
+        </div>
+        <div
+          className="relative z-10"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <AudioButton text={entry.palabra_nativa} compact />
+        </div>
       </div>
 
       <p className="native-word mt-4 font-display text-2xl font-semibold leading-tight text-ink">
@@ -32,24 +43,33 @@ export function WordCard({ entry, onOpen, className }: WordCardProps) {
         {entry.ejemplo_uso} · {entry.ejemplo_traduccion}
       </p>
 
-      <div className="mt-4 flex items-center justify-between gap-2 border-t border-sand-200/80 pt-3">
+      <div className="mt-auto flex items-center justify-between gap-2 border-t border-sand-200/80 pt-3 mt-4">
         <span className="inline-flex items-center gap-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-muted">
-          <span className="h-1.5 w-1.5 rounded-full bg-terracotta-400" />
+          <span
+            className={cn(
+              'h-1.5 w-1.5 rounded-full',
+              entry.language === 'embera' ? 'bg-terracotta-500' : 'bg-ochre-500',
+            )}
+          />
           {category?.shortLabel ?? entry.category}
         </span>
-        {onOpen && <span className="text-[0.68rem] font-semibold text-jungle-700">Ver ficha →</span>}
+        {onOpen && (
+          <span className="text-[0.68rem] font-semibold text-jungle-700 transition-transform group-hover:translate-x-0.5">
+            Ver ficha →
+          </span>
+        )}
       </div>
     </>
   )
 
   if (!onOpen) {
-    return <article className={cn('surface p-5', className)}>{content}</article>
+    return <article className={cn('surface flex flex-col p-5', className)}>{content}</article>
   }
 
   return (
     <article
       className={cn(
-        'surface group flex flex-col p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-jungle-200 hover:shadow-lift',
+        'surface group relative flex flex-col p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-jungle-200 hover:shadow-lift',
         className,
       )}
     >
@@ -57,7 +77,7 @@ export function WordCard({ entry, onOpen, className }: WordCardProps) {
       <button
         type="button"
         onClick={() => onOpen(entry)}
-        className="absolute inset-0 rounded-3xl"
+        className="absolute inset-0 rounded-3xl focus-visible:outline-offset-2"
         aria-label={`Ver ficha de ${entry.palabra_nativa}`}
       />
     </article>

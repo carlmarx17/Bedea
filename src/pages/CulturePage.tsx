@@ -2,12 +2,14 @@ import { useMemo, useState } from 'react'
 import { getCultureCapsules } from '../data/culture'
 import { AVAILABLE_LANGUAGES, LANGUAGE_MAP } from '../data/languages'
 import { CultureCard } from '../components/CultureCard'
-import { SectionHeading, EmptyState } from '../components/ui'
+import { SectionHeading, EmptyState, Modal, Badge, AudioButton } from '../components/ui'
 import { Icon } from '../components/Icon'
 import { cn } from '../lib/utils'
+import type { CultureCapsule } from '../types'
 
 export function CulturePage() {
   const [filter, setFilter] = useState<string>('todas')
+  const [activeCapsule, setActiveCapsule] = useState<CultureCapsule | null>(null)
   const capsules = useMemo(() => getCultureCapsules(filter === 'todas' ? undefined : filter), [filter])
   const featured = capsules[0]
   const rest = featured ? capsules.slice(1) : []
@@ -38,16 +40,56 @@ export function CulturePage() {
         <EmptyState icon="sparkles" title="No hay cápsulas" description="Pronto sumaremos más contenidos culturales para esta lengua." />
       ) : (
         <div className="space-y-6">
-          {featured && <CultureCard capsule={featured} featured />}
+          {featured && <CultureCard capsule={featured} featured onOpen={setActiveCapsule} />}
           {rest.length > 0 && (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {rest.map((capsule) => (
-                <CultureCard key={capsule.id} capsule={capsule} />
+                <CultureCard key={capsule.id} capsule={capsule} onOpen={setActiveCapsule} />
               ))}
             </div>
           )}
         </div>
       )}
+
+      <Modal
+        open={Boolean(activeCapsule)}
+        onClose={() => setActiveCapsule(null)}
+        title="Cápsula cultural"
+        size="lg"
+      >
+        {activeCapsule && (
+          <div className="space-y-5">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge tone={activeCapsule.language === 'embera' ? 'terracotta' : 'ochre'}>
+                {activeCapsule.language === 'embera' ? 'Ẽbẽra · Emberá' : 'Wayuunaiki'}
+              </Badge>
+              <Badge tone="sand">{activeCapsule.category}</Badge>
+            </div>
+            <h3 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
+              {activeCapsule.title}
+            </h3>
+            <p className="text-sm leading-relaxed text-ink/85 sm:text-base">
+              {activeCapsule.body}
+            </p>
+            <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-sand-200 bg-sand-50 p-4">
+              <div>
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                  Palabra clave
+                </p>
+                <p className="native-word mt-1 font-display text-2xl font-semibold text-jungle-800">
+                  {activeCapsule.keyword}
+                </p>
+                <p className="text-sm text-muted">{activeCapsule.keywordTranslation}</p>
+              </div>
+              <AudioButton text={activeCapsule.keyword} />
+            </div>
+            <p className="text-xs text-muted">
+              <span className="font-semibold text-ink/70">Fuente: </span>
+              {activeCapsule.source}
+            </p>
+          </div>
+        )}
+      </Modal>
 
       <div className="surface-muted p-6">
         <div className="flex items-start gap-4">

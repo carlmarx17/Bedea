@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { LANGUAGE_MAP, CATEGORY_MAP } from '../data/languages'
 import { getLesson, getCurriculum } from '../data/curriculum'
 import { getWords, buildTranslationOptions, buildNativeOptions } from '../lib/vocabulary'
 import { useProgress } from '../lib/progress'
-import { Button, Badge, StepProgress, AudioButton, ProgressBar } from '../components/ui'
+import { Button, Badge, StepProgress, AudioButton } from '../components/ui'
+import { TextileBorder } from '../components/TextilePattern'
 import { Icon } from '../components/Icon'
 import { cn, shuffle } from '../lib/utils'
 import type { VocabularyEntry } from '../types'
@@ -64,6 +65,35 @@ export function LessonPage() {
   const [correctCount, setCorrectCount] = useState(0)
   const [awardedXp, setAwardedXp] = useState(0)
   const [wasNewCompletion, setWasNewCompletion] = useState(false)
+
+  // Reinicia el estado cuando el usuario pasa directamente a la siguiente lección.
+  useEffect(() => {
+    setPhase('intro')
+    setLearnIndex(0)
+    setQuestionIndex(0)
+    setSelected(null)
+    setAnswered(false)
+    setCorrectCount(0)
+    setAwardedXp(0)
+    setWasNewCompletion(false)
+  }, [languageId, lessonId])
+
+  const orderedLessons = useMemo(
+    () =>
+      curriculum
+        ? curriculum.units.flatMap((unit) =>
+            unit.lessonIds
+              .map((id) => curriculum.lessons.find((l) => l.id === id))
+              .filter((l): l is NonNullable<typeof l> => Boolean(l)),
+          )
+        : [],
+    [curriculum],
+  )
+  const currentLessonOrderIndex = orderedLessons.findIndex((l) => l.id === lessonId)
+  const nextLessonInPath =
+    currentLessonOrderIndex >= 0 && currentLessonOrderIndex < orderedLessons.length - 1
+      ? orderedLessons[currentLessonOrderIndex + 1]
+      : null
 
   if (!language || !lesson || !curriculum || words.length === 0) {
     return (
@@ -130,6 +160,22 @@ export function LessonPage() {
     }
   }
 
+  useEffect(() => {
+    if (phase !== 'practice' || !currentQuestion) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (!answered) {
+        const idx = Number(event.key) - 1
+        if (idx >= 0 && idx < currentQuestion.options.length) {
+          submitAnswer(currentQuestion.options[idx])
+        }
+      } else if (event.key === 'Enter') {
+        nextQuestion()
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  })
+
   const progressTotal =
     phase === 'learn'
       ? words.length
@@ -161,10 +207,12 @@ export function LessonPage() {
             <button type="button" onClick={exit} className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-ink">
               <Icon name="arrow-left" size={16} /> Volver a {language.name}
             </button>
-            <div className="surface overflow-hidden p-6 sm:p-10">
-              <Badge tone={language.accent === 'wayuu' ? 'ochre' : 'terracotta'}>
-                {language.name} · {category?.label ?? lesson.category}
-              </Badge>
+            <div className="surface overflow-hidden">
+              <TextileBorder tone={language.accent === 'wayuu' ? 'gold' : 'terracotta'} />
+              <div className="p-6 sm:p-10">
+                <Badge tone={language.accent === 'wayuu' ? 'ochre' : 'terracotta'}>
+                  {language.name} · {category?.label ?? lesson.category}
+                </Badge>
               <h1 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">{lesson.title}</h1>
               <p className="native-word mt-2 text-lg font-medium text-muted">{lesson.subtitle}</p>
               <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted sm:text-base">{lesson.description}</p>
@@ -195,6 +243,7 @@ export function LessonPage() {
                 <Icon name="volume" size={14} className="mr-1 inline text-jungle-600" />
                 La pronunciación usa una voz sintética aproximada en español mientras se incorporan grabaciones de hablantes nativos.
               </p>
+              </div>
             </div>
           </div>
         )}
@@ -274,7 +323,7 @@ export function LessonPage() {
               </div>
 
               <div className="mx-auto mt-8 grid max-w-xl gap-3">
-                {currentQuestion.options.map((option) => {
+                {currentQuestion.options.map((option, optionIndex) => {
                   const isCorrectOption = option === currentQuestion.correct
                   const isSelected = option === selected
                   let stateClass = 'border-sand-300 bg-cream hover:border-jungle-300 hover:bg-jungle-50'
@@ -294,7 +343,12 @@ export function LessonPage() {
                       )}
                     >
                       <span className="flex items-center justify-between gap-3">
-                        {option}
+                        <span className="flex items-center gap-3">
+                          <span className="hidden h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-sand-300 bg-sand-50 text-xs font-bold text-muted sm:inline-flex">
+                            {optionIndex + 1}
+                          </span>
+                          <span>{option}</span>
+                        </span>
                         {answered && isCorrectOption && <Icon name="check-circle" size={20} className="text-jungle-600" />}
                         {answered && isSelected && !isCorrectOption && <Icon name="x-circle" size={20} className="text-coral-500" />}
                       </span>
@@ -332,41 +386,52 @@ export function LessonPage() {
         {/* Complete */}
         {phase === 'complete' && (
           <div className="flex flex-1 flex-col items-center justify-center py-10 text-center animate-pop-in">
-            <div className="surface w-full max-w-lg p-8 sm:p-10">
-              <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-4xl bg-ochre-100 text-ochre-600">
-                <Icon name="trophy" size={38} />
-              </span>
-              <h1 className="mt-5 font-display text-3xl font-semibold text-ink">¡Lección completada!</h1>
-              <p className="mt-2 text-sm text-muted">{lesson.title} · {language.name}</p>
+            <div className="surface w-full max-w-lg overflow-hidden">
+              <TextileBorder tone="gold" />
+              <div className="p-8 sm:p-10">
+                <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-4xl bg-ochre-100 text-ochre-600 shadow-soft">
+                  <Icon name="trophy" size={38} />
+                </span>
+                <h1 className="mt-5 font-display text-3xl font-semibold text-ink">¡Lección completada!</h1>
+                <p className="mt-2 text-sm text-muted">{lesson.title} · {language.name}</p>
 
-              <div className="mt-6 grid grid-cols-3 gap-3">
-                <div className="rounded-2xl bg-ochre-50 p-4">
-                  <p className="font-display text-2xl font-semibold text-ochre-800">+{awardedXp}</p>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-ochre-700">XP</p>
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  <div className="rounded-2xl bg-ochre-50 p-4">
+                    <p className="font-display text-2xl font-semibold text-ochre-800">+{awardedXp}</p>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-ochre-700">XP</p>
+                  </div>
+                  <div className="rounded-2xl bg-jungle-50 p-4">
+                    <p className="font-display text-2xl font-semibold text-jungle-800">{correctCount}/{questions.length}</p>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-jungle-700">Aciertos</p>
+                  </div>
+                  <div className="rounded-2xl bg-sand-100 p-4">
+                    <p className="font-display text-2xl font-semibold text-ink">{words.length}</p>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted">Palabras</p>
+                  </div>
                 </div>
-                <div className="rounded-2xl bg-jungle-50 p-4">
-                  <p className="font-display text-2xl font-semibold text-jungle-800">{correctCount}/{questions.length}</p>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-jungle-700">Aciertos</p>
-                </div>
-                <div className="rounded-2xl bg-sand-100 p-4">
-                  <p className="font-display text-2xl font-semibold text-ink">{words.length}</p>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted">Palabras</p>
-                </div>
-              </div>
 
-              <p className="mt-5 text-sm leading-relaxed text-muted">
-                {wasNewCompletion
-                  ? 'Has ganado XP completo por completar esta lección por primera vez. ¡Sigue tejiendo tu camino!'
-                  : 'Has repasado esta lección y ganado un pequeño refuerzo de XP. Repetir también es aprender.'}
-              </p>
+                <p className="mt-5 text-sm leading-relaxed text-muted">
+                  {wasNewCompletion
+                    ? 'Has ganado XP completo por completar esta lección por primera vez. ¡Sigue tejiendo tu camino!'
+                    : 'Has repasado esta lección y ganado un pequeño refuerzo de XP. Repetir también es aprender.'}
+                </p>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
-                <Link to={`/lengua/${languageId}`} className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full">Volver al camino</Button>
-                </Link>
-                <Link to={`/lengua/${languageId}/practica/quiz`} className="w-full sm:w-auto">
-                  <Button variant="outline" size="lg" className="w-full">Practicar más</Button>
-                </Link>
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
+                  {nextLessonInPath ? (
+                    <Link to={`/lengua/${languageId}/leccion/${nextLessonInPath.id}`} className="w-full sm:w-auto">
+                      <Button size="lg" className="w-full">
+                        Siguiente lección <Icon name="arrow-right" size={16} />
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Link to={`/lengua/${languageId}/practica/quiz`} className="w-full sm:w-auto">
+                      <Button size="lg" className="w-full">Practicar en quiz</Button>
+                    </Link>
+                  )}
+                  <Link to={`/lengua/${languageId}`} className="w-full sm:w-auto">
+                    <Button variant="outline" size="lg" className="w-full">Volver al camino</Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
