@@ -21,7 +21,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Saludos de uso extendido en materiales de Emberá Chamí",
-      "tags": ["saludo", "cotidiano"]
+      "tags": [
+        "saludo",
+        "cotidiano"
+      ]
     },
     {
       "id": "emb-s02",
@@ -36,7 +39,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Saludos de uso extendido en materiales de Emberá Chamí",
-      "tags": ["saludo", "pregunta"]
+      "tags": [
+        "saludo",
+        "pregunta"
+      ]
     },
     {
       "id": "emb-s03",
@@ -51,7 +57,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Saludos de uso extendido en materiales de Emberá Chamí",
-      "tags": ["saludo", "mañana"]
+      "tags": [
+        "saludo",
+        "mañana"
+      ]
     },
     {
       "id": "emb-s04",
@@ -66,7 +75,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Saludos de uso extendido en materiales de Emberá Chamí",
-      "tags": ["saludo", "tarde"]
+      "tags": [
+        "saludo",
+        "tarde"
+      ]
     },
     {
       "id": "emb-s05",
@@ -81,7 +93,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Saludos de uso extendido en materiales de Emberá Chamí",
-      "tags": ["saludo", "noche"]
+      "tags": [
+        "saludo",
+        "noche"
+      ]
     },
     {
       "id": "emb-f01",
@@ -96,7 +111,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, ejemplos de consonantes aspiradas",
-      "tags": ["familia", "padre"]
+      "tags": [
+        "familia",
+        "padre"
+      ]
     },
     {
       "id": "emb-f02",
@@ -111,7 +129,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, ejemplos de consonantes aspiradas",
-      "tags": ["familia", "abuela"]
+      "tags": [
+        "familia",
+        "abuela"
+      ]
     },
     {
       "id": "emb-f03",
@@ -126,7 +147,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, aproximantes w y y",
-      "tags": ["familia", "hijo"]
+      "tags": [
+        "familia",
+        "hijo"
+      ]
     },
     {
       "id": "emb-f04",
@@ -141,7 +165,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, consonantes prenasalizadas",
-      "tags": ["familia", "hermano"]
+      "tags": [
+        "familia",
+        "hermano"
+      ]
     },
     {
       "id": "emb-f05",
@@ -156,7 +183,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["familia", "mujer"]
+      "tags": [
+        "familia",
+        "mujer"
+      ]
     },
     {
       "id": "emb-f06",
@@ -171,7 +201,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["familia", "hombre"]
+      "tags": [
+        "familia",
+        "hombre"
+      ]
     },
     {
       "id": "emb-f07",
@@ -186,7 +219,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, título y presentación",
-      "tags": ["identidad", "pueblo"]
+      "tags": [
+        "identidad",
+        "pueblo"
+      ]
     },
     {
       "id": "emb-f08",
@@ -201,7 +237,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, vocales altas como aproximantes",
-      "tags": ["pronombre", "comunidad"]
+      "tags": [
+        "pronombre",
+        "comunidad"
+      ]
     },
     {
       "id": "emb-f09",
@@ -216,7 +255,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, nasalidad",
-      "tags": ["familia", "parentesco"]
+      "tags": [
+        "familia",
+        "parentesco"
+      ]
     },
     {
       "id": "emb-f10",
@@ -231,7 +273,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento y los gramemas",
-      "tags": ["familia", "dirección"]
+      "tags": [
+        "familia",
+        "dirección"
+      ]
     },
     {
       "id": "emb-n01",
@@ -246,7 +291,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, fonología",
-      "tags": ["número", "conteo"]
+      "tags": [
+        "número",
+        "conteo"
+      ]
     },
     {
       "id": "emb-n02",
@@ -261,7 +309,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Materiales de Emberá Chamí, Universidad Nacional de Colombia",
-      "tags": ["número", "conteo"]
+      "tags": [
+        "número",
+        "conteo"
+      ]
     },
     {
       "id": "emb-n03",
@@ -276,7 +327,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, fonología",
-      "tags": ["número", "conteo"]
+      "tags": [
+        "número",
+        "conteo"
+      ]
     },
     {
       "id": "emb-n04",
@@ -291,7 +345,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Materiales de Emberá Chamí, Universidad Nacional de Colombia",
-      "tags": ["número", "conteo"]
+      "tags": [
+        "número",
+        "conteo"
+      ]
     },
     {
       "id": "emb-n05",
@@ -306,7 +363,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Materiales de Emberá Chamí, Universidad Nacional de Colombia",
-      "tags": ["número", "conteo"]
+      "tags": [
+        "número",
+        "conteo"
+      ]
     },
     {
       "id": "emb-na01",
@@ -321,7 +381,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, aproximantes y vocales",
-      "tags": ["territorio", "tierra"]
+      "tags": [
+        "territorio",
+        "tierra"
+      ]
     },
     {
       "id": "emb-na02",
@@ -336,7 +399,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, consonantes implosivas",
-      "tags": ["agua", "sonido"]
+      "tags": [
+        "agua",
+        "sonido"
+      ]
     },
     {
       "id": "emb-na03",
@@ -351,7 +417,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, consonantes prenasalizadas",
-      "tags": ["agua", "territorio"]
+      "tags": [
+        "agua",
+        "territorio"
+      ]
     },
     {
       "id": "emb-na04",
@@ -366,7 +435,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, consonantes implosivas",
-      "tags": ["cielo", "sonido"]
+      "tags": [
+        "cielo",
+        "sonido"
+      ]
     },
     {
       "id": "emb-na05",
@@ -381,7 +453,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, glosario de términos técnicos",
-      "tags": ["territorio", "camino"]
+      "tags": [
+        "territorio",
+        "camino"
+      ]
     },
     {
       "id": "emb-na06",
@@ -396,7 +471,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, vibrantes",
-      "tags": ["río", "transporte"]
+      "tags": [
+        "río",
+        "transporte"
+      ]
     },
     {
       "id": "emb-na07",
@@ -411,7 +489,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["tierra", "oficio"]
+      "tags": [
+        "tierra",
+        "oficio"
+      ]
     },
     {
       "id": "emb-na08",
@@ -426,7 +507,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, consonantes implosivas",
-      "tags": ["alimento", "cultivo"]
+      "tags": [
+        "alimento",
+        "cultivo"
+      ]
     },
     {
       "id": "emb-na09",
@@ -441,7 +525,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, nasalidad",
-      "tags": ["cantidad", "reparto"]
+      "tags": [
+        "cantidad",
+        "reparto"
+      ]
     },
     {
       "id": "emb-an01",
@@ -456,7 +543,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, fonética",
-      "tags": ["animal", "monte"]
+      "tags": [
+        "animal",
+        "monte"
+      ]
     },
     {
       "id": "emb-an02",
@@ -471,7 +561,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, aproximantes",
-      "tags": ["animal", "monte"]
+      "tags": [
+        "animal",
+        "monte"
+      ]
     },
     {
       "id": "emb-an03",
@@ -486,7 +579,11 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, aproximantes",
-      "tags": ["animal", "río", "alimento"]
+      "tags": [
+        "animal",
+        "río",
+        "alimento"
+      ]
     },
     {
       "id": "emb-an04",
@@ -501,7 +598,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, consonantes nasalizadas",
-      "tags": ["animal", "noche"]
+      "tags": [
+        "animal",
+        "noche"
+      ]
     },
     {
       "id": "emb-an05",
@@ -516,7 +616,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, consonantes prenasalizadas",
-      "tags": ["animal", "monte"]
+      "tags": [
+        "animal",
+        "monte"
+      ]
     },
     {
       "id": "emb-an06",
@@ -531,7 +634,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["animal", "agua"]
+      "tags": [
+        "animal",
+        "agua"
+      ]
     },
     {
       "id": "emb-an07",
@@ -546,7 +652,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["animal", "agua"]
+      "tags": [
+        "animal",
+        "agua"
+      ]
     },
     {
       "id": "emb-an08",
@@ -561,7 +670,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["animal", "tejido"]
+      "tags": [
+        "animal",
+        "tejido"
+      ]
     },
     {
       "id": "emb-an09",
@@ -576,7 +688,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, nasalidad",
-      "tags": ["animal", "lluvia"]
+      "tags": [
+        "animal",
+        "lluvia"
+      ]
     },
     {
       "id": "emb-an10",
@@ -591,7 +706,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["animal", "casa"]
+      "tags": [
+        "animal",
+        "casa"
+      ]
     },
     {
       "id": "emb-c01",
@@ -606,7 +724,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["casa", "posesión"]
+      "tags": [
+        "casa",
+        "posesión"
+      ]
     },
     {
       "id": "emb-c02",
@@ -621,7 +742,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, consonantes aspiradas",
-      "tags": ["casa", "cocina"]
+      "tags": [
+        "casa",
+        "cocina"
+      ]
     },
     {
       "id": "emb-c03",
@@ -636,7 +760,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, fricativización",
-      "tags": ["casa", "alimento"]
+      "tags": [
+        "casa",
+        "alimento"
+      ]
     },
     {
       "id": "emb-c04",
@@ -651,7 +778,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, consonantes prenasalizadas",
-      "tags": ["casa", "objeto"]
+      "tags": [
+        "casa",
+        "objeto"
+      ]
     },
     {
       "id": "emb-c05",
@@ -666,7 +796,11 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, lengua y símbolos",
-      "tags": ["casa", "tejido", "cultura"]
+      "tags": [
+        "casa",
+        "tejido",
+        "cultura"
+      ]
     },
     {
       "id": "emb-c06",
@@ -681,7 +815,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, vocales",
-      "tags": ["casa", "pesca"]
+      "tags": [
+        "casa",
+        "pesca"
+      ]
     },
     {
       "id": "emb-c07",
@@ -696,7 +833,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["casa", "posesión"]
+      "tags": [
+        "casa",
+        "posesión"
+      ]
     },
     {
       "id": "emb-b01",
@@ -711,7 +851,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["cuerpo", "anatomía"]
+      "tags": [
+        "cuerpo",
+        "anatomía"
+      ]
     },
     {
       "id": "emb-b02",
@@ -726,7 +869,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, vocales altas como aproximantes",
-      "tags": ["cuerpo", "anatomía"]
+      "tags": [
+        "cuerpo",
+        "anatomía"
+      ]
     },
     {
       "id": "emb-b03",
@@ -741,7 +887,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, vibrantes y vocales posteriores",
-      "tags": ["cuerpo", "anatomía"]
+      "tags": [
+        "cuerpo",
+        "anatomía"
+      ]
     },
     {
       "id": "emb-b04",
@@ -756,7 +905,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, consonantes aspiradas",
-      "tags": ["cuerpo", "anatomía"]
+      "tags": [
+        "cuerpo",
+        "anatomía"
+      ]
     },
     {
       "id": "emb-b05",
@@ -771,7 +923,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, subida de vocales bajas",
-      "tags": ["cuerpo", "anatomía"]
+      "tags": [
+        "cuerpo",
+        "anatomía"
+      ]
     },
     {
       "id": "emb-b06",
@@ -786,7 +941,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, fonología",
-      "tags": ["cuerpo", "anatomía"]
+      "tags": [
+        "cuerpo",
+        "anatomía"
+      ]
     },
     {
       "id": "emb-b07",
@@ -801,7 +959,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, vocales altas como aproximantes",
-      "tags": ["cuerpo", "anatomía"]
+      "tags": [
+        "cuerpo",
+        "anatomía"
+      ]
     },
     {
       "id": "emb-b08",
@@ -816,7 +977,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, fonología",
-      "tags": ["cuerpo", "anatomía"]
+      "tags": [
+        "cuerpo",
+        "anatomía"
+      ]
     },
     {
       "id": "emb-b09",
@@ -831,7 +995,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["cuerpo", "anatomía"]
+      "tags": [
+        "cuerpo",
+        "anatomía"
+      ]
     },
     {
       "id": "emb-b10",
@@ -846,7 +1013,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["cuerpo", "anatomía"]
+      "tags": [
+        "cuerpo",
+        "anatomía"
+      ]
     },
     {
       "id": "emb-b11",
@@ -861,7 +1031,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["cuerpo", "emoción"]
+      "tags": [
+        "cuerpo",
+        "emoción"
+      ]
     },
     {
       "id": "emb-b12",
@@ -876,7 +1049,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["cuerpo", "anatomía"]
+      "tags": [
+        "cuerpo",
+        "anatomía"
+      ]
     },
     {
       "id": "emb-b13",
@@ -891,7 +1067,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, consonantes implosivas",
-      "tags": ["cuerpo", "sonido"]
+      "tags": [
+        "cuerpo",
+        "sonido"
+      ]
     },
     {
       "id": "emb-v01",
@@ -906,7 +1085,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["verbo", "alimento"]
+      "tags": [
+        "verbo",
+        "alimento"
+      ]
     },
     {
       "id": "emb-v02",
@@ -921,7 +1103,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, aproximantes",
-      "tags": ["verbo", "alimento"]
+      "tags": [
+        "verbo",
+        "alimento"
+      ]
     },
     {
       "id": "emb-v03",
@@ -936,7 +1121,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, aproximantes",
-      "tags": ["verbo", "futuro"]
+      "tags": [
+        "verbo",
+        "futuro"
+      ]
     },
     {
       "id": "emb-v04",
@@ -951,7 +1139,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["verbo", "agua"]
+      "tags": [
+        "verbo",
+        "agua"
+      ]
     },
     {
       "id": "emb-v05",
@@ -966,7 +1157,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["verbo", "movimiento"]
+      "tags": [
+        "verbo",
+        "movimiento"
+      ]
     },
     {
       "id": "emb-v06",
@@ -981,7 +1175,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["verbo", "movimiento"]
+      "tags": [
+        "verbo",
+        "movimiento"
+      ]
     },
     {
       "id": "emb-v07",
@@ -996,7 +1193,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, presentación",
-      "tags": ["verbo", "lengua"]
+      "tags": [
+        "verbo",
+        "lengua"
+      ]
     },
     {
       "id": "emb-v08",
@@ -1011,7 +1211,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, presentación",
-      "tags": ["verbo", "pensamiento"]
+      "tags": [
+        "verbo",
+        "pensamiento"
+      ]
     },
     {
       "id": "emb-v09",
@@ -1026,7 +1229,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, nasalidad",
-      "tags": ["verbo", "movimiento"]
+      "tags": [
+        "verbo",
+        "movimiento"
+      ]
     },
     {
       "id": "emb-v10",
@@ -1041,7 +1247,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["verbo", "hábito"]
+      "tags": [
+        "verbo",
+        "hábito"
+      ]
     },
     {
       "id": "emb-p01",
@@ -1056,7 +1265,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, nasalidad",
-      "tags": ["frase", "orden"]
+      "tags": [
+        "frase",
+        "orden"
+      ]
     },
     {
       "id": "emb-p02",
@@ -1071,7 +1283,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["frase", "colectivo"]
+      "tags": [
+        "frase",
+        "colectivo"
+      ]
     },
     {
       "id": "emb-p03",
@@ -1086,7 +1301,11 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["frase", "alimento", "colectivo"]
+      "tags": [
+        "frase",
+        "alimento",
+        "colectivo"
+      ]
     },
     {
       "id": "emb-p04",
@@ -1101,7 +1320,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["frase", "prohibitivo"]
+      "tags": [
+        "frase",
+        "prohibitivo"
+      ]
     },
     {
       "id": "emb-p05",
@@ -1116,7 +1338,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["frase", "prohibitivo"]
+      "tags": [
+        "frase",
+        "prohibitivo"
+      ]
     },
     {
       "id": "emb-p06",
@@ -1131,7 +1356,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["frase", "prohibitivo"]
+      "tags": [
+        "frase",
+        "prohibitivo"
+      ]
     },
     {
       "id": "emb-p07",
@@ -1146,7 +1374,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["frase", "pedido"]
+      "tags": [
+        "frase",
+        "pedido"
+      ]
     },
     {
       "id": "emb-p08",
@@ -1161,7 +1392,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["frase", "dirección"]
+      "tags": [
+        "frase",
+        "dirección"
+      ]
     },
     {
       "id": "emb-p09",
@@ -1176,7 +1410,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["frase", "dirección"]
+      "tags": [
+        "frase",
+        "dirección"
+      ]
     },
     {
       "id": "emb-p10",
@@ -1191,7 +1428,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["frase", "emoción"]
+      "tags": [
+        "frase",
+        "emoción"
+      ]
     },
     {
       "id": "emb-q01",
@@ -1206,7 +1446,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, vocales",
-      "tags": ["cualidad", "acuerdo"]
+      "tags": [
+        "cualidad",
+        "acuerdo"
+      ]
     },
     {
       "id": "emb-q02",
@@ -1221,7 +1464,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, aproximantes",
-      "tags": ["cualidad", "salud"]
+      "tags": [
+        "cualidad",
+        "salud"
+      ]
     },
     {
       "id": "emb-q03",
@@ -1236,7 +1482,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, fricativización",
-      "tags": ["cualidad", "posición"]
+      "tags": [
+        "cualidad",
+        "posición"
+      ]
     },
     {
       "id": "emb-q04",
@@ -1251,7 +1500,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["cualidad", "ánimo"]
+      "tags": [
+        "cualidad",
+        "ánimo"
+      ]
     },
     {
       "id": "emb-q05",
@@ -1266,7 +1518,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["cualidad", "cuerpo"]
+      "tags": [
+        "cualidad",
+        "cuerpo"
+      ]
     },
     {
       "id": "emb-q06",
@@ -1281,7 +1536,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, marcación de acentos",
-      "tags": ["conector", "discurso"]
+      "tags": [
+        "conector",
+        "discurso"
+      ]
     },
     {
       "id": "emb-q07",
@@ -1296,7 +1554,10 @@
       "audio_url": null,
       "source": "manual",
       "source_detail": "Manual ẽbẽra-chamí, el acento",
-      "tags": ["cualidad", "valoración"]
+      "tags": [
+        "cualidad",
+        "valoración"
+      ]
     },
     {
       "id": "way-s01",
@@ -1311,7 +1572,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["saludo", "cotidiano"]
+      "tags": [
+        "saludo",
+        "cotidiano"
+      ]
     },
     {
       "id": "way-s02",
@@ -1326,7 +1590,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["saludo", "mañana"]
+      "tags": [
+        "saludo",
+        "mañana"
+      ]
     },
     {
       "id": "way-s03",
@@ -1341,7 +1608,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["saludo", "tarde"]
+      "tags": [
+        "saludo",
+        "tarde"
+      ]
     },
     {
       "id": "way-s04",
@@ -1356,7 +1626,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["saludo", "noche"]
+      "tags": [
+        "saludo",
+        "noche"
+      ]
     },
     {
       "id": "way-s05",
@@ -1371,7 +1644,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["saludo", "pregunta"]
+      "tags": [
+        "saludo",
+        "pregunta"
+      ]
     },
     {
       "id": "way-s06",
@@ -1386,7 +1662,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["cortesía", "gracias"]
+      "tags": [
+        "cortesía",
+        "gracias"
+      ]
     },
     {
       "id": "way-f01",
@@ -1401,7 +1680,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["familia", "padre"]
+      "tags": [
+        "familia",
+        "padre"
+      ]
     },
     {
       "id": "way-f02",
@@ -1416,7 +1698,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["familia", "madre"]
+      "tags": [
+        "familia",
+        "madre"
+      ]
     },
     {
       "id": "way-f03",
@@ -1431,7 +1716,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["familia", "hijo"]
+      "tags": [
+        "familia",
+        "hijo"
+      ]
     },
     {
       "id": "way-f04",
@@ -1446,7 +1734,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["familia", "hermano"]
+      "tags": [
+        "familia",
+        "hermano"
+      ]
     },
     {
       "id": "way-f05",
@@ -1461,7 +1752,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["familia", "abuelo"]
+      "tags": [
+        "familia",
+        "abuelo"
+      ]
     },
     {
       "id": "way-f06",
@@ -1476,7 +1770,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["identidad", "pueblo"]
+      "tags": [
+        "identidad",
+        "pueblo"
+      ]
     },
     {
       "id": "way-f07",
@@ -1491,7 +1788,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["familia", "mujer"]
+      "tags": [
+        "familia",
+        "mujer"
+      ]
     },
     {
       "id": "way-f08",
@@ -1506,7 +1806,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["identidad", "relación"]
+      "tags": [
+        "identidad",
+        "relación"
+      ]
     },
     {
       "id": "way-f09",
@@ -1521,7 +1824,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["pronombre", "persona"]
+      "tags": [
+        "pronombre",
+        "persona"
+      ]
     },
     {
       "id": "way-f10",
@@ -1536,7 +1842,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["pronombre", "persona"]
+      "tags": [
+        "pronombre",
+        "persona"
+      ]
     },
     {
       "id": "way-n01",
@@ -1551,7 +1860,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["número", "conteo"]
+      "tags": [
+        "número",
+        "conteo"
+      ]
     },
     {
       "id": "way-n02",
@@ -1566,7 +1878,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["número", "conteo"]
+      "tags": [
+        "número",
+        "conteo"
+      ]
     },
     {
       "id": "way-n03",
@@ -1581,7 +1896,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["número", "conteo"]
+      "tags": [
+        "número",
+        "conteo"
+      ]
     },
     {
       "id": "way-n04",
@@ -1596,7 +1914,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["número", "conteo"]
+      "tags": [
+        "número",
+        "conteo"
+      ]
     },
     {
       "id": "way-n05",
@@ -1611,7 +1932,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["número", "conteo"]
+      "tags": [
+        "número",
+        "conteo"
+      ]
     },
     {
       "id": "way-n06",
@@ -1626,7 +1950,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["número", "conteo"]
+      "tags": [
+        "número",
+        "conteo"
+      ]
     },
     {
       "id": "way-na01",
@@ -1641,7 +1968,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["agua", "territorio"]
+      "tags": [
+        "agua",
+        "territorio"
+      ]
     },
     {
       "id": "way-na02",
@@ -1656,7 +1986,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["tierra", "territorio"]
+      "tags": [
+        "tierra",
+        "territorio"
+      ]
     },
     {
       "id": "way-na03",
@@ -1671,7 +2004,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["cielo", "tiempo"]
+      "tags": [
+        "cielo",
+        "tiempo"
+      ]
     },
     {
       "id": "way-na04",
@@ -1686,7 +2022,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["cielo", "tiempo"]
+      "tags": [
+        "cielo",
+        "tiempo"
+      ]
     },
     {
       "id": "way-na05",
@@ -1701,7 +2040,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["clima", "agua"]
+      "tags": [
+        "clima",
+        "agua"
+      ]
     },
     {
       "id": "way-na06",
@@ -1716,7 +2058,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["clima", "territorio"]
+      "tags": [
+        "clima",
+        "territorio"
+      ]
     },
     {
       "id": "way-na07",
@@ -1731,7 +2076,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["cielo", "cosmovisión"]
+      "tags": [
+        "cielo",
+        "cosmovisión"
+      ]
     },
     {
       "id": "way-na08",
@@ -1746,7 +2094,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["mar", "territorio"]
+      "tags": [
+        "mar",
+        "territorio"
+      ]
     },
     {
       "id": "way-na09",
@@ -1761,7 +2112,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["planta", "territorio"]
+      "tags": [
+        "planta",
+        "territorio"
+      ]
     },
     {
       "id": "way-na10",
@@ -1776,7 +2130,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["fuego", "casa"]
+      "tags": [
+        "fuego",
+        "casa"
+      ]
     },
     {
       "id": "way-na11",
@@ -1791,7 +2148,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["agua", "territorio"]
+      "tags": [
+        "agua",
+        "territorio"
+      ]
     },
     {
       "id": "way-na12",
@@ -1806,7 +2166,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["territorio", "cosmovisión"]
+      "tags": [
+        "territorio",
+        "cosmovisión"
+      ]
     },
     {
       "id": "way-c01",
@@ -1821,7 +2184,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["casa", "territorio"]
+      "tags": [
+        "casa",
+        "territorio"
+      ]
     },
     {
       "id": "way-c02",
@@ -1836,7 +2202,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["casa", "tejido"]
+      "tags": [
+        "casa",
+        "tejido"
+      ]
     },
     {
       "id": "way-c03",
@@ -1851,7 +2220,11 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["casa", "tejido", "cultura"]
+      "tags": [
+        "casa",
+        "tejido",
+        "cultura"
+      ]
     },
     {
       "id": "way-c04",
@@ -1866,7 +2239,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["casa", "cocina"]
+      "tags": [
+        "casa",
+        "cocina"
+      ]
     },
     {
       "id": "way-c05",
@@ -1881,7 +2257,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["casa", "cocina"]
+      "tags": [
+        "casa",
+        "cocina"
+      ]
     },
     {
       "id": "way-c06",
@@ -1896,7 +2275,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["casa", "vestido"]
+      "tags": [
+        "casa",
+        "vestido"
+      ]
     },
     {
       "id": "way-q01",
@@ -1911,7 +2293,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["cualidad", "acuerdo"]
+      "tags": [
+        "cualidad",
+        "acuerdo"
+      ]
     },
     {
       "id": "way-q02",
@@ -1926,7 +2311,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["emoción", "afecto"]
+      "tags": [
+        "emoción",
+        "afecto"
+      ]
     },
     {
       "id": "way-q03",
@@ -1941,7 +2329,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["emoción", "fiesta"]
+      "tags": [
+        "emoción",
+        "fiesta"
+      ]
     },
     {
       "id": "way-q04",
@@ -1956,7 +2347,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["emoción", "salud"]
+      "tags": [
+        "emoción",
+        "salud"
+      ]
     },
     {
       "id": "way-q05",
@@ -1971,7 +2365,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["emoción", "cuidado"]
+      "tags": [
+        "emoción",
+        "cuidado"
+      ]
     },
     {
       "id": "way-q06",
@@ -1986,7 +2383,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["emoción", "armonía"]
+      "tags": [
+        "emoción",
+        "armonía"
+      ]
     },
     {
       "id": "way-v01",
@@ -2001,7 +2401,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["verbo", "alimento"]
+      "tags": [
+        "verbo",
+        "alimento"
+      ]
     },
     {
       "id": "way-v02",
@@ -2016,7 +2419,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["verbo", "agua"]
+      "tags": [
+        "verbo",
+        "agua"
+      ]
     },
     {
       "id": "way-v03",
@@ -2031,7 +2437,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["verbo", "percepción"]
+      "tags": [
+        "verbo",
+        "percepción"
+      ]
     },
     {
       "id": "way-v04",
@@ -2046,7 +2455,11 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["verbo", "cultura", "danza"]
+      "tags": [
+        "verbo",
+        "cultura",
+        "danza"
+      ]
     },
     {
       "id": "way-p01",
@@ -2061,7 +2474,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["frase", "respuesta"]
+      "tags": [
+        "frase",
+        "respuesta"
+      ]
     },
     {
       "id": "way-p02",
@@ -2076,7 +2492,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["frase", "respuesta"]
+      "tags": [
+        "frase",
+        "respuesta"
+      ]
     },
     {
       "id": "way-p03",
@@ -2091,7 +2510,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["frase", "movimiento"]
+      "tags": [
+        "frase",
+        "movimiento"
+      ]
     },
     {
       "id": "way-p04",
@@ -2106,7 +2528,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["frase", "afecto"]
+      "tags": [
+        "frase",
+        "afecto"
+      ]
     },
     {
       "id": "way-p05",
@@ -2121,7 +2546,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["palabra", "cultura"]
+      "tags": [
+        "palabra",
+        "cultura"
+      ]
     },
     {
       "id": "way-an01",
@@ -2136,7 +2564,10 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["animal", "relato"]
+      "tags": [
+        "animal",
+        "relato"
+      ]
     },
     {
       "id": "way-an02",
@@ -2151,7 +2582,962 @@
       "audio_url": null,
       "source": "complemento",
       "source_detail": "Módulo inicial wayuunaiki",
-      "tags": ["animal", "mar", "alimento"]
+      "tags": [
+        "animal",
+        "mar",
+        "alimento"
+      ]
+    },
+    {
+      "id": "emb-c08",
+      "language": "embera",
+      "category": "casa",
+      "palabra_nativa": "karta",
+      "traduccion_espanol": "libro / carta",
+      "guia_fonetica": "KAR-ta",
+      "ejemplo_uso": "Karta ẽbẽra beɗea.",
+      "ejemplo_traduccion": "Libro de la lengua ẽbẽra.",
+      "nota_cultural": "Aparece en el título mismo del manual (Karta ẽbẽra beɗea ɓɯ kawabiy ita). Muestra cómo el idioma incorpora préstamos y los adapta a su uso comunitario.",
+      "audio_url": null,
+      "source": "manual",
+      "source_detail": "Manual de enseñanza y escritura ẽbẽra-chamí (2013), portada",
+      "tags": [
+        "libro",
+        "educacion",
+        "escritura"
+      ]
+    },
+    {
+      "id": "emb-v11",
+      "language": "embera",
+      "category": "verbos",
+      "palabra_nativa": "kawabiy",
+      "traduccion_espanol": "aprender / saber",
+      "guia_fonetica": "ka-wa-BÍY",
+      "ejemplo_uso": "Ẽbẽra beɗea kawabiy.",
+      "ejemplo_traduccion": "Aprender la lengua ẽbẽra.",
+      "nota_cultural": "Presente en el título del manual base. Aprender una lengua se entiende como un proceso compartido entre maestros, mayores y jóvenes.",
+      "audio_url": null,
+      "source": "manual",
+      "source_detail": "Manual de enseñanza y escritura ẽbẽra-chamí (2013), portada",
+      "tags": [
+        "aprender",
+        "saber",
+        "educacion"
+      ]
+    },
+    {
+      "id": "emb-p11",
+      "language": "embera",
+      "category": "frases",
+      "palabra_nativa": "beɗea",
+      "traduccion_espanol": "palabra / lengua",
+      "guia_fonetica": "be-ɗE-a, con d implosiva",
+      "ejemplo_uso": "Ẽbẽra beɗea bía ní.",
+      "ejemplo_traduccion": "La lengua ẽbẽra es buena.",
+      "nota_cultural": "Da nombre a este proyecto. Contiene la consonante implosiva ɗ, rasgo distintivo del ẽbẽra-chamí.",
+      "audio_url": null,
+      "source": "manual",
+      "source_detail": "Manual de enseñanza y escritura ẽbẽra-chamí (2013)",
+      "tags": [
+        "lengua",
+        "palabra",
+        "identidad"
+      ]
+    },
+    {
+      "id": "emb-na10",
+      "language": "embera",
+      "category": "naturaleza",
+      "palabra_nativa": "ruáɗe",
+      "traduccion_espanol": "en la tierra",
+      "guia_fonetica": "ru-Á-ɗe",
+      "ejemplo_uso": "Dái ruáɗe beɗeabarí.",
+      "ejemplo_traduccion": "Nosotros hablamos en la tierra.",
+      "nota_cultural": "Ejemplo clásico del manual para mostrar el sufijo locativo -ɗe (en, de) y cómo desplaza el acento en la palabra rúa (tierra).",
+      "audio_url": null,
+      "source": "manual",
+      "source_detail": "Manual de enseñanza y escritura ẽbẽra-chamí (2013), sufijación",
+      "tags": [
+        "tierra",
+        "territorio",
+        "locativo"
+      ]
+    },
+    {
+      "id": "emb-q08",
+      "language": "embera",
+      "category": "cualidades",
+      "palabra_nativa": "nuéɗa",
+      "traduccion_espanol": "ayer",
+      "guia_fonetica": "nu-É-ɗa",
+      "ejemplo_uso": "Nuéɗa déɗe n’ẽeɗa.",
+      "ejemplo_traduccion": "Ayer vino a la casa.",
+      "nota_cultural": "Adverbio de tiempo citado en el manual para ilustrar el uso de la consonante implosiva ɗ en posición intermedia.",
+      "audio_url": null,
+      "source": "manual",
+      "source_detail": "Manual de enseñanza y escritura ẽbẽra-chamí (2013)",
+      "tags": [
+        "tiempo",
+        "ayer"
+      ]
+    },
+    {
+      "id": "emb-q09",
+      "language": "embera",
+      "category": "cualidades",
+      "palabra_nativa": "ɗe",
+      "traduccion_espanol": "en / de (lugar)",
+      "guia_fonetica": "ɗe, con d implosiva",
+      "ejemplo_uso": "Ruáɗe (en la tierra).",
+      "ejemplo_traduccion": "En la tierra.",
+      "nota_cultural": "El manual contrasta ɗe (en, de) con dé (casa) para mostrar que la consonante implosiva ɗ y el acento cambian por completo el significado.",
+      "audio_url": null,
+      "source": "manual",
+      "source_detail": "Manual de enseñanza y escritura ẽbẽra-chamí (2013), pares contrastivos",
+      "tags": [
+        "lugar",
+        "gramatica"
+      ]
+    },
+    {
+      "id": "emb-b14",
+      "language": "embera",
+      "category": "cuerpo",
+      "palabra_nativa": "jua",
+      "traduccion_espanol": "mano",
+      "guia_fonetica": "JÚ-a",
+      "ejemplo_uso": "Jua áɓa (cinco / una mano).",
+      "ejemplo_traduccion": "Una mano (cinco).",
+      "nota_cultural": "La mano (jua) es la base del sistema numérico ẽbẽra: cinco es una mano (jua áɓa) y diez son dos manos (jua omê).",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario base ẽbẽra-chamí (UNAL / ICANH)",
+      "tags": [
+        "cuerpo",
+        "mano",
+        "numeros"
+      ]
+    },
+    {
+      "id": "emb-n06",
+      "language": "embera",
+      "category": "numeros",
+      "palabra_nativa": "jua aɓa aɓa",
+      "traduccion_espanol": "seis",
+      "guia_fonetica": "JUA a-ɓa a-ɓa",
+      "ejemplo_uso": "Jua aɓa aɓa páda.",
+      "ejemplo_traduccion": "Seis plátanos.",
+      "nota_cultural": "Literalmente «una mano y uno». El conteo tradicional parte del cuerpo como medida cotidiana.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Sistema numérico ẽbẽra-chamí (fuentes educativas UNAL)",
+      "tags": [
+        "numero",
+        "seis"
+      ]
+    },
+    {
+      "id": "emb-n07",
+      "language": "embera",
+      "category": "numeros",
+      "palabra_nativa": "jua aɓa omê",
+      "traduccion_espanol": "siete",
+      "guia_fonetica": "JUA a-ɓa o-MÊ",
+      "ejemplo_uso": "Jua aɓa omê ẽ.",
+      "ejemplo_traduccion": "Siete canastos.",
+      "nota_cultural": "Literalmente «una mano y dos». Muestra la estructura regular y transparente de los números del 6 al 9.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Sistema numérico ẽbẽra-chamí (fuentes educativas UNAL)",
+      "tags": [
+        "numero",
+        "siete"
+      ]
+    },
+    {
+      "id": "emb-n08",
+      "language": "embera",
+      "category": "numeros",
+      "palabra_nativa": "jua aɓa õbéa",
+      "traduccion_espanol": "ocho",
+      "guia_fonetica": "JUA a-ɓa õ-BÉ-a",
+      "ejemplo_uso": "Jua aɓa õbéa ãwár.",
+      "ejemplo_traduccion": "Ocho sardinas.",
+      "nota_cultural": "Literalmente «una mano y tres». Combina jua (mano), aɓa (uno) y õbéa (tres).",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Sistema numérico ẽbẽra-chamí (fuentes educativas UNAL)",
+      "tags": [
+        "numero",
+        "ocho"
+      ]
+    },
+    {
+      "id": "emb-n09",
+      "language": "embera",
+      "category": "numeros",
+      "palabra_nativa": "jua aɓa kimârê",
+      "traduccion_espanol": "nueve",
+      "guia_fonetica": "JUA a-ɓa ki-MÂ-rê",
+      "ejemplo_uso": "Jua aɓa kimârê wár.",
+      "ejemplo_traduccion": "Nueve hijos.",
+      "nota_cultural": "Literalmente «una mano y cuatro». Antes de completar las dos manos.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Sistema numérico ẽbẽra-chamí (fuentes educativas UNAL)",
+      "tags": [
+        "numero",
+        "nueve"
+      ]
+    },
+    {
+      "id": "emb-n10",
+      "language": "embera",
+      "category": "numeros",
+      "palabra_nativa": "jua omê",
+      "traduccion_espanol": "diez",
+      "guia_fonetica": "JUA o-MÊ",
+      "ejemplo_uso": "Jua omê ẽbẽra.",
+      "ejemplo_traduccion": "Diez personas ẽbẽra.",
+      "nota_cultural": "Literalmente «dos manos». En muchas lenguas amerindias las manos y los dedos estructuran el conteo.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Sistema numérico ẽbẽra-chamí (fuentes educativas UNAL)",
+      "tags": [
+        "numero",
+        "diez"
+      ]
+    },
+    {
+      "id": "emb-na11",
+      "language": "embera",
+      "category": "naturaleza",
+      "palabra_nativa": "do",
+      "traduccion_espanol": "río / agua",
+      "guia_fonetica": "DO",
+      "ejemplo_uso": "Do bía ní.",
+      "ejemplo_traduccion": "El río está bueno.",
+      "nota_cultural": "El río (do) es eje del territorio y del nombre de pueblos como los dóbiɗa («gente de río»).",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario ẽbẽra (ICANH / materiales etnoeducativos)",
+      "tags": [
+        "agua",
+        "rio",
+        "territorio"
+      ]
+    },
+    {
+      "id": "emb-na12",
+      "language": "embera",
+      "category": "naturaleza",
+      "palabra_nativa": "ĩkĩ",
+      "traduccion_espanol": "sol",
+      "guia_fonetica": "ĩ-KĨ, ambas nasales",
+      "ejemplo_uso": "Ĩkĩ bía.",
+      "ejemplo_traduccion": "Buen sol.",
+      "nota_cultural": "Las vocales nasales distinguen significados en ẽbẽra; la pronunciación puede variar entre comunidades.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Glosarios divulgativos ẽbẽra-chamí (pendiente de revisión comunitaria)",
+      "tags": [
+        "sol",
+        "naturaleza"
+      ]
+    },
+    {
+      "id": "emb-na13",
+      "language": "embera",
+      "category": "naturaleza",
+      "palabra_nativa": "jeɗako",
+      "traduccion_espanol": "luna",
+      "guia_fonetica": "je-ɗA-ko",
+      "ejemplo_uso": "Jeɗako bía.",
+      "ejemplo_traduccion": "Luna hermosa.",
+      "nota_cultural": "La luna guía siembras, cortes de madera y tiempos de pesca en muchas comunidades ẽbẽra.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Glosarios ẽbẽra-chamí (Swarthmore / materiales etnoeducativos)",
+      "tags": [
+        "luna",
+        "noche",
+        "naturaleza"
+      ]
+    },
+    {
+      "id": "emb-na14",
+      "language": "embera",
+      "category": "naturaleza",
+      "palabra_nativa": "põno",
+      "traduccion_espanol": "flor",
+      "guia_fonetica": "PÕ-no, con o nasal",
+      "ejemplo_uso": "Põno bía.",
+      "ejemplo_traduccion": "Flor bonita.",
+      "nota_cultural": "Las flores y plantas del monte también se asocian a los colores del tejido en chaquira y la pintura corporal con jagua.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Materiales pedagógicos ẽbẽra-chamí",
+      "tags": [
+        "flor",
+        "naturaleza"
+      ]
+    },
+    {
+      "id": "emb-an11",
+      "language": "embera",
+      "category": "animales",
+      "palabra_nativa": "ɓeda",
+      "traduccion_espanol": "pez / pescado",
+      "guia_fonetica": "ɓE-da, con b implosiva",
+      "ejemplo_uso": "Doɗe ɓeda.",
+      "ejemplo_traduccion": "Pez en el río.",
+      "nota_cultural": "La pesca con anzuelo (dúа) o atarraya es sustento diario y espacio de enseñanza entre generaciones.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario ẽbẽra-chamí (pendiente de revisión comunitaria)",
+      "tags": [
+        "pez",
+        "animal",
+        "rio"
+      ]
+    },
+    {
+      "id": "emb-f11",
+      "language": "embera",
+      "category": "familia",
+      "palabra_nativa": "kima",
+      "traduccion_espanol": "esposo / esposa",
+      "guia_fonetica": "KÍ-ma",
+      "ejemplo_uso": "Kima bía.",
+      "ejemplo_traduccion": "Buena pareja / cónyuge.",
+      "nota_cultural": "Término de parentesco usado en el chamí; la familia extensa es el núcleo de la vida comunitaria.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario ẽbẽra-chamí (UNAL)",
+      "tags": [
+        "familia",
+        "pareja"
+      ]
+    },
+    {
+      "id": "emb-s06",
+      "language": "embera",
+      "category": "saludos",
+      "palabra_nativa": "nee",
+      "traduccion_espanol": "no",
+      "guia_fonetica": "NEE",
+      "ejemplo_uso": "Nee, bía ní.",
+      "ejemplo_traduccion": "No, está bien.",
+      "nota_cultural": "Respuesta breve de negación usada en la conversación cotidiana.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Expresiones cotidianas ẽbẽra-chamí (pendiente de revisión)",
+      "tags": [
+        "saludo",
+        "respuesta"
+      ]
+    },
+    {
+      "id": "emb-s07",
+      "language": "embera",
+      "category": "saludos",
+      "palabra_nativa": "biía",
+      "traduccion_espanol": "bien / saludo de bienestar",
+      "guia_fonetica": "bi-Í-a",
+      "ejemplo_uso": "¿Sakabuma? — Biía.",
+      "ejemplo_traduccion": "¿Cómo estás? — Bien.",
+      "nota_cultural": "Se usa tanto para responder que se está bien como en saludos breves al encontrarse en el camino.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Expresiones cotidianas ẽbẽra-chamí (ICANH)",
+      "tags": [
+        "saludo",
+        "bienestar"
+      ]
+    },
+    {
+      "id": "way-n07",
+      "language": "wayuunaiki",
+      "category": "numeros",
+      "palabra_nativa": "aipirua",
+      "traduccion_espanol": "seis",
+      "guia_fonetica": "ai-pi-RU-a",
+      "ejemplo_uso": "Aipirua kattoi.",
+      "ejemplo_traduccion": "Seis mochilas.",
+      "nota_cultural": "Completa la serie del 1 al 10 en wayuunaiki junto a wane, piama, apünüin, pienchi y jarai.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Módulo wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "numero",
+        "seis"
+      ]
+    },
+    {
+      "id": "way-n08",
+      "language": "wayuunaiki",
+      "category": "numeros",
+      "palabra_nativa": "akaratshi",
+      "traduccion_espanol": "siete",
+      "guia_fonetica": "a-ka-RAT-shi",
+      "ejemplo_uso": "Akaratshi ka’i.",
+      "ejemplo_traduccion": "Siete días.",
+      "nota_cultural": "Número de uso frecuente para contar días, animales del rebaño y objetos.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Módulo wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "numero",
+        "siete"
+      ]
+    },
+    {
+      "id": "way-n09",
+      "language": "wayuunaiki",
+      "category": "numeros",
+      "palabra_nativa": "mekiisat",
+      "traduccion_espanol": "ocho",
+      "guia_fonetica": "me-KII-sat, con i larga",
+      "ejemplo_uso": "Mekiisat kaa’ula.",
+      "ejemplo_traduccion": "Ocho chivos.",
+      "nota_cultural": "Observa la vocal larga ii: en wayuunaiki la duración vocálica es parte esencial de la palabra.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Módulo wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "numero",
+        "ocho"
+      ]
+    },
+    {
+      "id": "way-n10",
+      "language": "wayuunaiki",
+      "category": "numeros",
+      "palabra_nativa": "mekie’etsat",
+      "traduccion_espanol": "nueve",
+      "guia_fonetica": "me-kie-ET-sat, con salto glotal",
+      "ejemplo_uso": "Mekie’etsat wayuu.",
+      "ejemplo_traduccion": "Nueve personas wayuu.",
+      "nota_cultural": "Incluye oclusión glotal (’) entre vocales, un sonido característico del wayuunaiki.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Módulo wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "numero",
+        "nueve"
+      ]
+    },
+    {
+      "id": "way-an03",
+      "language": "wayuunaiki",
+      "category": "animales",
+      "palabra_nativa": "mürülü",
+      "traduccion_espanol": "animal doméstico",
+      "guia_fonetica": "mü-RÜ-lü",
+      "ejemplo_uso": "Anasü tü mürülü.",
+      "ejemplo_traduccion": "Los animales domésticos están bien.",
+      "nota_cultural": "El pastoreo de animales domésticos (mürülü) es pilar económico, social y simbólico en las rancherías wayuu.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "animal",
+        "rancheria"
+      ]
+    },
+    {
+      "id": "way-an04",
+      "language": "wayuunaiki",
+      "category": "animales",
+      "palabra_nativa": "wuchii",
+      "traduccion_espanol": "pájaro / ave",
+      "guia_fonetica": "wu-CHII, con i larga",
+      "ejemplo_uso": "Anasü tü wuchii.",
+      "ejemplo_traduccion": "El pájaro es hermoso.",
+      "nota_cultural": "Las aves del desierto y del manglar anuncian lluvias, visitas y cambios del viento en la sabiduría wayuu.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "pajaro",
+        "ave",
+        "animal"
+      ]
+    },
+    {
+      "id": "way-an05",
+      "language": "wayuunaiki",
+      "category": "animales",
+      "palabra_nativa": "erü",
+      "traduccion_espanol": "perro",
+      "guia_fonetica": "E-rü",
+      "ejemplo_uso": "Erü yala piichipa’a.",
+      "ejemplo_traduccion": "El perro está en la casa.",
+      "nota_cultural": "Compañero habitual en las rancherías para cuidar el patio y el rebaño. La grafía con ü señala la vocal central alta.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "perro",
+        "animal"
+      ]
+    },
+    {
+      "id": "way-an06",
+      "language": "wayuunaiki",
+      "category": "animales",
+      "palabra_nativa": "kaa’ula",
+      "traduccion_espanol": "chivo / cabra",
+      "guia_fonetica": "KAA-u-la, con glotal",
+      "ejemplo_uso": "Piama kaa’ula.",
+      "ejemplo_traduccion": "Dos chivos.",
+      "nota_cultural": "El chivo (kaa’ula) es central en la vida guajira: está presente en la alimentación, los encuentros familiares y los acuerdos.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "chivo",
+        "cabra",
+        "animal"
+      ]
+    },
+    {
+      "id": "way-an07",
+      "language": "wayuunaiki",
+      "category": "animales",
+      "palabra_nativa": "paa’a",
+      "traduccion_espanol": "vaca / ganado",
+      "guia_fonetica": "PAA-a, con glotal",
+      "ejemplo_uso": "Wane paa’a.",
+      "ejemplo_traduccion": "Una vaca.",
+      "nota_cultural": "El ganado vacuno simboliza abundancia y prestigio familiar en la península de La Guajira.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "vaca",
+        "animal"
+      ]
+    },
+    {
+      "id": "way-an08",
+      "language": "wayuunaiki",
+      "category": "animales",
+      "palabra_nativa": "ama",
+      "traduccion_espanol": "caballo",
+      "guia_fonetica": "A-ma",
+      "ejemplo_uso": "Ama anasü.",
+      "ejemplo_traduccion": "Buen caballo.",
+      "nota_cultural": "Palabra muy usada para nombrar al caballo, compañero tradicional de viaje por las trochas de La Guajira.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "caballo",
+        "animal"
+      ]
+    },
+    {
+      "id": "way-an09",
+      "language": "wayuunaiki",
+      "category": "animales",
+      "palabra_nativa": "püliikü",
+      "traduccion_espanol": "burro",
+      "guia_fonetica": "pü-LII-kü",
+      "ejemplo_uso": "Püliikü akaaliijüshi.",
+      "ejemplo_traduccion": "El burro ayuda.",
+      "nota_cultural": "El burro ha sido fundamental en La Guajira para transportar agua (wüin) desde los jagüeyes hasta la ranchería.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "burro",
+        "animal"
+      ]
+    },
+    {
+      "id": "way-an10",
+      "language": "wayuunaiki",
+      "category": "animales",
+      "palabra_nativa": "muusa",
+      "traduccion_espanol": "gato",
+      "guia_fonetica": "MUU-sa, con u larga",
+      "ejemplo_uso": "Muusa piichipa’a.",
+      "ejemplo_traduccion": "El gato está en la casa.",
+      "nota_cultural": "Ejemplo claro de vocal larga (uu) en wayuunaiki.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "gato",
+        "animal"
+      ]
+    },
+    {
+      "id": "way-b01",
+      "language": "wayuunaiki",
+      "category": "cuerpo",
+      "palabra_nativa": "ekii",
+      "traduccion_espanol": "cabeza",
+      "guia_fonetica": "e-KII, con i larga",
+      "ejemplo_uso": "Tekii (mi cabeza).",
+      "ejemplo_traduccion": "Mi cabeza.",
+      "nota_cultural": "En wayuunaiki muchas partes del cuerpo son nombres inalienables: suelen llevar prefijo posesivo (ta-/te- = mi, pü- = tu).",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "cuerpo",
+        "cabeza"
+      ]
+    },
+    {
+      "id": "way-b02",
+      "language": "wayuunaiki",
+      "category": "cuerpo",
+      "palabra_nativa": "o’u",
+      "traduccion_espanol": "ojo",
+      "guia_fonetica": "O-u, con glotal",
+      "ejemplo_uso": "To’u (mi ojo).",
+      "ejemplo_traduccion": "Mi ojo.",
+      "nota_cultural": "Con prefijo posesivo se forma to’u (mi ojo) o po’u (tu ojo). Practica la pausa breve de la glotal (’).",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "cuerpo",
+        "ojo"
+      ]
+    },
+    {
+      "id": "way-b03",
+      "language": "wayuunaiki",
+      "category": "cuerpo",
+      "palabra_nativa": "ichi",
+      "traduccion_espanol": "nariz",
+      "guia_fonetica": "I-chi",
+      "ejemplo_uso": "Tichi (mi nariz).",
+      "ejemplo_traduccion": "Mi nariz.",
+      "nota_cultural": "También existe la palabra ichi para sal en otros contextos; el contexto y la posesión distinguen el sentido.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "cuerpo",
+        "nariz"
+      ]
+    },
+    {
+      "id": "way-b04",
+      "language": "wayuunaiki",
+      "category": "cuerpo",
+      "palabra_nativa": "anükü",
+      "traduccion_espanol": "boca",
+      "guia_fonetica": "a-NÜ-kü",
+      "ejemplo_uso": "Tanükü (mi boca).",
+      "ejemplo_traduccion": "Mi boca.",
+      "nota_cultural": "Lleva dos vocales ü, cuya articulación se logra pronunciando una u con los labios estirados.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "cuerpo",
+        "boca"
+      ]
+    },
+    {
+      "id": "way-b05",
+      "language": "wayuunaiki",
+      "category": "cuerpo",
+      "palabra_nativa": "ache’e",
+      "traduccion_espanol": "oreja",
+      "guia_fonetica": "a-CHE-e, con glotal",
+      "ejemplo_uso": "Tache’e (mi oreja).",
+      "ejemplo_traduccion": "Mi oreja.",
+      "nota_cultural": "Escuchar bien (aapajaa) es una virtud muy valorada en el consejo familiar wayuu.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "cuerpo",
+        "oreja"
+      ]
+    },
+    {
+      "id": "way-b06",
+      "language": "wayuunaiki",
+      "category": "cuerpo",
+      "palabra_nativa": "ajapü",
+      "traduccion_espanol": "mano",
+      "guia_fonetica": "a-JA-pü",
+      "ejemplo_uso": "Tajapü (mi mano).",
+      "ejemplo_traduccion": "Mi mano.",
+      "nota_cultural": "Con las manos se tejen las mochilas (kattoi) y los chinchorros (sui) que narran la historia del clan.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "cuerpo",
+        "mano"
+      ]
+    },
+    {
+      "id": "way-b07",
+      "language": "wayuunaiki",
+      "category": "cuerpo",
+      "palabra_nativa": "o’ui",
+      "traduccion_espanol": "pie",
+      "guia_fonetica": "O-ui, con glotal",
+      "ejemplo_uso": "To’ui (mi pie).",
+      "ejemplo_traduccion": "Mi pie.",
+      "nota_cultural": "Raíz poseída para nombrar el pie; al caminar el desierto se usan las sandalias tradicionales (waireñas).",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "cuerpo",
+        "pie"
+      ]
+    },
+    {
+      "id": "way-v05",
+      "language": "wayuunaiki",
+      "category": "verbos",
+      "palabra_nativa": "aapajaa",
+      "traduccion_espanol": "escuchar",
+      "guia_fonetica": "aa-pa-JAA",
+      "ejemplo_uso": "Aapajaa pütchi.",
+      "ejemplo_traduccion": "Escuchar la palabra / el consejo.",
+      "nota_cultural": "Muchos verbos en infinitivo en wayuunaiki terminan en -aa o -waa. Escuchar a los mayores es base del aprendizaje.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "verbo",
+        "escuchar"
+      ]
+    },
+    {
+      "id": "way-v06",
+      "language": "wayuunaiki",
+      "category": "verbos",
+      "palabra_nativa": "aashajawaa",
+      "traduccion_espanol": "hablar / conversar",
+      "guia_fonetica": "aa-sha-ja-WAA",
+      "ejemplo_uso": "Aashajawaa wayuunaiki.",
+      "ejemplo_traduccion": "Hablar en wayuunaiki.",
+      "nota_cultural": "Conversar con calma bajo la enramada es una forma esencial de cuidar la relación comunitaria.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "verbo",
+        "hablar"
+      ]
+    },
+    {
+      "id": "way-v07",
+      "language": "wayuunaiki",
+      "category": "verbos",
+      "palabra_nativa": "akaaliijaa",
+      "traduccion_espanol": "ayudar",
+      "guia_fonetica": "a-kaa-lii-JAA",
+      "ejemplo_uso": "Akaaliijaa wayuu.",
+      "ejemplo_traduccion": "Ayudar a la gente.",
+      "nota_cultural": "El apoyo mutuo (yanama) entre familias vecinas es una institución clave en la vida wayuu.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "verbo",
+        "ayudar"
+      ]
+    },
+    {
+      "id": "way-v08",
+      "language": "wayuunaiki",
+      "category": "verbos",
+      "palabra_nativa": "emi’ijaa",
+      "traduccion_espanol": "jugar",
+      "guia_fonetica": "e-mi-i-JAA, con glotal",
+      "ejemplo_uso": "Emi’ijaa jintüi.",
+      "ejemplo_traduccion": "El niño juega.",
+      "nota_cultural": "Los juegos tradicionales infantiles enseñan destreza, equilibrio y convivencia desde pequeños.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "verbo",
+        "jugar"
+      ]
+    },
+    {
+      "id": "way-v09",
+      "language": "wayuunaiki",
+      "category": "verbos",
+      "palabra_nativa": "aainjaa",
+      "traduccion_espanol": "hacer / tejer / construir",
+      "guia_fonetica": "aa-in-JAA",
+      "ejemplo_uso": "Aainjaa kattoi.",
+      "ejemplo_traduccion": "Tejer / hacer una mochila.",
+      "nota_cultural": "Verbo muy versátil usado para nombrar tanto el trabajo cotidiano como la creación artesanal.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "verbo",
+        "hacer",
+        "tejer"
+      ]
+    },
+    {
+      "id": "way-v10",
+      "language": "wayuunaiki",
+      "category": "verbos",
+      "palabra_nativa": "ekirajaa",
+      "traduccion_espanol": "aprender / estudiar",
+      "guia_fonetica": "e-ki-ra-JAA",
+      "ejemplo_uso": "Ekirajaa wayuunaiki.",
+      "ejemplo_traduccion": "Aprender wayuunaiki.",
+      "nota_cultural": "Se usa en escuelas etnoeducativas bilingües de La Guajira para hablar de la enseñanza y el estudio.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "verbo",
+        "aprender",
+        "estudiar"
+      ]
+    },
+    {
+      "id": "way-s07",
+      "language": "wayuunaiki",
+      "category": "saludos",
+      "palabra_nativa": "jamaya pü’lapüin?",
+      "traduccion_espanol": "¿qué tal estuvo tu sueño?",
+      "guia_fonetica": "ja-MA-ya pü-la-PÜ-in",
+      "ejemplo_uso": "Anasü wattama’at, ¿jamaya pü’lapüin?",
+      "ejemplo_traduccion": "Buenos días, ¿qué tal estuvo tu sueño?",
+      "nota_cultural": "Saludo tradicional wayuu al amanecer: los sueños (lapü) son mensajeros importantes que orientan el día y protegen a la familia.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Saludos tradicionales wayuu (pendiente de revisión comunitaria)",
+      "tags": [
+        "saludo",
+        "sueno",
+        "cultura"
+      ]
+    },
+    {
+      "id": "way-s08",
+      "language": "wayuunaiki",
+      "category": "saludos",
+      "palabra_nativa": "antüshi pia",
+      "traduccion_espanol": "bienvenido (a un hombre)",
+      "guia_fonetica": "an-TÜ-shi PI-a",
+      "ejemplo_uso": "Antüshi pia piichipa’a.",
+      "ejemplo_traduccion": "Bienvenido a la casa.",
+      "nota_cultural": "En wayuunaiki el verbo cambia según el género de quien llega: antüshi pia (para hombre) y antüsü pia (para mujer).",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Saludos tradicionales wayuu (pendiente de revisión comunitaria)",
+      "tags": [
+        "saludo",
+        "bienvenida"
+      ]
+    },
+    {
+      "id": "way-p06",
+      "language": "wayuunaiki",
+      "category": "frases",
+      "palabra_nativa": "kasaichi pünülia?",
+      "traduccion_espanol": "¿cómo te llamas?",
+      "guia_fonetica": "ka-SAI-chi pü-nü-LI-a",
+      "ejemplo_uso": "Ajaa, ¿kasaichi pünülia?",
+      "ejemplo_traduccion": "Hola, ¿cómo te llamas?",
+      "nota_cultural": "Pregunta básica para presentarse. En el territorio wayuu, además del nombre, suele importar el clan (eirukuu) materno.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Frases cotidianas wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "frase",
+        "nombre",
+        "presentacion"
+      ]
+    },
+    {
+      "id": "way-p07",
+      "language": "wayuunaiki",
+      "category": "frases",
+      "palabra_nativa": "kasachiki?",
+      "traduccion_espanol": "¿qué noticias hay? / ¿qué pasa?",
+      "guia_fonetica": "ka-sa-CHI-ki",
+      "ejemplo_uso": "Ajaa, ¿kasachiki?",
+      "ejemplo_traduccion": "Hola, ¿qué noticias hay?",
+      "nota_cultural": "Expresión muy común al reencontrarse con familiares o vecinos para ponerse al día.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Frases cotidianas wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "frase",
+        "pregunta"
+      ]
+    },
+    {
+      "id": "way-p08",
+      "language": "wayuunaiki",
+      "category": "frases",
+      "palabra_nativa": "pütchipü’üi",
+      "traduccion_espanol": "palabrero / mediador",
+      "guia_fonetica": "püt-chi-PÜ-üi",
+      "ejemplo_uso": "Aashajawaa pütchipü’üi.",
+      "ejemplo_traduccion": "El palabrero conversa.",
+      "nota_cultural": "Autoridad moral tradicional reconocida por la UNESCO como Patrimonio Cultural Inmaterial; resuelve conflictos mediante la palabra.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario cultural wayuu",
+      "tags": [
+        "cultura",
+        "justicia",
+        "palabra"
+      ]
+    },
+    {
+      "id": "way-f11",
+      "language": "wayuunaiki",
+      "category": "familia",
+      "palabra_nativa": "wa’lee",
+      "traduccion_espanol": "amigo / amiga",
+      "guia_fonetica": "wa-LEE, con glotal y e larga",
+      "ejemplo_uso": "Ajaa, wa’lee.",
+      "ejemplo_traduccion": "Hola, amigo.",
+      "nota_cultural": "Término afectuoso para saludar a una amistad cercana.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "familia",
+        "amigo"
+      ]
+    },
+    {
+      "id": "way-f12",
+      "language": "wayuunaiki",
+      "category": "familia",
+      "palabra_nativa": "jintüi",
+      "traduccion_espanol": "niño / muchacho",
+      "guia_fonetica": "jin-TÜ-i",
+      "ejemplo_uso": "Emi’ijaa jintüi.",
+      "ejemplo_traduccion": "El niño juega.",
+      "nota_cultural": "Para niña se usa jintut. Los niños aprenden la lengua escuchando a madres, tíos maternos y abuelas.",
+      "audio_url": null,
+      "source": "complemento",
+      "source_detail": "Vocabulario wayuunaiki (pendiente de revisión comunitaria)",
+      "tags": [
+        "familia",
+        "nino"
+      ]
     }
   ]
 }

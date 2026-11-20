@@ -145,14 +145,14 @@ const wayuuUnits: UnitConfig[] = [
   {
     id: 'way-u2',
     title: 'El desierto y el mar',
-    subtitle: 'El territorio y los objetos que acompañan la vida.',
-    lessonIds: ['way-l-naturaleza', 'way-l-casa'],
+    subtitle: 'El territorio, los animales y los objetos que acompañan la vida.',
+    lessonIds: ['way-l-naturaleza', 'way-l-animales', 'way-l-casa'],
   },
   {
     id: 'way-u3',
-    title: 'Vida y palabra',
-    subtitle: 'Emociones, acciones y expresiones de todos los días.',
-    lessonIds: ['way-l-cualidades', 'way-l-verbos', 'way-l-frases'],
+    title: 'Cuerpo, vida y palabra',
+    subtitle: 'El cuerpo, emociones, acciones y expresiones de todos los días.',
+    lessonIds: ['way-l-cuerpo', 'way-l-cualidades', 'way-l-verbos', 'way-l-frases'],
   },
 ]
 
@@ -198,6 +198,16 @@ const wayuuLessons: LessonConfig[] = [
     xp: 30,
   },
   {
+    id: 'way-l-animales',
+    language: 'wayuunaiki',
+    category: 'animales',
+    unitId: 'way-u2',
+    title: 'Animales de la ranchería',
+    subtitle: 'mürülü · kaa’ula · wuchii · erü',
+    description: 'Animales domésticos y del territorio guajiro.',
+    xp: 25,
+  },
+  {
     id: 'way-l-casa',
     language: 'wayuunaiki',
     category: 'casa',
@@ -205,6 +215,16 @@ const wayuuLessons: LessonConfig[] = [
     title: 'Tejidos y objetos',
     subtitle: 'piichi · sui · kattoi · siwarai',
     description: 'La casa, el chinchorro y la mochila.',
+    xp: 25,
+  },
+  {
+    id: 'way-l-cuerpo',
+    language: 'wayuunaiki',
+    category: 'cuerpo',
+    unitId: 'way-u3',
+    title: 'El cuerpo humano',
+    subtitle: 'ekii · o’u · anükü · ajapü',
+    description: 'Partes del cuerpo y cómo se nombran con posesión.',
     xp: 25,
   },
   {

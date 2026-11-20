@@ -5,6 +5,7 @@ import type { SentenceExercise } from '../types'
  * Los tokens se barajan y el usuario debe ordenarlos.
  */
 export const SENTENCES: SentenceExercise[] = [
+  // === ẼBẼRA-CHAMÍ ===
   {
     id: 'emb-sen-01',
     language: 'embera',
@@ -54,6 +55,56 @@ export const SENTENCES: SentenceExercise[] = [
     source: 'Manual ẽbẽra-chamí',
   },
   {
+    id: 'emb-sen-07',
+    language: 'embera',
+    tokens: ['karta', 'ẽbẽra', 'beɗea'],
+    translation: 'Libro de la lengua ẽbẽra.',
+    hint: 'Son las primeras palabras del título del manual de 2013.',
+    source: 'Manual ẽbẽra-chamí (portada)',
+  },
+  {
+    id: 'emb-sen-08',
+    language: 'embera',
+    tokens: ['ẽbẽra', 'beɗea', 'kawabiy'],
+    translation: 'Aprender la lengua ẽbẽra.',
+    hint: 'beɗea es lengua/palabra; kawabiy significa aprender.',
+    source: 'Manual ẽbẽra-chamí',
+  },
+  {
+    id: 'emb-sen-09',
+    language: 'embera',
+    tokens: ['dái', 'ruáɗe', 'beɗeabarí'],
+    translation: 'Nosotros hablamos en la tierra.',
+    hint: 'dái = nosotros; ruáɗe = en la tierra; beɗeabarí = suele hablar.',
+    source: 'Manual ẽbẽra-chamí',
+  },
+  {
+    id: 'emb-sen-10',
+    language: 'embera',
+    tokens: ['jua', 'aɓa', 'páda'],
+    translation: 'Cinco plátanos.',
+    hint: 'jua aɓa (una mano) es cinco; páda es plátano.',
+    source: 'Manual ẽbẽra-chamí y complemento',
+  },
+  {
+    id: 'emb-sen-11',
+    language: 'embera',
+    tokens: ['mãe,', 'sakabuma?'],
+    translation: 'Hola, ¿cómo estás?',
+    hint: 'mãe abre el saludo y sakabuma pregunta cómo está la otra persona.',
+    source: 'Saludos de uso extendido',
+  },
+  {
+    id: 'emb-sen-12',
+    language: 'embera',
+    tokens: ['miadaa', 'ní'],
+    translation: 'Es feo.',
+    hint: 'Construcción descriptiva documentada en el manual.',
+    source: 'Manual ẽbẽra-chamí',
+  },
+
+  // === WAYUUNAIKI ===
+  {
     id: 'way-sen-01',
     language: 'wayuunaiki',
     tokens: ['anasü', 'wattama’at'],
@@ -88,9 +139,65 @@ export const SENTENCES: SentenceExercise[] = [
   {
     id: 'way-sen-05',
     language: 'wayuunaiki',
-    tokens: ['ajaa', 'pia'],
-    translation: 'Hola, tú.',
-    hint: 'Una construcción sencilla para practicar dos palabras de saludo.',
+    tokens: ['jamaya', 'pü’lapüin?'],
+    translation: '¿Qué tal estuvo tu sueño?',
+    hint: 'Saludo tradicional wayuu al despertar; lapü es sueño.',
+    source: 'Módulo inicial wayuunaiki',
+  },
+  {
+    id: 'way-sen-06',
+    language: 'wayuunaiki',
+    tokens: ['kasaichi', 'pünülia?'],
+    translation: '¿Cómo te llamas?',
+    hint: 'pünülia se refiere a tu nombre.',
+    source: 'Módulo inicial wayuunaiki',
+  },
+  {
+    id: 'way-sen-07',
+    language: 'wayuunaiki',
+    tokens: ['aashajawaa', 'wayuunaiki'],
+    translation: 'Hablar en wayuunaiki.',
+    hint: 'aashajawaa es el verbo hablar o conversar.',
+    source: 'Módulo inicial wayuunaiki',
+  },
+  {
+    id: 'way-sen-08',
+    language: 'wayuunaiki',
+    tokens: ['aainjaa', 'kattoi'],
+    translation: 'Tejer / hacer una mochila.',
+    hint: 'aainjaa significa hacer o tejer; kattoi es mochila.',
+    source: 'Módulo inicial wayuunaiki',
+  },
+  {
+    id: 'way-sen-09',
+    language: 'wayuunaiki',
+    tokens: ['aapajaa', 'pütchi'],
+    translation: 'Escuchar la palabra / el consejo.',
+    hint: 'aapajaa es escuchar; pütchi es palabra o consejo.',
+    source: 'Módulo inicial wayuunaiki',
+  },
+  {
+    id: 'way-sen-10',
+    language: 'wayuunaiki',
+    tokens: ['antüshi', 'pia', 'piichipa’a'],
+    translation: 'Bienvenido a la casa.',
+    hint: 'antüshi pia es bienvenido (a un hombre); piichi es casa.',
+    source: 'Módulo inicial wayuunaiki',
+  },
+  {
+    id: 'way-sen-11',
+    language: 'wayuunaiki',
+    tokens: ['ekirajaa', 'wayuunaiki'],
+    translation: 'Aprender wayuunaiki.',
+    hint: 'ekirajaa significa estudiar o aprender.',
+    source: 'Módulo inicial wayuunaiki',
+  },
+  {
+    id: 'way-sen-12',
+    language: 'wayuunaiki',
+    tokens: ['ajaa,', 'wa’lee'],
+    translation: 'Hola, amigo.',
+    hint: 'ajaa es hola y wa’lee nombra a una amistad cercana.',
     source: 'Módulo inicial wayuunaiki',
   },
 ]
