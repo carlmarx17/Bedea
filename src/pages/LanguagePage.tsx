@@ -5,7 +5,6 @@ import { getCurriculum } from '../data/curriculum'
 import { getWords, getWordOfTheDay, getLanguageCategoryCounts } from '../lib/vocabulary'
 import { useProgress } from '../lib/progress'
 import { Button, Badge, ProgressBar, SectionHeading, AudioButton, EmptyState } from '../components/ui'
-import { TextileBorder } from '../components/TextilePattern'
 import { Icon } from '../components/Icon'
 import { cn } from '../lib/utils'
 
@@ -63,14 +62,16 @@ export function LanguagePage() {
     return completed.includes(orderedLessons[index - 1].id)
   }
 
-  const accent = language.accent === 'wayuu' ? 'ochre' : 'jungle'
-  const nextActiveLessonId = orderedLessons.find((l) => !completed.includes(l.id))?.id
+  const isWayuu = language.accent === 'wayuu'
+  const accent = isWayuu ? 'ochre' : 'jungle'
+  const nextActiveLesson = orderedLessons.find((l) => !completed.includes(l.id))
+  const nextActiveLessonId = nextActiveLesson?.id
 
   return (
-    <div className="space-y-8 sm:space-y-10">
-      {/* Selector rápido de lengua */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="inline-flex rounded-full border border-sand-200 bg-cream p-1 shadow-soft">
+    <div className="space-y-12 sm:space-y-16">
+      {/* Selector editorial de lengua */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-ink/12 pb-4">
+        <div className="flex items-center gap-6">
           {AVAILABLE_LANGUAGES.map((lang) => {
             const active = lang.id === language.id
             return (
@@ -78,125 +79,189 @@ export function LanguagePage() {
                 key={lang.id}
                 to={`/lengua/${lang.id}`}
                 className={cn(
-                  'rounded-full px-4 py-1.5 text-sm font-semibold transition-all',
-                  active
-                    ? 'bg-jungle-700 text-cream shadow-sm'
-                    : 'text-muted hover:text-ink',
+                  'relative pb-1 font-display text-lg font-semibold transition-colors',
+                  active ? 'text-ink' : 'text-muted hover:text-ink',
                 )}
               >
                 {lang.name}
+                {active && (
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      'absolute inset-x-0 -bottom-[1.06rem] h-[2px]',
+                      lang.accent === 'wayuu' ? 'bg-ochre-500' : 'bg-terracotta-500',
+                    )}
+                  />
+                )}
               </Link>
             )
           })}
         </div>
-        <Link to={`/diccionario?lang=${language.id}`} className="inline-flex items-center gap-1.5 text-xs font-semibold text-jungle-700 hover:underline">
-          <Icon name="book" size={14} />
-          Ver diccionario de {language.name}
+        <Link
+          to={`/diccionario?lang=${language.id}`}
+          className="link-underline text-xs font-semibold text-ink"
+        >
+          Diccionario {language.name} ({getWords(languageId).length}) →
         </Link>
       </div>
 
-      {/* Encabezado de la lengua */}
-      <section className="surface overflow-hidden">
-        <TextileBorder tone={language.accent === 'wayuu' ? 'gold' : 'terracotta'} />
-        <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-start">
-          <div>
-            <p className="eyebrow">{language.family}</p>
-            <h1 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">{language.name}</h1>
-            <p className="native-word mt-1 text-lg font-medium text-muted">{language.nativeName}</p>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">{language.description}</p>
+      {/* Cabecera abierta de la lengua */}
+      <section className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
+        <div>
+          <p className="eyebrow">{language.family}</p>
+          <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <h1 className="font-display text-4xl font-semibold text-ink sm:text-5xl">
+              {language.name}
+            </h1>
+            <span className="native-word font-display text-xl italic text-muted">
+              {language.nativeName}
+            </span>
+          </div>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+            {language.description}
+          </p>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              <Badge tone="sand"><Icon name="map-pin" size={13} className="mr-1" />{language.region}</Badge>
-              <Badge tone="sand"><Icon name="users" size={13} className="mr-1" />{language.speakers}</Badge>
-              <Badge tone="sand"><Icon name="book" size={13} className="mr-1" />{getWords(languageId).length} palabras</Badge>
-            </div>
-
-            <div className={cn('mt-5 rounded-2xl p-4', language.accent === 'wayuu' ? 'bg-ochre-50' : 'bg-terracotta-50')}>
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">Saludo para empezar</p>
-              <div className="mt-1 flex flex-wrap items-center gap-3">
-                <span className={cn('native-word font-display text-2xl font-semibold', language.accent === 'wayuu' ? 'text-ochre-700' : 'text-terracotta-700')}>
-                  {language.greeting}
+          {/* Saludo interactivo */}
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-y border-ink/12 py-4">
+            <div>
+              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
+                Saludo para empezar
+              </p>
+              <p className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+                <span
+                  className={cn(
+                    'native-word font-display text-2xl font-semibold sm:text-3xl',
+                    isWayuu ? 'text-ochre-700' : 'text-terracotta-600',
+                  )}
+                >
+                  “{language.greeting}”
                 </span>
                 <span className="text-sm text-muted">{language.greetingTranslation}</span>
-                <AudioButton text={language.greeting} compact />
-              </div>
-            </div>
-
-            <p className="mt-4 text-xs leading-relaxed text-muted">
-              <span className="font-semibold text-ink/70">Comunidad: </span>{language.community}
-            </p>
-            <p className="mt-1.5 text-xs leading-relaxed text-muted">
-              <span className="font-semibold text-ink/70">Fuente: </span>{language.sourceNote}
-            </p>
-            {language.caution && (
-              <p className="mt-2 rounded-xl border border-ochre-200 bg-ochre-50/70 px-3 py-2 text-xs leading-relaxed text-ochre-800">
-                <Icon name="info" size={14} className="mr-1 inline text-ochre-600" />
-                {language.caution}
               </p>
-            )}
+            </div>
+            <AudioButton text={language.greeting} />
           </div>
 
-          <div className="space-y-4">
-            <div className="surface-muted p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Tu progreso en {language.name}</p>
-              <p className="mt-2 font-display text-3xl font-semibold text-ink">{completedCount}<span className="text-lg text-muted">/{totalLessons}</span></p>
-              <p className="text-sm text-muted">lecciones completadas</p>
-              <ProgressBar value={percent} tone={accent} className="mt-3" />
-              <p className="mt-2 text-xs font-medium text-muted">{Math.round(percent)}% del camino</p>
+          {/* Ficha territorial en 3 columnas limpias */}
+          <dl className="mt-5 grid gap-4 text-xs sm:grid-cols-3">
+            <div>
+              <dt className="font-semibold uppercase tracking-[0.14em] text-muted">Territorio</dt>
+              <dd className="mt-1 font-medium text-ink">{language.region}</dd>
             </div>
+            <div>
+              <dt className="font-semibold uppercase tracking-[0.14em] text-muted">Hablantes</dt>
+              <dd className="mt-1 font-medium text-ink">{language.speakers}</dd>
+            </div>
+            <div>
+              <dt className="font-semibold uppercase tracking-[0.14em] text-muted">Fuente</dt>
+              <dd className="mt-1 text-muted">{language.sourceNote}</dd>
+            </div>
+          </dl>
 
-            {wordOfDay && (
-              <div className="surface-muted p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Palabra del día</p>
-                <div className="mt-2 flex items-center gap-2">
-                  <span className="native-word font-display text-xl font-semibold text-ink">{wordOfDay.palabra_nativa}</span>
-                  <AudioButton text={wordOfDay.palabra_nativa} compact />
-                </div>
-                <p className="text-sm font-medium text-jungle-800">{wordOfDay.traduccion_espanol}</p>
-                <p className="mt-1 text-xs italic text-muted">[{wordOfDay.guia_fonetica}]</p>
+          {language.caution && (
+            <p className="mt-5 border-l-2 border-ochre-500 pl-3.5 text-xs leading-relaxed text-muted">
+              {language.caution}
+            </p>
+          )}
+        </div>
+
+        {/* Columna derecha: progreso y palabra del día */}
+        <aside className="space-y-4">
+          <div className="rounded-2xl bg-ink p-6 text-cream">
+            <div className="flex items-baseline justify-between">
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-ochre-300">
+                Tu avance
+              </p>
+              <span className="text-xs tabular-nums text-sand-200/75">{Math.round(percent)}%</span>
+            </div>
+            <p className="mt-2 font-display text-3xl font-semibold tabular-nums">
+              {completedCount}
+              <span className="text-lg font-normal text-sand-200/60"> / {totalLessons} lecciones</span>
+            </p>
+            <ProgressBar
+              value={percent}
+              tone={isWayuu ? 'ochre' : 'jungle'}
+              height="h-1.5"
+              className="mt-4 bg-white/15"
+            />
+            {nextActiveLesson && (
+              <div className="mt-5 border-t border-white/12 pt-4">
+                <Link to={`/lengua/${languageId}/leccion/${nextActiveLesson.id}`}>
+                  <Button variant="ochre" size="md" className="w-full">
+                    <Icon name="play" size={15} />
+                    {completedCount === 0 ? 'Comenzar lección 1' : `Seguir: ${nextActiveLesson.title}`}
+                  </Button>
+                </Link>
               </div>
             )}
           </div>
-        </div>
+
+          {wordOfDay && (
+            <div className="surface p-5">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
+                    Palabra del día
+                  </p>
+                  <p className="native-word mt-1.5 font-display text-2xl font-semibold text-ink">
+                    {wordOfDay.palabra_nativa}
+                  </p>
+                  <p className="text-xs italic text-muted">/{wordOfDay.guia_fonetica}/</p>
+                </div>
+                <AudioButton text={wordOfDay.palabra_nativa} compact />
+              </div>
+              <p className="mt-2.5 text-sm font-semibold text-jungle-700">
+                {wordOfDay.traduccion_espanol}
+              </p>
+            </div>
+          )}
+        </aside>
       </section>
 
-      {/* Modos de práctica */}
-      <section className="space-y-4">
+      {/* Modos de práctica: índice editorial numerado */}
+      <section className="space-y-5 border-t border-ink/12 pt-10">
         <SectionHeading
-          eyebrow="Practica"
+          eyebrow="Práctica libre"
           title="Juegos y repaso"
-          description="Refuerza lo aprendido con diferentes formas de practicar."
+          description="Refuerza vocabulario y estructuras sin presión, en cuatro formatos."
         />
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {[
-            { mode: 'flashcards', icon: 'layers', label: 'Tarjetas', desc: 'Voltea y memoriza' },
-            { mode: 'quiz', icon: 'target', label: 'Quiz', desc: 'Elige la respuesta' },
-            { mode: 'match', icon: 'puzzle', label: 'Emparejar', desc: 'Une palabra y significado' },
-            { mode: 'sentence', icon: 'pen', label: 'Oraciones', desc: 'Ordena las palabras' },
+            { num: '01', mode: 'flashcards', label: 'Tarjetas', desc: 'Voltea y recuerda en voz alta' },
+            { num: '02', mode: 'quiz', label: 'Quiz', desc: 'Elige la traducción correcta' },
+            { num: '03', mode: 'match', label: 'Emparejar', desc: 'Conecta palabra y sentido' },
+            { num: '04', mode: 'sentence', label: 'Oraciones', desc: 'Ordena expresiones reales' },
           ].map((item) => (
             <Link
               key={item.mode}
               to={`/lengua/${languageId}/practica/${item.mode}`}
-              className="surface group flex flex-col items-center gap-2 p-4 text-center transition-all hover:-translate-y-0.5 hover:shadow-lift sm:p-5"
+              className="surface group flex flex-col justify-between p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-ink/30"
             >
-              <span className={cn('flex h-12 w-12 items-center justify-center rounded-2xl transition-colors', language.accent === 'wayuu' ? 'bg-ochre-100 text-ochre-700 group-hover:bg-ochre-200' : 'bg-jungle-100 text-jungle-700 group-hover:bg-jungle-200')}>
-                <Icon name={item.icon} size={22} />
-              </span>
-              <span className="font-display text-base font-semibold text-ink">{item.label}</span>
-              <span className="text-xs text-muted">{item.desc}</span>
+              <div className="flex items-center justify-between text-xs font-medium text-muted">
+                <span className="font-display italic">{item.num}</span>
+                <Icon
+                  name="arrow-up-right"
+                  size={15}
+                  className="text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink"
+                />
+              </div>
+              <div className="mt-6">
+                <p className="font-display text-xl font-semibold text-ink">{item.label}</p>
+                <p className="mt-1 text-xs leading-relaxed text-muted">{item.desc}</p>
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
       {/* Camino de aprendizaje */}
-      <section className="space-y-5">
+      <section className="space-y-6 border-t border-ink/12 pt-10">
         <SectionHeading
-          eyebrow="Camino de aprendizaje"
+          eyebrow="Recorrido guiado"
           title="Tus lecciones"
-          description="Avanza unidad por unidad. Cada lección completada desbloquea la siguiente."
+          description="Avanza unidad por unidad. Cada lección completada abre el paso a la siguiente."
         />
-        <div className="space-y-6">
+        <div className="space-y-8">
           {curriculum.units.map((unit, unitIndex) => {
             const lessons = unit.lessonIds
               .map((id) => curriculum.lessons.find((l) => l.id === id))
@@ -204,17 +269,20 @@ export function LanguagePage() {
             const unitDone = lessons.every((l) => completed.includes(l.id))
             return (
               <div key={unit.id} className="surface overflow-hidden">
-                <div className={cn('flex items-center gap-4 border-b border-sand-200/80 p-5 sm:p-6', unitDone && 'bg-jungle-50/50')}>
-                  <span className={cn('flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl font-display text-lg font-semibold', unitDone ? 'bg-jungle-700 text-cream' : 'bg-sand-100 text-ink')}>
-                    {unitDone ? <Icon name="check" size={18} /> : unitIndex + 1}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-display text-lg font-semibold text-ink">{unit.title}</h3>
+                <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-ink/10 px-6 py-5">
+                  <div>
+                    <p className="font-display text-xs italic text-terracotta-600">
+                      Unidad 0{unitIndex + 1}
+                    </p>
+                    <h3 className="mt-0.5 font-display text-xl font-semibold text-ink">
+                      {unit.title}
+                    </h3>
                     <p className="text-sm text-muted">{unit.subtitle}</p>
                   </div>
                   {unitDone && <Badge tone="jungle">Completada</Badge>}
                 </div>
-                <div className="divide-y divide-sand-200/60">
+
+                <div className="divide-y divide-ink/10">
                   {lessons.map((lesson, lessonIdx) => {
                     const isDone = completed.includes(lesson.id)
                     const unlocked = isLessonUnlocked(lesson.id)
@@ -225,48 +293,61 @@ export function LanguagePage() {
                       <div
                         key={lesson.id}
                         className={cn(
-                          'relative flex items-center gap-4 p-4 transition-colors sm:p-5',
-                          isNext && 'bg-ochre-50/45',
-                          !unlocked && 'opacity-60',
+                          'relative flex items-center gap-4 px-5 py-4 transition-colors sm:px-6 sm:py-5',
+                          isNext && 'bg-sand-100/70',
+                          !unlocked && 'opacity-55',
                         )}
                       >
                         <div className="relative flex flex-col items-center self-stretch">
                           <span
                             className={cn(
-                              'relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border-2 transition-transform',
+                              'relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors',
                               isDone
-                                ? 'border-jungle-600 bg-jungle-600 text-cream'
+                                ? 'border-jungle-700 bg-jungle-700 text-cream'
                                 : isNext
-                                  ? 'border-ochre-400 bg-ochre-100 text-ochre-800 shadow-glow'
+                                  ? 'border-ink bg-ink text-cream'
                                   : unlocked
-                                    ? 'border-ochre-300 bg-ochre-50 text-ochre-700'
-                                    : 'border-sand-300 bg-sand-100 text-muted',
+                                    ? 'border-ink/25 bg-cream text-ink'
+                                    : 'border-ink/15 bg-sand-100 text-muted',
                             )}
                           >
-                            {isDone ? <Icon name="check" size={18} /> : unlocked ? <Icon name="play" size={17} /> : <Icon name="lock" size={16} />}
+                            {isDone ? (
+                              <Icon name="check" size={16} />
+                            ) : unlocked ? (
+                              <Icon name="play" size={15} />
+                            ) : (
+                              <Icon name="lock" size={14} />
+                            )}
                           </span>
                           {!isLast && (
                             <span
                               aria-hidden="true"
                               className={cn(
-                                'mt-1 w-0.5 flex-1 rounded-full',
-                                isDone ? 'bg-jungle-400' : 'border-l-2 border-dashed border-sand-300',
+                                'mt-1.5 w-px flex-1',
+                                isDone ? 'bg-jungle-500' : 'border-l border-dashed border-ink/20',
                               )}
                             />
                           )}
                         </div>
+
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-2">
-                            <p className="font-display text-base font-semibold text-ink">{lesson.title}</p>
-                            {isNext && <Badge tone="ochre">Siguiente</Badge>}
+                            <p className="font-display text-lg font-semibold text-ink">
+                              {lesson.title}
+                            </p>
+                            {isNext && (
+                              <span className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-terracotta-600">
+                                · Siguiente
+                              </span>
+                            )}
                           </div>
-                          <p className="native-word text-xs text-muted">{lesson.subtitle}</p>
-                          <p className="mt-0.5 text-xs text-muted">{lesson.description}</p>
-                          <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[0.68rem] font-semibold text-muted">
-                            <span className="inline-flex items-center gap-1"><Icon name="book" size={12} />{wordCount} palabras</span>
-                            <span className="inline-flex items-center gap-1"><Icon name="zap" size={12} className="text-ochre-500" />+{lesson.xp} XP</span>
-                          </div>
+                          <p className="native-word text-xs italic text-muted">{lesson.subtitle}</p>
+                          <p className="mt-1 text-xs text-muted">{lesson.description}</p>
+                          <p className="mt-1.5 text-[0.7rem] font-medium text-muted">
+                            {wordCount} palabras · +{lesson.xp} XP
+                          </p>
                         </div>
+
                         <div className="shrink-0">
                           {unlocked ? (
                             <Link to={`/lengua/${languageId}/leccion/${lesson.id}`}>
@@ -275,7 +356,7 @@ export function LanguagePage() {
                               </Button>
                             </Link>
                           ) : (
-                            <Badge tone="outline"><Icon name="lock" size={12} className="mr-1" />Bloqueada</Badge>
+                            <span className="text-xs font-medium text-muted">Bloqueada</span>
                           )}
                         </div>
                       </div>
@@ -289,8 +370,12 @@ export function LanguagePage() {
       </section>
 
       {/* Categorías del léxico */}
-      <section className="space-y-4">
-        <SectionHeading eyebrow="Léxico" title="Categorías de vocabulario" description="Explora las palabras de esta lengua en el diccionario." />
+      <section className="space-y-4 border-t border-ink/12 pt-10">
+        <SectionHeading
+          eyebrow="Léxico"
+          title="Explora por tema"
+          description="Filtra directamente el diccionario de esta lengua según la categoría."
+        />
         <div className="flex flex-wrap gap-2">
           {CATEGORIES.filter((cat) => (categoryCounts[cat.id] ?? 0) > 0).map((cat) => (
             <Link
@@ -298,9 +383,8 @@ export function LanguagePage() {
               to={`/diccionario?lang=${languageId}&cat=${cat.id}`}
               className="chip"
             >
-              <Icon name={cat.icon} size={15} />
               {cat.label}
-              <span className="ml-0.5 rounded-full bg-sand-200 px-1.5 py-0.5 text-[0.65rem] font-bold text-muted">{categoryCounts[cat.id]}</span>
+              <span className="tabular-nums text-muted">({categoryCounts[cat.id]})</span>
             </Link>
           ))}
         </div>

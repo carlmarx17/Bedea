@@ -53,12 +53,12 @@ export function Button({
 type BadgeTone = 'jungle' | 'ochre' | 'terracotta' | 'coral' | 'sand' | 'outline'
 
 const BADGE_TONES: Record<BadgeTone, string> = {
-  jungle: 'bg-jungle-100 text-jungle-800 border-jungle-200',
-  ochre: 'bg-ochre-100 text-ochre-800 border-ochre-200',
-  terracotta: 'bg-terracotta-100 text-terracotta-800 border-terracotta-200',
+  jungle: 'bg-jungle-50 text-jungle-800 border-jungle-200',
+  ochre: 'bg-ochre-50 text-ochre-800 border-ochre-200',
+  terracotta: 'bg-terracotta-50 text-terracotta-800 border-terracotta-200',
   coral: 'bg-coral-400/15 text-coral-600 border-coral-400/30',
-  sand: 'bg-sand-100 text-muted border-sand-200',
-  outline: 'bg-transparent text-muted border-sand-300',
+  sand: 'bg-sand-100/80 text-ink/75 border-ink/10',
+  outline: 'bg-transparent text-muted border-ink/15',
 }
 
 export function Badge({
@@ -146,9 +146,11 @@ export function SectionHeading({
   return (
     <div className={cn('flex flex-wrap items-end justify-between gap-4', className)}>
       <div className="max-w-2xl">
-        {eyebrow && <p className="eyebrow mb-2">{eyebrow}</p>}
-        <h2 className="font-display text-2xl font-semibold text-ink sm:text-3xl">{title}</h2>
-        {description && <p className="mt-2 text-sm leading-relaxed text-muted sm:text-base">{description}</p>}
+        {eyebrow && <p className="eyebrow mb-1.5">{eyebrow}</p>}
+        <h2 className="font-display text-2xl font-semibold text-ink sm:text-[2rem] sm:leading-tight">
+          {title}
+        </h2>
+        {description && <p className="mt-2 text-sm leading-relaxed text-muted">{description}</p>}
       </div>
       {action}
     </div>
@@ -259,8 +261,8 @@ export function AudioButton({
       className={cn(
         'inline-flex items-center justify-center gap-1.5 rounded-full border font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40',
         speaking
-          ? 'border-jungle-500 bg-jungle-700 text-cream animate-pulse-ring'
-          : 'border-jungle-200 bg-jungle-50 text-jungle-700 hover:border-jungle-300 hover:bg-jungle-100',
+          ? 'border-ink bg-ink text-cream animate-pulse-ring'
+          : 'border-ink/15 bg-sand-50 text-ink hover:border-ink/40 hover:bg-sand-100',
         compact ? 'h-9 w-9' : 'px-3.5 py-1.5 text-xs',
         className,
       )}

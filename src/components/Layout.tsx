@@ -3,7 +3,6 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { BrandLockup } from './BrandMark'
 import { Icon } from './Icon'
 import { TextileBorder } from './TextilePattern'
-import { ProgressBar } from './ui'
 import { useBrand } from '../lib/brand'
 import { useProgress } from '../lib/progress'
 import { cn, dateKey } from '../lib/utils'
@@ -13,7 +12,6 @@ interface NavItem {
   label: string
   shortLabel: string
   icon: string
-  match?: (pathname: string) => boolean
 }
 
 export function Layout() {
@@ -22,7 +20,7 @@ export function Layout() {
   const location = useLocation()
   const learningHref = `/lengua/${progress.lastLanguage || 'embera'}`
   const todayXp = progress.dailyDate === dateKey() ? progress.dailyXp : 0
-  const dailyPercent = Math.min(100, (todayXp / dailyGoal) * 100)
+  const goalMet = todayXp >= dailyGoal
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' })
@@ -30,10 +28,10 @@ export function Layout() {
 
   const primaryNav: NavItem[] = [
     { to: '/', label: 'Inicio', shortLabel: 'Inicio', icon: 'home' },
-    { to: learningHref, label: 'Mi aprendizaje', shortLabel: 'Aprender', icon: 'route' },
+    { to: learningHref, label: 'Aprender', shortLabel: 'Aprender', icon: 'route' },
     { to: '/diccionario', label: 'Diccionario', shortLabel: 'Diccionario', icon: 'book' },
     { to: '/cultura', label: 'Cultura', shortLabel: 'Cultura', icon: 'sparkles' },
-    { to: '/progreso', label: 'Mi progreso', shortLabel: 'Progreso', icon: 'trophy' },
+    { to: '/progreso', label: 'Progreso', shortLabel: 'Progreso', icon: 'trophy' },
   ]
 
   const isActive = (item: NavItem) => {
@@ -43,144 +41,117 @@ export function Layout() {
   }
 
   return (
-    <div className="min-h-dvh">
-      {/* ---------------------------------------------------------- */}
-      {/* Barra lateral de escritorio                                 */}
-      {/* ---------------------------------------------------------- */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-[17.5rem] flex-col border-r border-sand-200/80 bg-cream/85 px-5 pb-6 pt-0 backdrop-blur-xl lg:flex">
-        <TextileBorder tone="gold" className="-mx-5 mb-6 w-[calc(100%+2.5rem)] opacity-75" />
-        <Link to="/" aria-label={`${brand.name}, ir al inicio`} className="mb-8 block">
-          <BrandLockup />
-        </Link>
-
-        <nav className="flex flex-col gap-1" aria-label="Navegación principal">
-          {primaryNav.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={cn(
-                'group flex items-center gap-3 rounded-2xl px-3.5 py-3 text-sm font-semibold transition-colors',
-                isActive(item)
-                  ? 'bg-jungle-700 text-cream shadow-soft'
-                  : 'text-muted hover:bg-sand-100 hover:text-ink',
-              )}
-            >
-              <span
-                className={cn(
-                  'flex h-8 w-8 items-center justify-center rounded-xl transition-colors',
-                  isActive(item) ? 'bg-white/10 text-ochre-200' : 'bg-sand-100 text-jungle-600 group-hover:bg-cream',
-                )}
-              >
-                <Icon name={item.icon} size={17} />
-              </span>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="my-5 h-px bg-sand-200/80" />
-
-        <Link
-          to="/ajustes"
-          className={cn(
-            'flex items-center gap-3 rounded-2xl px-3.5 py-2.5 text-sm font-medium transition-colors',
-            location.pathname.startsWith('/ajustes')
-              ? 'bg-sand-100 text-ink'
-              : 'text-muted hover:bg-sand-100 hover:text-ink',
-          )}
-        >
-          <Icon name="settings" size={17} />
-          Ajustes y marca
-        </Link>
-
-        <div className="mt-auto space-y-4 pt-6">
-          <div className="rounded-3xl border border-sand-200 bg-sand-50/80 p-4">
-            <div className="flex items-center justify-between text-xs font-semibold text-muted">
-              <span>Meta de hoy</span>
-              <span className="tabular-nums text-ink">
-                {todayXp}/{dailyGoal} XP
-              </span>
-            </div>
-            <ProgressBar value={dailyPercent} className="mt-2.5" tone="ochre" height="h-2" />
-            <div className="mt-3 flex items-center gap-4 text-xs font-semibold text-ink">
-              <span className="inline-flex items-center gap-1.5">
-                <Icon name="flame" size={15} className="text-terracotta-500" />
-                {progress.streak} {progress.streak === 1 ? 'día' : 'días'}
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Icon name="zap" size={15} className="text-ochre-500" />
-                {progress.xp} XP
-              </span>
-            </div>
-          </div>
-
-          <p className="px-1 text-[0.68rem] leading-relaxed text-muted/80">
-            Voces indígenas de Colombia, aprendidas con respeto. Material en construcción junto a las
-            comunidades.
-          </p>
-        </div>
-      </aside>
-
-      {/* ---------------------------------------------------------- */}
-      {/* Cabecera móvil                                              */}
-      {/* ---------------------------------------------------------- */}
-      <header className="sticky top-0 z-30 border-b border-sand-200/70 bg-sand-50/85 backdrop-blur-xl lg:hidden">
-        <div className="container-app flex h-16 items-center justify-between gap-3">
-          <Link to="/" aria-label={`${brand.name}, ir al inicio`}>
-            <BrandLockup compact />
+    <div className="flex min-h-dvh flex-col">
+      {/* Cabecera editorial superior */}
+      <header className="sticky top-0 z-30 border-b border-ink/10 bg-sand-50/90 backdrop-blur-md">
+        <div className="container-app flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]">
+          <Link to="/" aria-label={`${brand.name}, ir al inicio`} className="shrink-0">
+            <BrandLockup compact className="sm:hidden" />
+            <BrandLockup className="hidden sm:flex" />
           </Link>
-          <div className="flex items-center gap-1.5">
-            <span className="inline-flex items-center gap-1 rounded-full border border-terracotta-200 bg-terracotta-50 px-2.5 py-1 text-xs font-bold text-terracotta-700">
-              <Icon name="flame" size={14} />
-              {progress.streak}
-            </span>
-            <span className="inline-flex items-center gap-1 rounded-full border border-ochre-200 bg-ochre-50 px-2.5 py-1 text-xs font-bold text-ochre-700">
-              <Icon name="zap" size={14} />
-              {progress.xp}
-            </span>
+
+          {/* Navegación de escritorio: tipográfica y limpia, sin cajas de iconos */}
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Navegación principal">
+            {primaryNav.map((item) => {
+              const active = isActive(item)
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={cn(
+                    'relative px-3.5 py-2 text-sm font-medium transition-colors',
+                    active ? 'text-ink' : 'text-muted hover:text-ink',
+                  )}
+                >
+                  {item.label}
+                  {active && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-3.5 -bottom-[1.15rem] h-[2px] bg-terracotta-500"
+                    />
+                  )}
+                </Link>
+              )
+            })}
+          </nav>
+
+          {/* Estado discreto: racha, XP y ajustes */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link
+              to="/progreso"
+              title={`Meta diaria: ${todayXp}/${dailyGoal} XP`}
+              className="inline-flex items-center gap-2.5 rounded-full border border-ink/12 bg-cream px-3 py-1.5 text-xs font-semibold text-ink transition-colors hover:border-ink/30"
+            >
+              <span className="inline-flex items-center gap-1 tabular-nums text-terracotta-600">
+                <Icon name="flame" size={14} />
+                {progress.streak}
+              </span>
+              <span aria-hidden="true" className="h-3 w-px bg-ink/15" />
+              <span className="inline-flex items-center gap-1 tabular-nums text-ink">
+                <Icon name="zap" size={13} className={goalMet ? 'text-jungle-600' : 'text-ochre-500'} />
+                {progress.xp}
+                <span className="hidden text-muted sm:inline">XP</span>
+              </span>
+            </Link>
+
             <Link
               to="/ajustes"
               aria-label="Ajustes y marca"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-sand-200 bg-cream text-muted transition-colors hover:text-ink"
+              className={cn(
+                'flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
+                location.pathname.startsWith('/ajustes')
+                  ? 'border-ink bg-ink text-cream'
+                  : 'border-ink/12 bg-cream text-muted hover:border-ink/30 hover:text-ink',
+              )}
             >
-              <Icon name="settings" size={17} />
+              <Icon name="settings" size={16} />
             </Link>
           </div>
         </div>
       </header>
 
-      {/* ---------------------------------------------------------- */}
-      {/* Contenido                                                   */}
-      {/* ---------------------------------------------------------- */}
-      <div className="lg:pl-[17.5rem]">
-        <main
-          key={location.pathname}
-          className="container-app min-h-[calc(100dvh-4rem)] animate-fade-in pb-28 pt-6 sm:pt-8 lg:pb-14 lg:pt-10"
-        >
-          <Outlet />
-        </main>
+      {/* Contenido principal */}
+      <main
+        key={location.pathname}
+        className="container-app flex-1 animate-fade-in pb-28 pt-8 sm:pt-12 lg:pb-20 lg:pt-14"
+      >
+        <Outlet />
+      </main>
 
-        <footer className="container-app hidden pb-10 lg:block">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-sand-200/80 pt-5 text-xs text-muted">
-            <p>
-              {brand.name} · {brand.subtitle} · Proyecto educativo de lenguas indígenas.
+      {/* Colofón editorial */}
+      <footer className="mt-auto hidden border-t border-ink/12 bg-sand-100/50 lg:block">
+        <TextileBorder tone="terracotta" className="opacity-35" />
+        <div className="container-app py-10">
+          <div className="grid gap-8 md:grid-cols-[1.2fr_1fr_auto] md:items-end">
+            <div>
+              <p className="font-display text-lg font-semibold text-ink">
+                {brand.name} <span className="font-normal italic text-muted">— {brand.subtitle}</span>
+              </p>
+              <p className="mt-2 max-w-md text-xs leading-relaxed text-muted">
+                Archivo vivo y espacio de aprendizaje dedicado a las lenguas indígenas de Colombia.
+                Construido con respeto a las comunidades hablantes y sus territorios.
+              </p>
+            </div>
+            <p className="text-xs leading-relaxed text-muted">
+              Fuente base:{' '}
+              <span className="font-medium text-ink">Manual de enseñanza y escritura ẽbẽra-chamí (2013)</span>.
+              El módulo wayuunaiki se encuentra abierto a revisión comunitaria.
             </p>
-            <p>
-              Fuente base: <span className="font-medium text-ink">Manual ẽbẽra-chamí (2013)</span>. El
-              módulo wayuunaiki está pendiente de revisión comunitaria.
-            </p>
+            <div className="flex items-center gap-4 text-xs font-medium text-muted">
+              <Link to="/diccionario" className="hover:text-ink">Diccionario</Link>
+              <Link to="/cultura" className="hover:text-ink">Cultura</Link>
+              <Link to="/ajustes" className="hover:text-ink">Identidad</Link>
+            </div>
           </div>
-        </footer>
-      </div>
+        </div>
+      </footer>
 
-      {/* ---------------------------------------------------------- */}
-      {/* Navegación móvil inferior                                   */}
-      {/* ---------------------------------------------------------- */}
+      {/* Navegación móvil inferior */}
       <nav
-        className="fixed inset-x-0 bottom-0 z-30 border-t border-sand-200/80 bg-cream/95 backdrop-blur-xl lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-ink/12 bg-cream/95 backdrop-blur-lg lg:hidden"
         aria-label="Navegación principal"
       >
-        <div className="safe-bottom mx-auto grid max-w-lg grid-cols-5 px-2 pt-1.5">
+        <div className="safe-bottom mx-auto grid max-w-lg grid-cols-5">
           {primaryNav.map((item) => {
             const active = isActive(item)
             return (
@@ -188,18 +159,17 @@ export function Layout() {
                 key={item.to}
                 to={item.to}
                 className={cn(
-                  'flex flex-col items-center gap-1 rounded-2xl px-1 py-2 text-[0.62rem] font-semibold transition-colors',
-                  active ? 'text-jungle-800' : 'text-muted',
+                  'relative flex flex-col items-center gap-1 py-2.5 text-[0.64rem] font-semibold transition-colors',
+                  active ? 'text-ink' : 'text-muted',
                 )}
               >
-                <span
-                  className={cn(
-                    'flex h-8 w-11 items-center justify-center rounded-full transition-colors',
-                    active ? 'bg-jungle-100 text-jungle-800' : 'text-muted',
-                  )}
-                >
-                  <Icon name={item.icon} size={19} />
-                </span>
+                {active && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-5 top-0 h-[2px] bg-terracotta-500"
+                  />
+                )}
+                <Icon name={item.icon} size={19} strokeWidth={active ? 2.2 : 1.7} />
                 {item.shortLabel}
               </NavLink>
             )

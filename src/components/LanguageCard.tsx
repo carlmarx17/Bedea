@@ -1,41 +1,41 @@
 import { Link } from 'react-router-dom'
 import { Icon } from './Icon'
-import { Badge, ProgressBar } from './ui'
+import { ProgressBar } from './ui'
 import { getCurriculum } from '../data/curriculum'
 import { countWords } from '../lib/vocabulary'
 import { useProgress } from '../lib/progress'
 import { cn } from '../lib/utils'
 import type { LanguageInfo } from '../types'
 
-const ACCENTS: Record<string, { bar: string; soft: string; text: string }> = {
+const ACCENTS: Record<string, { border: string; text: string; dot: string }> = {
   embera: {
-    bar: 'from-terracotta-500 to-terracotta-700',
-    soft: 'bg-terracotta-50',
-    text: 'text-terracotta-700',
+    border: 'border-t-terracotta-500',
+    text: 'text-terracotta-600',
+    dot: 'bg-terracotta-500',
   },
   wayuu: {
-    bar: 'from-ochre-400 to-ochre-600',
-    soft: 'bg-ochre-50',
-    text: 'text-ochre-700',
+    border: 'border-t-ochre-500',
+    text: 'text-ochre-600',
+    dot: 'bg-ochre-500',
   },
   nasa: {
-    bar: 'from-jungle-500 to-jungle-700',
-    soft: 'bg-jungle-50',
+    border: 'border-t-jungle-600',
     text: 'text-jungle-700',
+    dot: 'bg-jungle-600',
   },
   kogui: {
-    bar: 'from-jungle-600 to-jungle-800',
-    soft: 'bg-jungle-50',
+    border: 'border-t-jungle-700',
     text: 'text-jungle-700',
+    dot: 'bg-jungle-700',
   },
   tikuna: {
-    bar: 'from-terracotta-400 to-ochre-500',
-    soft: 'bg-sand-100',
-    text: 'text-terracotta-700',
+    border: 'border-t-terracotta-400',
+    text: 'text-terracotta-600',
+    dot: 'bg-terracotta-400',
   },
 }
 
-/** Tarjeta de una lengua disponible, con progreso y acceso al camino. */
+/** Tarjeta editorial de una lengua disponible, con progreso y acceso al camino. */
 export function LanguageCard({ language }: { language: LanguageInfo }) {
   const { progress } = useProgress()
   const curriculum = getCurriculum(language.id)
@@ -48,84 +48,91 @@ export function LanguageCard({ language }: { language: LanguageInfo }) {
   return (
     <Link
       to={`/lengua/${language.id}`}
-      className="surface group relative flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+      className={cn(
+        'surface group relative flex flex-col border-t-[3px] p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-ink/25 sm:p-8',
+        accent.border,
+      )}
     >
-      <div className={cn('h-1.5 w-full bg-gradient-to-r', accent.bar)} />
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <p className={cn('text-[0.68rem] font-semibold uppercase tracking-[0.16em]', accent.text)}>
-              {language.family}
-            </p>
-            <h3 className="mt-1.5 font-display text-2xl font-semibold text-ink">{language.name}</h3>
-            <p className="native-word text-sm font-medium text-muted">{language.nativeName}</p>
-          </div>
-          <span
-            className={cn(
-              'flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl transition-transform group-hover:scale-105',
-              accent.soft,
-              accent.text,
-            )}
-          >
-            <Icon name="languages" size={21} />
-          </span>
-        </div>
-
-        <div className={cn('mt-5 rounded-2xl px-4 py-3', accent.soft)}>
-          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-muted">Saludo</p>
-          <p className="mt-0.5 flex items-baseline gap-2">
-            <span className={cn('native-word font-display text-xl font-semibold', accent.text)}>
-              {language.greeting}
-            </span>
-            <span className="text-xs font-medium text-muted">{language.greetingTranslation}</span>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className={cn('text-[0.68rem] font-semibold uppercase tracking-[0.18em]', accent.text)}>
+            {language.family}
+          </p>
+          <h3 className="mt-2 font-display text-3xl font-semibold text-ink">{language.name}</h3>
+          <p className="native-word mt-0.5 font-display text-base italic text-muted">
+            {language.nativeName}
           </p>
         </div>
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink/12 text-ink transition-all duration-200 group-hover:border-ink group-hover:bg-ink group-hover:text-cream">
+          <Icon name="arrow-up-right" size={18} />
+        </span>
+      </div>
 
-        <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-muted">{language.description}</p>
+      {/* Saludo destacado como espécimen tipográfico */}
+      <div className="mt-6 border-y border-ink/10 py-4">
+        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
+          Saludo tradicional
+        </p>
+        <p className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+          <span className={cn('native-word font-display text-2xl font-semibold', accent.text)}>
+            “{language.greeting}”
+          </span>
+          <span className="text-xs text-muted">{language.greetingTranslation}</span>
+        </p>
+      </div>
 
-        <div className="mt-5 flex flex-wrap items-center gap-2 text-xs font-semibold text-muted">
-          <Badge tone="sand">{words} palabras</Badge>
-          <Badge tone="sand">{totalLessons} lecciones</Badge>
-          <Badge tone="sand">{language.speakers}</Badge>
+      <p className="mt-5 line-clamp-3 text-sm leading-relaxed text-muted">{language.description}</p>
+
+      {/* Metadatos en línea limpia, sin pila de badges */}
+      <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-medium text-muted">
+        <span className="text-ink">{words} palabras</span>
+        <span aria-hidden="true">·</span>
+        <span className="text-ink">{totalLessons} lecciones</span>
+        <span aria-hidden="true">·</span>
+        <span>{language.speakers}</span>
+      </div>
+
+      <div className="mt-auto pt-6">
+        <div className="mb-2 flex items-center justify-between text-xs font-medium text-muted">
+          <span>
+            {completed === 0 ? 'Sin iniciar' : `${completed} de ${totalLessons} lecciones`}
+          </span>
+          <span className="tabular-nums text-ink">{Math.round(percent)}%</span>
         </div>
-
-        <div className="mt-auto pt-5">
-          <div className="mb-1.5 flex items-center justify-between text-[0.7rem] font-semibold text-muted">
-            <span>{completed === 0 ? 'Empieza tu camino' : `${completed} de ${totalLessons} lecciones`}</span>
-            <span className="tabular-nums">{Math.round(percent)}%</span>
-          </div>
-          <ProgressBar value={percent} tone={language.accent === 'wayuu' ? 'ochre' : 'jungle'} height="h-2" />
-          <div className="mt-3.5 flex items-center justify-between text-xs font-semibold text-jungle-700">
-            <span>{completed === 0 ? 'Comenzar lección 1' : 'Continuar camino'}</span>
-            <Icon name="arrow-right" size={15} className="transition-transform group-hover:translate-x-1" />
-          </div>
-        </div>
+        <ProgressBar
+          value={percent}
+          tone={language.accent === 'wayuu' ? 'ochre' : 'jungle'}
+          height="h-1.5"
+        />
       </div>
     </Link>
   )
 }
 
-/** Tarjeta de una lengua que llegará próximamente. */
-export function UpcomingLanguageCard({ language }: { language: LanguageInfo }) {
+/** Entrada editorial para lenguas próximas, como volúmenes en preparación. */
+export function UpcomingLanguageCard({
+  language,
+  index,
+}: {
+  language: LanguageInfo
+  index?: number
+}) {
   const accent = ACCENTS[language.accent] ?? ACCENTS.nasa
   return (
-    <div className="surface-muted relative flex flex-col overflow-hidden p-5 transition-colors hover:border-sand-300 hover:bg-cream/80">
-      <div className={cn('absolute inset-x-0 top-0 h-1 bg-gradient-to-r opacity-45', accent.bar)} />
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-muted">
-            {language.family}
-          </p>
-          <h3 className="mt-1.5 font-display text-lg font-semibold text-ink/90">{language.name}</h3>
-          <p className="native-word text-xs font-medium text-muted">{language.nativeName}</p>
-        </div>
-        <Badge tone="outline">Próximamente</Badge>
+    <div className="flex flex-col border-t border-ink/15 pt-5">
+      <div className="flex items-baseline justify-between gap-2">
+        <span className="font-display text-xs italic text-muted">
+          {index ? `0${index}` : 'Pronto'} · {language.family}
+        </span>
+        <span className="inline-flex items-center gap-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-muted">
+          <span className={cn('h-1.5 w-1.5 rounded-full', accent.dot)} />
+          En camino
+        </span>
       </div>
+      <h3 className="mt-2 font-display text-xl font-semibold text-ink">{language.name}</h3>
+      <p className="native-word text-xs italic text-muted">{language.nativeName}</p>
       <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-muted">{language.description}</p>
-      <p className="mt-auto flex items-center gap-1.5 pt-3 text-[0.68rem] font-medium text-muted/85">
-        <Icon name="map-pin" size={12} className={accent.text} />
-        {language.region}
-      </p>
+      <p className="mt-auto pt-3 text-[0.7rem] font-medium text-ink/70">{language.region}</p>
     </div>
   )
 }

@@ -1,15 +1,7 @@
-import { Icon } from './Icon'
-import { Badge } from './ui'
-import { TextileLattice } from './TextilePattern'
 import { cn } from '../lib/utils'
 import type { CultureCapsule } from '../types'
 
-const ICON_TONES: Record<string, string> = {
-  embera: 'bg-terracotta-100 text-terracotta-700',
-  wayuunaiki: 'bg-ochre-100 text-ochre-700',
-}
-
-/** Cápsula cultural "Sabías que...". */
+/** Cápsula cultural con estética de ensayo editorial. */
 export function CultureCard({
   capsule,
   featured = false,
@@ -26,53 +18,43 @@ export function CultureCard({
   return (
     <article
       className={cn(
-        'surface group relative flex flex-col overflow-hidden p-5 transition-all duration-300 hover:shadow-lift sm:p-6',
-        featured && 'border-jungle-800/30 bg-gradient-to-br from-jungle-900 via-jungle-800 to-jungle-950 text-cream',
+        'group relative flex flex-col overflow-hidden rounded-2xl border p-6 transition-all duration-200 sm:p-7',
+        featured
+          ? 'border-ink bg-ink text-cream'
+          : 'border-ink/10 bg-cream text-ink hover:border-ink/25',
         onOpen && 'cursor-pointer hover:-translate-y-0.5',
         className,
       )}
     >
-      {featured && <TextileLattice className="text-ochre-300 opacity-[0.06]" />}
-
-      <div className="relative flex items-start justify-between gap-3">
+      <div className="flex items-center justify-between gap-3">
         <span
           className={cn(
-            'flex h-11 w-11 items-center justify-center rounded-2xl',
-            featured
-              ? 'bg-white/10 text-ochre-200'
-              : ICON_TONES[capsule.language] ?? 'bg-sand-100 text-jungle-700',
+            'inline-flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.16em]',
+            featured ? 'text-ochre-300' : 'text-terracotta-600',
           )}
         >
-          <Icon name={capsule.icon} size={21} />
+          <span
+            className={cn(
+              'h-1.5 w-1.5 rounded-full',
+              featured ? 'bg-ochre-300' : isEmbera ? 'bg-terracotta-500' : 'bg-ochre-500',
+            )}
+          />
+          {isEmbera ? 'Ẽbẽra' : 'Wayuunaiki'} · {capsule.category}
         </span>
-        <Badge
-          tone={featured ? 'ochre' : isEmbera ? 'terracotta' : 'ochre'}
-          className={featured ? 'border-ochre-300/30 bg-ochre-400/20 text-ochre-100' : undefined}
-        >
-          {isEmbera ? 'Ẽbẽra' : 'Wayuunaiki'}
-        </Badge>
       </div>
 
-      <p
-        className={cn(
-          'relative mt-4 text-[0.68rem] font-semibold uppercase tracking-[0.16em]',
-          featured ? 'text-ochre-200' : 'text-terracotta-600',
-        )}
-      >
-        Sabías que · {capsule.category}
-      </p>
       <h3
         className={cn(
-          'relative mt-1.5 font-display text-xl font-semibold leading-snug',
-          featured ? 'text-cream sm:text-2xl' : 'text-ink',
+          'mt-4 font-display font-semibold leading-snug',
+          featured ? 'text-2xl text-cream sm:text-[1.75rem]' : 'text-xl text-ink',
         )}
       >
         {capsule.title}
       </h3>
       <p
         className={cn(
-          'relative mt-3 text-sm leading-relaxed',
-          featured ? 'text-sand-100/85' : 'text-muted',
+          'mt-3 text-sm leading-relaxed',
+          featured ? 'text-sand-100/80' : 'text-muted',
           !featured && 'line-clamp-4',
         )}
       >
@@ -81,34 +63,34 @@ export function CultureCard({
 
       <div
         className={cn(
-          'relative mt-auto flex flex-wrap items-center justify-between gap-2 border-t pt-3 mt-4',
-          featured ? 'border-white/15' : 'border-sand-200/80',
+          'mt-auto flex flex-wrap items-baseline justify-between gap-3 border-t pt-4 mt-6',
+          featured ? 'border-white/12' : 'border-ink/10',
         )}
       >
-        <span className="flex items-baseline gap-2">
+        <span className="flex items-baseline gap-2.5">
           <span
             className={cn(
               'native-word font-display text-lg font-semibold',
-              featured ? 'text-ochre-200' : 'text-jungle-800',
+              featured ? 'text-ochre-200' : 'text-ink',
             )}
           >
             {capsule.keyword}
           </span>
-          <span className={cn('text-xs', featured ? 'text-sand-200/70' : 'text-muted')}>
+          <span className={cn('text-xs italic', featured ? 'text-sand-200/70' : 'text-muted')}>
             {capsule.keywordTranslation}
           </span>
         </span>
         {onOpen ? (
           <span
             className={cn(
-              'text-[0.7rem] font-semibold transition-transform group-hover:translate-x-0.5',
-              featured ? 'text-ochre-200' : 'text-jungle-700',
+              'text-xs font-semibold transition-transform group-hover:translate-x-0.5',
+              featured ? 'text-ochre-200' : 'text-ink',
             )}
           >
-            Leer completa →
+            Leer →
           </span>
         ) : (
-          <span className={cn('text-[0.65rem]', featured ? 'text-sand-200/60' : 'text-muted/70')}>
+          <span className={cn('text-[0.68rem]', featured ? 'text-sand-200/55' : 'text-muted/75')}>
             {capsule.source}
           </span>
         )}
@@ -118,7 +100,7 @@ export function CultureCard({
         <button
           type="button"
           onClick={() => onOpen(capsule)}
-          className="absolute inset-0 rounded-3xl"
+          className="absolute inset-0 rounded-2xl"
           aria-label={`Leer cápsula cultural: ${capsule.title}`}
         />
       )}
