@@ -18,8 +18,8 @@ export function CulturePage() {
     <div className="space-y-8">
       <SectionHeading
         eyebrow="Sabías que..."
-        title="Cultura, territorio y memoria"
-        description="Cada lengua guarda una forma de ver el mundo. Estas cápsulas conectan palabras con historias, oficios y saberes de los pueblos ẽbẽra y wayuu."
+        title="Cultura y territorio"
+        description="Historias cortas que conectan las palabras con los oficios, la familia y el territorio de los pueblos ẽbẽra y wayuu. Léelas como una invitación a preguntar, no como la última palabra."
       />
 
       <div className="flex flex-wrap gap-2">
@@ -73,7 +73,7 @@ export function CulturePage() {
             </p>
             <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-sand-200 bg-sand-50 p-4">
               <div>
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                <p className="text-sm font-bold text-muted">
                   Palabra clave
                 </p>
                 <p className="native-word mt-1 font-display text-2xl font-semibold text-jungle-800">

@@ -18,9 +18,11 @@ export function CultureCard({
   return (
     <article
       className={cn(
-        'group relative flex flex-col overflow-hidden rounded-md border p-6 transition-all duration-200 sm:p-7',
+        'group relative flex flex-col overflow-hidden rounded-lg border-2 p-6 transition-all duration-200 sm:p-7',
         featured
-          ? 'border-ink bg-ink text-cream'
+          ? isEmbera
+            ? 'border-embera-jagua bg-embera-jagua text-cream'
+            : 'border-wayuu-deep bg-wayuu-deep text-cream'
           : 'border-ink/10 bg-cream text-ink hover:border-ink/25',
         onOpen && 'cursor-pointer hover:-translate-y-0.5',
         className,
@@ -29,7 +31,7 @@ export function CultureCard({
       <div className="flex items-center justify-between gap-3">
         <span
           className={cn(
-            'inline-flex items-center gap-2 font-display text-sm italic',
+            'inline-flex items-center gap-2 text-sm font-bold',
             featured ? 'text-ochre-300' : 'text-terracotta-600',
           )}
         >
@@ -45,7 +47,7 @@ export function CultureCard({
 
       <h3
         className={cn(
-          'mt-4 font-display font-semibold leading-snug',
+          'mt-4 font-display font-extrabold leading-snug',
           featured ? 'text-2xl text-cream sm:text-[1.75rem]' : 'text-xl text-ink',
         )}
       >

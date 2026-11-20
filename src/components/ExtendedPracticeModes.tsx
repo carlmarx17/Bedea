@@ -101,7 +101,7 @@ export function ImageMatchMode({
       subtitle: 'Escuchar e imágenes',
       stats: [
         { label: 'Aciertos', value: `${correct}/${questions.length}` },
-        { label: 'XP', value: `+${Math.max(6, correct * 5)}` },
+        { label: 'Cuentas', value: `+${Math.max(6, correct * 5)}` },
       ],
       onExit,
       onRetry: onRestart,
@@ -113,7 +113,7 @@ export function ImageMatchMode({
       <StepProgress current={index + (answered ? 1 : 0)} total={questions.length} onExit={onExit} label="Imágenes" />
       <div className="flex flex-1 flex-col py-6">
         <div className="surface flex-1 p-6 sm:p-8">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+          <p className="text-center text-xs font-bold text-muted">
             Escucha y elige la imagen correcta
           </p>
           <div className="mt-4 text-center">
@@ -237,7 +237,7 @@ export function DictationMode({
       subtitle: 'Dictado con teclado especial',
       stats: [
         { label: 'Correctas', value: `${correct}/${words.length}` },
-        { label: 'XP', value: `+${Math.max(8, correct * 6)}` },
+        { label: 'Cuentas', value: `+${Math.max(8, correct * 6)}` },
       ],
       onExit,
       onRetry: onRestart,
@@ -253,7 +253,7 @@ export function DictationMode({
             <div className="flex items-center gap-3.5">
               <WordIllustration entry={current} size="md" />
               <div>
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-muted">
+                <p className="text-sm font-bold text-muted">
                   Escucha y escribe en la lengua nativa
                 </p>
                 <p className="mt-1 font-display text-2xl font-semibold text-ink">
@@ -421,7 +421,7 @@ export function SpeakCompareMode({
       subtitle: 'Escuchar, grabar y comparar',
       stats: [
         { label: 'Seguras', value: `${confident}/${words.length}` },
-        { label: 'XP', value: `+${12 + confident * 3}` },
+        { label: 'Cuentas', value: `+${12 + confident * 3}` },
       ],
       onExit,
       onRetry: onRestart,
@@ -435,7 +435,7 @@ export function SpeakCompareMode({
         <div className="surface flex-1 p-6 sm:p-8">
           <div className="flex flex-col items-center text-center">
             <WordIllustration entry={current} size="lg" />
-            <p className="mt-4 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-muted">
+            <p className="mt-4 text-sm font-bold text-muted">
               Escucha, grábate y compara lado a lado
             </p>
             <p className="native-word mt-2 font-display text-4xl font-semibold text-ink">
@@ -447,7 +447,7 @@ export function SpeakCompareMode({
 
           <div className="mx-auto mt-7 grid max-w-lg gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-ink/10 bg-sand-50 p-4 text-center">
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
+              <p className="text-sm font-bold text-muted">
                 1. Referencia
               </p>
               <div className="mt-3 flex justify-center">
@@ -459,7 +459,7 @@ export function SpeakCompareMode({
             </div>
 
             <div className="rounded-2xl border border-ink/10 bg-sand-50 p-4 text-center">
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
+              <p className="text-sm font-bold text-muted">
                 2. Tu voz
               </p>
               <div className="mt-3 flex justify-center">
@@ -550,7 +550,7 @@ export function SrsReviewMode({
       <EmptyState
         icon="check-circle"
         title="Sin errores pendientes"
-        description="¡Excelente! No tienes palabras falladas por repasar en esta lengua. Cuando falles una en cualquier lección o quiz, aparecerá aquí automáticamente."
+        description="¡Bien ahí! No tienes palabras falladas por repasar en esta lengua. Cuando falles una en cualquier lección o quiz, aparecerá aquí automáticamente."
         action={<Button onClick={onExit}>Volver a la lengua</Button>}
       />
     )
@@ -578,7 +578,7 @@ export function SrsReviewMode({
       subtitle: variant === 'mistakes' ? 'Repaso de errores' : 'Repetición espaciada (SM-2)',
       stats: [
         { label: 'Recordadas', value: `${remembered}/${queue.length}` },
-        { label: 'XP', value: `+${10 + remembered * 2}` },
+        { label: 'Cuentas', value: `+${10 + remembered * 2}` },
       ],
       onExit,
       onRetry: onRestart,

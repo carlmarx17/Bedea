@@ -42,8 +42,8 @@ export function DictionaryPage() {
     <div className="space-y-6 sm:space-y-8">
       <SectionHeading
         eyebrow="Diccionario"
-        title="Busca y explora palabras"
-        description="Filtra por lengua, categoría o fuente. Cada palabra incluye pronunciación aproximada, ejemplo de uso y nota cultural."
+        title="Diccionario"
+        description="Busca en español o en la lengua. Cada palabra trae cómo se dice, un ejemplo y una nota sobre su uso."
         action={
           <Button variant="outline" size="sm" onClick={exportData}>
             <Icon name="download" size={16} /> Exportar vista
@@ -162,12 +162,12 @@ export function DictionaryPage() {
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-sand-200 bg-sand-50 p-4">
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">Ejemplo de uso</p>
+                <p className="text-sm font-bold text-muted">Ejemplo de uso</p>
                 <p className="native-word mt-2 text-sm font-semibold text-ink">{selected.ejemplo_uso}</p>
                 <p className="mt-1 text-sm text-muted">{selected.ejemplo_traduccion}</p>
               </div>
               <div className="rounded-2xl border border-terracotta-100 bg-terracotta-50/70 p-4">
-                <p className="flex items-center gap-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-terracotta-700">
+                <p className="flex items-center gap-1.5 text-sm font-bold text-terracotta-700">
                   <Icon name="sparkles" size={13} /> Nota cultural
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-ink/80">{selected.nota_cultural}</p>

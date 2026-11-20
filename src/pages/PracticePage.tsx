@@ -123,7 +123,7 @@ function FlashcardsMode({ languageId, onExit, onRestart }: { languageId: string;
         subtitle="Tarjetas"
         stats={[
           { label: 'Recordadas', value: `${known}/${words.length}` },
-          { label: 'XP', value: `+${10 + Math.round((known / words.length) * 10)}` },
+          { label: 'Cuentas', value: `+${10 + Math.round((known / words.length) * 10)}` },
         ]}
         onExit={onExit}
         onRetry={onRestart}
@@ -135,7 +135,7 @@ function FlashcardsMode({ languageId, onExit, onRestart }: { languageId: string;
     <>
       <StepProgress current={index} total={words.length} onExit={onExit} label="Tarjetas" />
       <div className="flex flex-1 flex-col items-center justify-center py-6">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+        <p className="mb-4 text-xs font-bold text-muted">
           Tarjeta {index + 1} de {words.length} · Toca para voltear
         </p>
         <button
@@ -247,7 +247,7 @@ function QuizMode({ languageId, onExit, onRestart }: { languageId: string; onExi
         subtitle="Quiz"
         stats={[
           { label: 'Aciertos', value: `${correct}/${questions.length}` },
-          { label: 'XP', value: `+${gained}` },
+          { label: 'Cuentas', value: `+${gained}` },
         ]}
         onExit={onExit}
         onRetry={onRestart}
@@ -260,7 +260,7 @@ function QuizMode({ languageId, onExit, onRestart }: { languageId: string; onExi
       <StepProgress current={index + (answered ? 1 : 0)} total={questions.length} onExit={onExit} label="Quiz" />
       <div className="flex flex-1 flex-col py-6">
         <div className="surface flex-1 p-6 sm:p-8">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-muted">¿Qué significa esta palabra?</p>
+          <p className="text-center text-xs font-bold text-muted">¿Qué significa esta palabra?</p>
           <div className="mt-4 text-center">
             <p className="native-word font-display text-4xl font-semibold text-ink sm:text-5xl">{question.entry.palabra_nativa}</p>
             <p className="mt-2 text-sm italic text-muted">[{question.entry.guia_fonetica}]</p>
@@ -387,7 +387,7 @@ function MatchMode({ languageId, onExit, onRestart }: { languageId: string; onEx
         stats={[
           { label: 'Parejas', value: `${entries.length}` },
           { label: 'Intentos', value: `${moves}` },
-          { label: 'XP', value: '+20' },
+          { label: 'Cuentas', value: '+20' },
         ]}
         onExit={onExit}
         onRetry={onRestart}
@@ -502,7 +502,7 @@ function SentenceMode({ languageId, onExit, onRestart }: { languageId: string; o
         subtitle="Oraciones"
         stats={[
           { label: 'Correctas', value: `${correct}/${sentences.length}` },
-          { label: 'XP', value: `+${gained}` },
+          { label: 'Cuentas', value: `+${gained}` },
         ]}
         onExit={onExit}
         onRetry={onRestart}
@@ -515,7 +515,7 @@ function SentenceMode({ languageId, onExit, onRestart }: { languageId: string; o
       <StepProgress current={index + (checked ? 1 : 0)} total={sentences.length} onExit={onExit} label="Oraciones" />
       <div className="flex flex-1 flex-col py-6">
         <div className="surface flex-1 p-6 sm:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Ordena la frase en la lengua nativa</p>
+          <p className="text-xs font-bold text-muted">Ordena la frase en la lengua nativa</p>
           <p className="mt-3 font-display text-2xl font-semibold text-ink">{current.translation}</p>
           <p className="mt-2 text-sm text-muted">
             <Icon name="lightbulb" size={14} className="mr-1 inline text-ochre-600" />
@@ -618,7 +618,7 @@ function Completion({
           <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-4xl bg-ochre-100 text-ochre-600 shadow-soft">
             <Icon name="trophy" size={38} />
           </span>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-muted">{subtitle}</p>
+          <p className="mt-4 text-xs font-bold text-muted">{subtitle}</p>
           <h1 className="mt-1 font-display text-3xl font-semibold text-ink">{title}</h1>
           <div className={cn('mt-6 grid gap-3', stats.length === 3 ? 'grid-cols-3' : 'grid-cols-2')}>
             {stats.map((stat) => (

@@ -41,7 +41,7 @@ export function SpecialKeyboard({
 
   return (
     <div className={cn('space-y-2', className)}>
-      <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
+      <p className="text-sm font-bold text-muted">
         Teclado especial · toca para insertar
       </p>
       <div className="flex flex-wrap gap-1.5">

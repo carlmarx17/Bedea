@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { BrandLockup } from './BrandMark'
 import { Icon } from './Icon'
+import { BeadMeter } from './Woven'
 import { GarzonQuote, PreAlphaBanner } from './ProjectNotice'
 import { REPO_URL } from '../config/project'
 import { useBrand } from '../lib/brand'
@@ -21,7 +22,6 @@ export function Layout() {
   const location = useLocation()
   const learningHref = `/lengua/${progress.lastLanguage || 'embera'}`
   const todayXp = progress.dailyDate === dateKey() ? progress.dailyXp : 0
-  const goalMet = todayXp >= dailyGoal
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' })
@@ -46,7 +46,7 @@ export function Layout() {
       <PreAlphaBanner />
 
       {/* Cabecera superior */}
-      <header className="sticky top-0 z-30 border-b border-ink/10 bg-sand-50/90 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b-2 border-ink/10 bg-sand-50/95 backdrop-blur-md">
         <div className="container-app flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]">
           <Link to="/" aria-label={`${brand.name}, ir al inicio`} className="shrink-0">
             <BrandLockup compact className="sm:hidden" />
@@ -62,7 +62,7 @@ export function Layout() {
                   key={item.to}
                   to={item.to}
                   className={cn(
-                    'relative px-3.5 py-2 text-sm font-medium transition-colors',
+                    'relative whitespace-nowrap px-3 py-2 text-[0.95rem] font-bold transition-colors',
                     active ? 'text-ink' : 'text-muted hover:text-ink',
                   )}
                 >
@@ -70,7 +70,7 @@ export function Layout() {
                   {active && (
                     <span
                       aria-hidden="true"
-                      className="absolute inset-x-3.5 -bottom-[1.15rem] h-[2px] bg-terracotta-500"
+                      className="absolute inset-x-3.5 -bottom-[1.15rem] h-1 rounded-t bg-terracotta-500"
                     />
                   )}
                 </Link>
@@ -79,7 +79,7 @@ export function Layout() {
             <Link
               to="/acerca"
               className={cn(
-                'relative ml-2 border-l border-ink/12 px-3.5 py-2 text-sm font-medium transition-colors',
+                'relative ml-2 whitespace-nowrap border-l border-ink/12 px-3.5 py-2 text-[0.95rem] font-bold transition-colors',
                 location.pathname.startsWith('/acerca') ? 'text-ink' : 'text-muted hover:text-ink',
               )}
             >
@@ -87,22 +87,17 @@ export function Layout() {
             </Link>
           </nav>
 
-          {/* Estado discreto: racha, XP y ajustes */}
+          {/* Cuentas de hoy, días seguidos y ajustes */}
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
               to="/progreso"
-              title={`Meta diaria: ${todayXp}/${dailyGoal} XP`}
-              className="inline-flex items-center gap-2.5 rounded-full border border-ink/12 bg-cream px-3 py-1.5 text-xs font-semibold text-ink transition-colors hover:border-ink/30"
+              title={`Hoy llevas ${todayXp} de ${dailyGoal} cuentas · ${progress.streak} días seguidos`}
+              className="inline-flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-full border-2 border-ink/15 bg-cream px-3 py-1.5 text-xs font-bold text-ink transition-colors hover:border-ink"
             >
-              <span className="inline-flex items-center gap-1 tabular-nums text-terracotta-600">
-                <Icon name="flame" size={14} />
+              <BeadMeter value={todayXp} max={dailyGoal} beads={5} />
+              <span className="tabular-nums">
                 {progress.streak}
-              </span>
-              <span aria-hidden="true" className="h-3 w-px bg-ink/15" />
-              <span className="inline-flex items-center gap-1 tabular-nums text-ink">
-                <Icon name="zap" size={13} className={goalMet ? 'text-jungle-600' : 'text-ochre-500'} />
-                {progress.xp}
-                <span className="hidden text-muted sm:inline">XP</span>
+                <span className="font-medium text-muted"> {progress.streak === 1 ? 'día' : 'días'}</span>
               </span>
             </Link>
 
@@ -131,15 +126,15 @@ export function Layout() {
       </main>
 
       {/* Pie de página */}
-      <footer className="mt-auto border-t border-ink/12 bg-sand-100/60 pb-24 lg:pb-0">
+      <footer className="mt-auto bg-sand-100 pb-24 lg:pb-0">
+        <div aria-hidden="true" className="stripes-colombia h-1.5" />
         <div className="container-app py-10">
           <div className="grid gap-10 md:grid-cols-[1.3fr_1fr]">
             <GarzonQuote variant="compact" />
             <div className="space-y-3 text-xs leading-relaxed text-muted">
               <p>
-                <span className="font-semibold text-ink">{brand.name}</span> es un proyecto hecho desde el
-                respeto, sin ánimo de lucro y todavía en pre-alfa. Faltan muchas palabras, grabaciones de
-                hablantes y revisión comunitaria.
+                <span className="font-bold text-ink">{brand.name}</span> es un proyecto sin ánimo de lucro,
+                hecho en Colombia. Nos faltan palabras, grabaciones de hablantes y revisión de las comunidades.
               </p>
               <p>
                 Fuente base: Manual de enseñanza y escritura ẽbẽra-chamí (2013). El módulo wayuunaiki está

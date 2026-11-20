@@ -4,10 +4,10 @@ export const MEDALS: Medal[] = [
   {
     id: 'primera-palabra',
     name: 'Primera palabra',
-    description: 'Ganaste tus primeros 10 XP.',
+    description: 'Ganaste tus primeras 10 cuentas.',
     icon: 'sparkles',
     tier: 'bronce',
-    requirement: '10 XP',
+    requirement: '10 cuentas',
   },
   {
     id: 'aprendiz',
@@ -20,7 +20,7 @@ export const MEDALS: Medal[] = [
   {
     id: 'racha-3',
     name: 'Fuego de tres días',
-    description: 'Mantuviste una racha de 3 días.',
+    description: 'Estudiaste 3 días seguidos.',
     icon: 'flame',
     tier: 'plata',
     requirement: 'Racha de 3 días',
@@ -52,18 +52,18 @@ export const MEDALS: Medal[] = [
   {
     id: 'cien',
     name: 'Cien palabras de aliento',
-    description: 'Acumulaste 100 XP.',
+    description: 'Juntaste 100 cuentas.',
     icon: 'award',
     tier: 'oro',
-    requirement: '100 XP',
+    requirement: '100 cuentas',
   },
   {
     id: 'sabio',
     name: 'Sabio del camino',
-    description: 'Acumulaste 300 XP y una racha de 7 días.',
+    description: 'Juntaste 300 cuentas y estudiaste 7 días seguidos.',
     icon: 'crown',
     tier: 'oro',
-    requirement: '300 XP + racha 7',
+    requirement: '300 cuentas + 7 días',
   },
 ]
 

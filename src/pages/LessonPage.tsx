@@ -225,17 +225,17 @@ export function LessonPage() {
 
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
                 <div className="rounded-2xl bg-sand-50 p-4">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">Palabras</p>
+                  <p className="text-sm font-bold text-muted">Palabras</p>
                   <p className="mt-1 font-display text-2xl font-semibold text-ink">{words.length}</p>
                 </div>
                 <div className="rounded-2xl bg-sand-50 p-4">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">Práctica</p>
+                  <p className="text-sm font-bold text-muted">Práctica</p>
                   <p className="mt-1 font-display text-2xl font-semibold text-ink">{questions.length}</p>
                   <p className="text-xs text-muted">preguntas</p>
                 </div>
                 <div className="rounded-2xl bg-ochre-50 p-4">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-ochre-700">Recompensa</p>
-                  <p className="mt-1 font-display text-2xl font-semibold text-ochre-800">+{lesson.xp} XP</p>
+                  <p className="text-sm font-bold text-ochre-700">Recompensa</p>
+                  <p className="mt-1 font-display text-2xl font-semibold text-ochre-800">+{lesson.xp} cuentas</p>
                 </div>
               </div>
 
@@ -281,12 +281,12 @@ export function LessonPage() {
 
               <div className="mt-6 space-y-4">
                 <div className="rounded-2xl border border-sand-200 bg-sand-50 p-4">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">Ejemplo de uso</p>
+                  <p className="text-sm font-bold text-muted">Ejemplo de uso</p>
                   <p className="native-word mt-1.5 text-sm font-semibold text-ink">{currentWord.ejemplo_uso}</p>
                   <p className="mt-0.5 text-sm text-muted">{currentWord.ejemplo_traduccion}</p>
                 </div>
                 <div className="rounded-2xl border border-terracotta-100 bg-terracotta-50/70 p-4">
-                  <p className="flex items-center gap-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-terracotta-700">
+                  <p className="flex items-center gap-1.5 text-sm font-bold text-terracotta-700">
                     <Icon name="sparkles" size={13} /> Nota cultural
                   </p>
                   <p className="mt-1.5 text-sm leading-relaxed text-ink/80">{currentWord.nota_cultural}</p>
@@ -318,7 +318,7 @@ export function LessonPage() {
 
             <div className="surface flex-1 p-6 sm:p-8">
               <div className="text-center">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                <p className="text-xs font-bold text-muted">
                   {currentQuestion.direction === 'native-to-es' ? 'Palabra en ' + language.name : 'En español'}
                 </p>
                 <p className={cn('native-word mt-3 font-display font-semibold text-ink', currentQuestion.direction === 'native-to-es' ? 'text-4xl sm:text-5xl' : 'text-2xl sm:text-3xl')}>
@@ -407,7 +407,7 @@ export function LessonPage() {
                 <div className="mt-6 grid grid-cols-3 gap-3">
                   <div className="rounded-2xl bg-ochre-50 p-4">
                     <p className="font-display text-2xl font-semibold text-ochre-800">+{awardedXp}</p>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-ochre-700">XP</p>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-ochre-700">Cuentas</p>
                   </div>
                   <div className="rounded-2xl bg-jungle-50 p-4">
                     <p className="font-display text-2xl font-semibold text-jungle-800">{correctCount}/{questions.length}</p>
@@ -421,8 +421,8 @@ export function LessonPage() {
 
                 <p className="mt-5 text-sm leading-relaxed text-muted">
                   {wasNewCompletion
-                    ? 'Has ganado XP completo por completar esta lección por primera vez. ¡Sigue tejiendo tu camino!'
-                    : 'Has repasado esta lección y ganado un pequeño refuerzo de XP. Repetir también es aprender.'}
+                    ? 'Primera vez que la terminas: te llevas todas las cuentas. ¡Vamos bien!'
+                    : 'Repasaste la lección y sumaste unas cuantas cuentas más. Repetir también es aprender.'}
                 </p>
 
                 {/* Microhistoria cultural al cerrar una unidad */}

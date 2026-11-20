@@ -6,8 +6,9 @@ import { getWords, getWordOfTheDay, getLanguageCategoryCounts } from '../lib/voc
 import { getDueWordIds, getMistakeWordIds } from '../lib/srs'
 import { useProgress } from '../lib/progress'
 import { TerritoryFlag, WordIllustration } from '../components/CulturalVisuals'
-import { Button, Badge, ProgressBar, SectionHeading, AudioButton, EmptyState } from '../components/ui'
+import { Button, Badge, SectionHeading, AudioButton, EmptyState } from '../components/ui'
 import { Icon } from '../components/Icon'
+import { LanguageProgress, getLangTheme } from '../components/Woven'
 import { cn } from '../lib/utils'
 
 export function LanguagePage() {
@@ -49,7 +50,6 @@ export function LanguagePage() {
   const completed = progress.completedLessons[languageId] ?? []
   const totalLessons = curriculum.lessons.length
   const completedCount = curriculum.lessons.filter((l) => completed.includes(l.id)).length
-  const percent = totalLessons === 0 ? 0 : (completedCount / totalLessons) * 100
   const wordOfDay = getWordOfTheDay(languageId)
   const categoryCounts = getLanguageCategoryCounts(languageId)
   const orderedLessons = curriculum.units.flatMap((unit) =>
@@ -64,7 +64,7 @@ export function LanguagePage() {
     return completed.includes(orderedLessons[index - 1].id)
   }
 
-  const isWayuu = language.accent === 'wayuu'
+  const theme = getLangTheme(language.accent)
   const nextActiveLesson = orderedLessons.find((l) => !completed.includes(l.id))
   const nextActiveLessonId = nextActiveLesson?.id
   const langWordIds = new Set(getWords(languageId).map((w) => w.id))
@@ -93,8 +93,8 @@ export function LanguagePage() {
                   <span
                     aria-hidden="true"
                     className={cn(
-                      'absolute inset-x-0 -bottom-[1.06rem] h-[2px]',
-                      lang.accent === 'wayuu' ? 'bg-ochre-500' : 'bg-terracotta-500',
+                      'absolute inset-x-0 -bottom-[1.06rem] h-1',
+                      getLangTheme(lang.accent).stripes,
                     )}
                   />
                 )}
@@ -118,7 +118,7 @@ export function LanguagePage() {
             <p className="eyebrow">{language.family}</p>
           </div>
           <div className="mt-2.5 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-            <h1 className="font-display text-4xl font-semibold text-ink sm:text-5xl">
+            <h1 className="font-display text-5xl font-extrabold text-ink sm:text-6xl">
               {language.name}
             </h1>
             <span className="native-word font-display text-xl italic text-muted">
@@ -135,14 +135,14 @@ export function LanguagePage() {
           {/* Saludo interactivo */}
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-y border-ink/12 py-4">
             <div>
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
+              <p className="text-sm font-bold text-muted">
                 Saludo para empezar
               </p>
               <p className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
                 <span
                   className={cn(
                     'native-word font-display text-2xl font-semibold sm:text-3xl',
-                    isWayuu ? 'text-ochre-700' : 'text-terracotta-600',
+                    theme.accentText,
                   )}
                 >
                   “{language.greeting}”
@@ -156,15 +156,15 @@ export function LanguagePage() {
           {/* Ficha territorial en 3 columnas limpias */}
           <dl className="mt-5 grid gap-4 text-xs sm:grid-cols-3">
             <div>
-              <dt className="font-semibold uppercase tracking-[0.14em] text-muted">Territorio</dt>
+              <dt className="font-bold text-muted">Territorio</dt>
               <dd className="mt-1 font-medium text-ink">{language.region}</dd>
             </div>
             <div>
-              <dt className="font-semibold uppercase tracking-[0.14em] text-muted">Hablantes</dt>
+              <dt className="font-bold text-muted">Hablantes</dt>
               <dd className="mt-1 font-medium text-ink">{language.speakers}</dd>
             </div>
             <div>
-              <dt className="font-semibold uppercase tracking-[0.14em] text-muted">Fuente</dt>
+              <dt className="font-bold text-muted">Fuente</dt>
               <dd className="mt-1 text-muted">{language.sourceNote}</dd>
             </div>
           </dl>
@@ -178,23 +178,30 @@ export function LanguagePage() {
 
         {/* Columna derecha: progreso y palabra del día */}
         <aside className="space-y-4">
-          <div className="rounded-md bg-ink p-6 text-cream">
-            <div className="flex items-baseline justify-between">
-              <p className="font-display text-sm italic text-ochre-300">
-                Tu avance
-              </p>
-              <span className="text-xs tabular-nums text-sand-200/75">{Math.round(percent)}%</span>
+          <div className={cn('overflow-hidden rounded-lg text-cream', theme.panel)}>
+            <div aria-hidden="true" className={cn('h-2.5', theme.stripes)} />
+            <div className="p-6">
+            <div className="flex items-center gap-5">
+              <LanguageProgress
+                accent={language.accent}
+                done={completedCount}
+                total={totalLessons}
+                dark
+                className="h-28 w-28"
+              />
+              <div>
+                <p className="text-sm font-bold text-sand-200">{theme.object}</p>
+                <p className="mt-1 font-display text-4xl font-extrabold tabular-nums">
+                  {completedCount}
+                  <span className="text-lg font-medium text-sand-200/80"> de {totalLessons} {theme.unit}</span>
+                </p>
+                <p className="mt-1 text-sm text-sand-200/80">
+                  {language.accent === 'wayuu'
+                    ? 'Cada lección teje una vuelta.'
+                    : 'Cada lección ensarta una cuenta.'}
+                </p>
+              </div>
             </div>
-            <p className="mt-2 font-display text-3xl font-semibold tabular-nums">
-              {completedCount}
-              <span className="text-lg font-normal text-sand-200/60"> / {totalLessons} lecciones</span>
-            </p>
-            <ProgressBar
-              value={percent}
-              tone={isWayuu ? 'ochre' : 'jungle'}
-              height="h-1.5"
-              className="mt-4 bg-white/15"
-            />
             {nextActiveLesson && (
               <div className="mt-5 border-t border-white/12 pt-4">
                 <Link to={`/lengua/${languageId}/leccion/${nextActiveLesson.id}`}>
@@ -205,6 +212,7 @@ export function LanguagePage() {
                 </Link>
               </div>
             )}
+            </div>
           </div>
 
           {wordOfDay && (
@@ -213,7 +221,7 @@ export function LanguagePage() {
                 <div className="flex items-start gap-3">
                   <WordIllustration entry={wordOfDay} size="sm" />
                   <div>
-                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
+                    <p className="text-sm font-bold text-muted">
                       Palabra del día
                     </p>
                     <p className="native-word mt-1 font-display text-2xl font-semibold text-ink">
@@ -279,8 +287,8 @@ export function LanguagePage() {
       <section className="space-y-5 border-t border-ink/12 pt-10">
         <SectionHeading
           eyebrow="Práctica libre"
-          title="Ejercicios variados"
-          description="Escucha, elige imágenes, escribe con el teclado especial, graba tu voz o arma oraciones."
+          title="A practicar"
+          description="Escucha, escribe con el teclado especial, graba tu voz o arma oraciones. Lo que quieras."
         />
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {[
@@ -318,8 +326,8 @@ export function LanguagePage() {
       <section className="space-y-6 border-t border-ink/12 pt-10">
         <SectionHeading
           eyebrow="Recorrido guiado"
-          title="Tus lecciones"
-          description="Avanza unidad por unidad. Cada lección completada abre el paso a la siguiente."
+          title="Lección por lección"
+          description="Al terminar una lección se abre la siguiente. Sin afán."
         />
         <div className="space-y-8">
           {curriculum.units.map((unit, unitIndex) => {
@@ -396,7 +404,7 @@ export function LanguagePage() {
                               {lesson.title}
                             </p>
                             {isNext && (
-                              <span className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-terracotta-600">
+                              <span className="text-sm font-bold text-terracotta-600">
                                 · Siguiente
                               </span>
                             )}
@@ -404,7 +412,7 @@ export function LanguagePage() {
                           <p className="native-word text-xs italic text-muted">{lesson.subtitle}</p>
                           <p className="mt-1 text-xs text-muted">{lesson.description}</p>
                           <p className="mt-1.5 text-[0.7rem] font-medium text-muted">
-                            {wordCount} palabras · +{lesson.xp} XP
+                            {wordCount} palabras · +{lesson.xp} cuentas
                           </p>
                         </div>
 
@@ -433,8 +441,8 @@ export function LanguagePage() {
       <section className="space-y-4 border-t border-ink/12 pt-10">
         <SectionHeading
           eyebrow="Léxico"
-          title="Explora por tema"
-          description="Filtra directamente el diccionario de esta lengua según la categoría."
+          title="Palabras por tema"
+          description="Abre el diccionario de esta lengua en el tema que te interese."
         />
         <div className="flex flex-wrap gap-2">
           {CATEGORIES.filter((cat) => (categoryCounts[cat.id] ?? 0) > 0).map((cat) => (

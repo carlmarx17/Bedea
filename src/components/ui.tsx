@@ -131,12 +131,12 @@ export function ProgressBar({
 /* ------------------------------------------------------------------ */
 
 export function SectionHeading({
-  eyebrow,
   title,
   description,
   action,
   className,
 }: {
+  /** Ya no se muestra; se conserva para no romper llamadas existentes. */
   eyebrow?: string
   title: string
   description?: string
@@ -146,11 +146,11 @@ export function SectionHeading({
   return (
     <div className={cn('flex flex-wrap items-end justify-between gap-4', className)}>
       <div className="max-w-2xl">
-        {eyebrow && <p className="eyebrow mb-1.5">{eyebrow}</p>}
-        <h2 className="font-display text-2xl font-semibold text-ink sm:text-[2rem] sm:leading-tight">
+        {/* El rótulo pequeño sobre el título se omite a propósito: el título ya dice lo necesario. */}
+        <h2 className="font-display text-3xl font-extrabold text-ink sm:text-[2.4rem] sm:leading-tight">
           {title}
         </h2>
-        {description && <p className="mt-2 text-sm leading-relaxed text-muted">{description}</p>}
+        {description && <p className="mt-2 text-base leading-relaxed text-ink/75">{description}</p>}
       </div>
       {action}
     </div>
@@ -188,8 +188,8 @@ export function StatCard({
         <Icon name={icon} size={20} />
       </span>
       <div className="min-w-0">
-        <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{label}</p>
-        <p className="font-display text-xl font-semibold leading-tight text-ink">{value}</p>
+        <p className="text-sm font-bold text-muted">{label}</p>
+        <p className="font-display text-2xl font-extrabold leading-tight text-ink">{value}</p>
         {hint && <p className="truncate text-xs text-muted">{hint}</p>}
       </div>
     </div>

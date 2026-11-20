@@ -13,8 +13,8 @@ export function SettingsPage() {
     <div className="space-y-8 sm:space-y-10">
       <SectionHeading
         eyebrow="Ajustes"
-        title="Identidad y configuración"
-        description="La marca de la app es configurable. Puedes cambiar el nombre y el logo sin tocar el código de los componentes."
+        title="Ajustes"
+        description="Cambia el nombre y el logo de la app, y otras preferencias."
       />
 
       {/* Selector de marca */}

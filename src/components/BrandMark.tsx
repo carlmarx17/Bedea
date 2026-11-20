@@ -28,25 +28,20 @@ export function BrandMark({ size = 44, className, brand, decorative = false }: B
       className={cn('shrink-0', className)}
     >
       <defs>
-        <linearGradient id={`mark-bg-${current.id}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#1B3D2F" />
-          <stop offset="100%" stopColor="#0B1F18" />
-        </linearGradient>
+        <clipPath id={`mark-bubble-${current.id}`}>
+          {/* Globo de diálogo: la palabra hablada */}
+          <path d="M14 12h36a6 6 0 0 1 6 6v20a6 6 0 0 1-6 6H30l-11 9v-9h-5a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6Z" />
+        </clipPath>
       </defs>
-      <rect width="64" height="64" rx="17" fill={`url(#mark-bg-${current.id})`} />
+      <rect width="64" height="64" rx="14" fill="#1A1512" />
 
       {symbol === 'woven' && (
-        <>
-          <path
-            d="M32 8.5 55.5 32 32 55.5 8.5 32Z"
-            fill="none"
-            stroke="#DCA94A"
-            strokeWidth="2.4"
-          />
-          <path d="M32 16.5 47.5 32 32 47.5 16.5 32Z" fill="#C75B39" />
-          <path d="M32 23 41 32 32 41 23 32Z" fill="#FBF8F1" />
-          <circle cx="32" cy="32" r="3.2" fill="#132C22" />
-        </>
+        <g clipPath={`url(#mark-bubble-${current.id})`}>
+          <rect x="0" y="0" width="64" height="20" fill="#D7261E" />
+          <rect x="0" y="20" width="64" height="9" fill="#F8BC0B" />
+          <rect x="0" y="29" width="64" height="9" fill="#0B9AA6" />
+          <rect x="0" y="38" width="64" height="20" fill="#D92A63" />
+        </g>
       )}
 
       {symbol === 'spiral' && (
@@ -54,11 +49,11 @@ export function BrandMark({ size = 44, className, brand, decorative = false }: B
           <path
             d="M32 50c-10 0-18-8-18-18S22 14 32 14s18 8 18 18c0 7.5-6 13.5-13.5 13.5S23 39.5 23 32s5-9.5 11-9.5 9 4 9 9"
             fill="none"
-            stroke="#DCA94A"
+            stroke="#F8BC0B"
             strokeWidth="2.6"
             strokeLinecap="round"
           />
-          <circle cx="32" cy="32" r="3.4" fill="#C75B39" />
+          <circle cx="32" cy="32" r="3.4" fill="#E2401C" />
         </>
       )}
 
@@ -66,12 +61,12 @@ export function BrandMark({ size = 44, className, brand, decorative = false }: B
         <>
           <path
             d="M46 16C32 16 20 24 20 38c0 5 2 8 5 10 3-10 9-17 19-22-7 6-12 13-14 23 3 1 6 1 9-1 9-5 12-17 7-32Z"
-            fill="#DCA94A"
+            fill="#F8BC0B"
           />
           <path
             d="M20 50c4-12 12-20 24-27"
             fill="none"
-            stroke="#C75B39"
+            stroke="#E2401C"
             strokeWidth="2.4"
             strokeLinecap="round"
           />
@@ -95,7 +90,7 @@ export function BrandLockup({ compact = false, invert = false, className }: Bran
       <div className="min-w-0">
         <p
           className={cn(
-            'font-display text-xl font-semibold leading-tight tracking-tight',
+            'font-display text-2xl font-extrabold leading-none tracking-tight',
             invert ? 'text-cream' : 'text-ink',
           )}
         >
@@ -104,7 +99,7 @@ export function BrandLockup({ compact = false, invert = false, className }: Bran
         {!compact && (
           <p
             className={cn(
-              'truncate text-[0.7rem] font-medium uppercase tracking-[0.14em]',
+              'mt-0.5 truncate text-xs font-medium',
               invert ? 'text-sand-200/80' : 'text-muted',
             )}
           >

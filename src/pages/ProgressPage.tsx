@@ -6,8 +6,8 @@ import { DAILY_GOAL_OPTIONS } from '../lib/storage'
 import { MEDALS } from '../data/medals'
 import { AVAILABLE_LANGUAGES } from '../data/languages'
 import { getCurriculum } from '../data/curriculum'
-import { getWords } from '../lib/vocabulary'
-import { TerritoryFlag } from '../components/CulturalVisuals'
+import { BeadMeter, LanguageProgress, getLangTheme } from '../components/Woven'
+import { WordAlbum } from '../components/WordAlbum'
 import { SectionHeading, StatCard, ProgressBar, Badge, Button } from '../components/ui'
 import { Icon } from '../components/Icon'
 import { cn, dateKey, downloadJson, formatNumber } from '../lib/utils'
@@ -43,17 +43,16 @@ export function ProgressPage() {
   return (
     <div className="space-y-8 sm:space-y-10">
       <SectionHeading
-        eyebrow="Mi progreso"
-        title={`Tu camino en ${brand.name}`}
-        description="Racha, experiencia, lecciones completadas y medallas. Todo se guarda en este dispositivo."
+        title="Lo que llevas"
+        description={`Tu mochila, tu collar y tu álbum de palabras en ${brand.name}. Todo se guarda en este dispositivo, sin cuenta.`}
       />
 
       {/* Resumen */}
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard icon="zap" label="Experiencia total" value={`${formatNumber(progress.xp)} XP`} hint={`Nivel: ${level.title}`} tone="ochre" />
+        <StatCard icon="sparkles" label="Cuentas" value={formatNumber(progress.xp)} hint={`Nivel: ${level.title}`} tone="ochre" />
         <StatCard
-          icon="flame"
-          label="Racha"
+          icon="calendar"
+          label="Días seguidos"
           value={`${progress.streak} ${progress.streak === 1 ? 'día' : 'días'}`}
           hint={`${progress.streakFreezes} ${progress.streakFreezes === 1 ? 'protector' : 'protectores'} activos`}
           tone="terracotta"
@@ -68,24 +67,24 @@ export function ProgressPage() {
           <div className="surface p-6">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="eyebrow">Meta diaria</p>
-                <h3 className="mt-1 font-display text-2xl font-semibold text-ink">
-                  {todayXp} <span className="text-lg text-muted">/ {dailyGoal} XP hoy</span>
+                <p className="eyebrow">Meta de hoy</p>
+                <h3 className="mt-1 font-display text-2xl font-extrabold text-ink">
+                  {todayXp} <span className="text-lg font-medium text-muted">de {dailyGoal} cuentas</span>
                 </h3>
               </div>
               <span className={cn('flex h-14 w-14 items-center justify-center rounded-3xl', dailyPercent >= 100 ? 'bg-jungle-100 text-jungle-700' : 'bg-ochre-100 text-ochre-700')}>
                 <Icon name={dailyPercent >= 100 ? 'check-circle' : 'target'} size={26} />
               </span>
             </div>
-            <ProgressBar value={dailyPercent} tone="ochre" className="mt-4" height="h-3" />
+            <BeadMeter value={todayXp} max={dailyGoal} beads={15} height={1.25} className="mt-4" />
             <p className="mt-2 text-sm text-muted">
               {dailyPercent >= 100
-                ? '¡Cumpliste tu meta de hoy! Cada palabra suma.'
-                : `Te faltan ${Math.max(0, dailyGoal - todayXp)} XP para tu meta de hoy.`}
+                ? '¡Listo por hoy! Mañana seguimos.'
+                : `Te faltan ${Math.max(0, dailyGoal - todayXp)} cuentas para la meta de hoy.`}
             </p>
             <div className="mt-4 border-t border-ink/10 pt-4">
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
-                Ritmo diario elegible
+              <p className="text-sm font-bold text-muted">
+                ¿Cuánto tiempo al día?
               </p>
               <div className="mt-2.5 grid grid-cols-3 gap-2">
                 {DAILY_GOAL_OPTIONS.map((opt) => {
@@ -104,7 +103,7 @@ export function ProgressPage() {
                     >
                       <p className="text-xs font-semibold">{opt.label}</p>
                       <p className={cn('text-[0.68rem]', active ? 'text-ochre-200' : 'text-muted')}>
-                        {opt.minutes} ({opt.xp} XP)
+                        {opt.minutes} ({opt.xp} cuentas)
                       </p>
                     </button>
                   )
@@ -118,53 +117,44 @@ export function ProgressPage() {
             <div className="mt-2 flex items-end justify-between gap-4">
               <div>
                 <h3 className="font-display text-2xl font-semibold text-ink">{level.title}</h3>
-                <p className="text-sm text-muted">Nivel {level.index + 1} · {formatNumber(progress.xp)} XP acumulados</p>
+                <p className="text-sm text-muted">Nivel {level.index + 1} · {formatNumber(progress.xp)} cuentas en total</p>
               </div>
               {level.nextXp !== null && (
-                <Badge tone="sand">Próximo: {level.nextXp} XP</Badge>
+                <Badge tone="sand">Próximo: {level.nextXp} cuentas</Badge>
               )}
             </div>
             <ProgressBar value={level.progress * 100} tone="jungle" className="mt-4" />
             <p className="mt-2 text-sm text-muted">
               {level.nextXp === null
-                ? 'Has alcanzado el nivel más alto. ¡Gracias por cuidar estas voces!'
-                : `${level.nextXp - progress.xp} XP para alcanzar el siguiente nivel.`}
+                ? 'Llegaste al nivel más alto. ¡Gracias por cuidar estas voces!'
+                : `Te faltan ${level.nextXp - progress.xp} cuentas para el siguiente nivel.`}
             </p>
           </div>
 
-          {/* Progreso por lengua */}
+          {/* Progreso por lengua: mochila y collar */}
           <div className="surface p-6">
-            <p className="eyebrow">Por lengua</p>
-            <h3 className="mt-1 font-display text-xl font-semibold text-ink">Avance en cada camino</h3>
-            <div className="mt-5 space-y-5">
+            <h3 className="font-display text-2xl font-extrabold text-ink">Tu mochila y tu collar</h3>
+            <div className="mt-5 grid gap-5 sm:grid-cols-2">
               {AVAILABLE_LANGUAGES.map((language) => {
                 const curriculum = getCurriculum(language.id)
                 const total = curriculum?.lessons.length ?? 0
                 const done = progress.completedLessons[language.id]?.length ?? 0
-                const percent = total === 0 ? 0 : (done / total) * 100
-                const langWordIds = new Set(getWords(language.id).map((w) => w.id))
-                const seenInLang = progress.seenWords.filter((id) => langWordIds.has(id)).length
+                const theme = getLangTheme(language.accent)
                 return (
-                  <div key={language.id}>
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-2.5">
-                        <TerritoryFlag territory={language.id} size="sm" />
-                        <div>
-                          <p className="font-display text-base font-semibold text-ink">{language.name}</p>
-                          <p className="text-xs text-muted">
-                            {done} de {total} lecciones · {seenInLang} de {langWordIds.size} palabras vistas
-                          </p>
-                        </div>
-                      </div>
-                      <span className="text-sm font-semibold tabular-nums text-muted">{Math.round(percent)}%</span>
+                  <Link
+                    key={language.id}
+                    to={`/lengua/${language.id}`}
+                    className="group flex items-center gap-4 rounded-lg border-2 border-ink/10 p-4 transition-colors hover:border-ink"
+                  >
+                    <LanguageProgress accent={language.accent} done={done} total={total} className="h-20 w-20" />
+                    <div>
+                      <p className="font-display text-xl font-extrabold text-ink">{language.name}</p>
+                      <p className="text-sm text-muted">
+                        {done} de {total} {theme.unit}
+                      </p>
+                      <p className={cn('mt-1 text-sm font-bold', theme.accentText)}>Seguir →</p>
                     </div>
-                    <ProgressBar value={percent} tone={language.accent === 'wayuu' ? 'ochre' : 'jungle'} className="mt-2" />
-                    <div className="mt-2">
-                      <Link to={`/lengua/${language.id}`} className="text-xs font-semibold text-jungle-700 hover:underline">
-                        Continuar →
-                      </Link>
-                    </div>
-                  </div>
+                  </Link>
                 )
               })}
             </div>
@@ -175,8 +165,7 @@ export function ProgressPage() {
         <section className="surface p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="eyebrow">Medallas</p>
-              <h3 className="mt-1 font-display text-xl font-semibold text-ink">Tus logros</h3>
+              <h3 className="font-display text-2xl font-extrabold text-ink">Medallas</h3>
             </div>
             <Badge tone="ochre">{earnedMedals.length}/{MEDALS.length}</Badge>
           </div>
@@ -206,7 +195,7 @@ export function ProgressPage() {
                   <div className="min-w-0">
                     <p className="font-display text-sm font-semibold text-ink">{medal.name}</p>
                     <p className="text-xs leading-snug text-muted">{medal.description}</p>
-                    <p className="mt-1 text-[0.65rem] font-semibold uppercase tracking-wide text-muted/80">{medal.requirement}</p>
+                    <p className="mt-1 text-xs font-bold text-muted/80">{medal.requirement}</p>
                   </div>
                 </div>
               )
@@ -214,6 +203,8 @@ export function ProgressPage() {
           </div>
         </section>
       </div>
+
+      <WordAlbum seenWords={progress.seenWords} />
 
       {/* Respaldo, transferencia y reinicio */}
       <section className="surface-muted p-5 sm:p-6">
