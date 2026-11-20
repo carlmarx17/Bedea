@@ -3,7 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import { AVAILABLE_LANGUAGES, LANGUAGE_MAP, CATEGORIES } from '../data/languages'
 import { getCurriculum } from '../data/curriculum'
 import { getWords, getWordOfTheDay, getLanguageCategoryCounts } from '../lib/vocabulary'
+import { getDueWordIds, getMistakeWordIds } from '../lib/srs'
 import { useProgress } from '../lib/progress'
+import { TerritoryFlag, WordIllustration } from '../components/CulturalVisuals'
 import { Button, Badge, ProgressBar, SectionHeading, AudioButton, EmptyState } from '../components/ui'
 import { Icon } from '../components/Icon'
 import { cn } from '../lib/utils'
@@ -63,9 +65,11 @@ export function LanguagePage() {
   }
 
   const isWayuu = language.accent === 'wayuu'
-  const accent = isWayuu ? 'ochre' : 'jungle'
   const nextActiveLesson = orderedLessons.find((l) => !completed.includes(l.id))
   const nextActiveLessonId = nextActiveLesson?.id
+  const langWordIds = new Set(getWords(languageId).map((w) => w.id))
+  const dueCount = getDueWordIds(progress.cards, langWordIds).length
+  const mistakeCount = getMistakeWordIds(progress.cards, langWordIds).length
 
   return (
     <div className="space-y-12 sm:space-y-16">
@@ -79,10 +83,11 @@ export function LanguagePage() {
                 key={lang.id}
                 to={`/lengua/${lang.id}`}
                 className={cn(
-                  'relative pb-1 font-display text-lg font-semibold transition-colors',
+                  'relative inline-flex items-center gap-2.5 pb-1 font-display text-lg font-semibold transition-colors',
                   active ? 'text-ink' : 'text-muted hover:text-ink',
                 )}
               >
+                <TerritoryFlag territory={lang.id} size="sm" />
                 {lang.name}
                 {active && (
                   <span
@@ -108,8 +113,11 @@ export function LanguagePage() {
       {/* Cabecera abierta de la lengua */}
       <section className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
         <div>
-          <p className="eyebrow">{language.family}</p>
-          <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <TerritoryFlag territory={language.id} size="md" />
+            <p className="eyebrow">{language.family}</p>
+          </div>
+          <div className="mt-2.5 flex flex-wrap items-baseline gap-x-4 gap-y-1">
             <h1 className="font-display text-4xl font-semibold text-ink sm:text-5xl">
               {language.name}
             </h1>
@@ -117,6 +125,9 @@ export function LanguagePage() {
               {language.nativeName}
             </span>
           </div>
+          <p className="mt-2 text-xs font-medium text-ink/75">
+            {language.dialect} · <span className="text-muted">{language.orthography}</span>
+          </p>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
             {language.description}
           </p>
@@ -199,16 +210,19 @@ export function LanguagePage() {
           {wordOfDay && (
             <div className="surface p-5">
               <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
-                    Palabra del día
-                  </p>
-                  <p className="native-word mt-1.5 font-display text-2xl font-semibold text-ink">
-                    {wordOfDay.palabra_nativa}
-                  </p>
-                  <p className="text-xs italic text-muted">/{wordOfDay.guia_fonetica}/</p>
+                <div className="flex items-start gap-3">
+                  <WordIllustration entry={wordOfDay} size="sm" />
+                  <div>
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
+                      Palabra del día
+                    </p>
+                    <p className="native-word mt-1 font-display text-2xl font-semibold text-ink">
+                      {wordOfDay.palabra_nativa}
+                    </p>
+                    <p className="text-xs italic text-muted">/{wordOfDay.guia_fonetica}/</p>
+                  </div>
                 </div>
-                <AudioButton text={wordOfDay.palabra_nativa} compact />
+                <AudioButton text={wordOfDay.palabra_nativa} audioUrl={wordOfDay.audio_url} compact />
               </div>
               <p className="mt-2.5 text-sm font-semibold text-jungle-700">
                 {wordOfDay.traduccion_espanol}
@@ -218,19 +232,65 @@ export function LanguagePage() {
         </aside>
       </section>
 
+      {/* Repaso espaciado y errores */}
+      <section className="grid gap-4 border-t border-ink/12 pt-10 sm:grid-cols-2">
+        <Link
+          to={`/lengua/${languageId}/practica/srs`}
+          className="surface group flex items-center justify-between gap-4 p-5 transition-all hover:-translate-y-0.5 hover:border-ink/30"
+        >
+          <div>
+            <p className="eyebrow">Repetición espaciada · SM-2</p>
+            <p className="mt-1 font-display text-xl font-semibold text-ink">
+              Repaso inteligente
+            </p>
+            <p className="mt-1 text-xs text-muted">
+              {dueCount > 0
+                ? `${dueCount} ${dueCount === 1 ? 'palabra lista' : 'palabras listas'} justo antes de olvidarlas.`
+                : 'Al día. Practica una selección para entrenar tu memoria.'}
+            </p>
+          </div>
+          <span className="flex h-11 min-w-[2.75rem] items-center justify-center rounded-full bg-ink px-3 font-display text-sm font-semibold tabular-nums text-cream">
+            {dueCount > 0 ? dueCount : '→'}
+          </span>
+        </Link>
+
+        <Link
+          to={`/lengua/${languageId}/practica/mistakes`}
+          className="surface group flex items-center justify-between gap-4 p-5 transition-all hover:-translate-y-0.5 hover:border-ink/30"
+        >
+          <div>
+            <p className="eyebrow">Refuerzo dirigido</p>
+            <p className="mt-1 font-display text-xl font-semibold text-ink">
+              Repaso de errores
+            </p>
+            <p className="mt-1 text-xs text-muted">
+              {mistakeCount > 0
+                ? `${mistakeCount} ${mistakeCount === 1 ? 'palabra' : 'palabras'} que fallaste antes, sin penalización.`
+                : 'Sin errores pendientes. Equivocarse también es parte de aprender.'}
+            </p>
+          </div>
+          <span className="flex h-11 min-w-[2.75rem] items-center justify-center rounded-full border border-ink/15 bg-sand-100 px-3 font-display text-sm font-semibold tabular-nums text-ink">
+            {mistakeCount > 0 ? mistakeCount : '✓'}
+          </span>
+        </Link>
+      </section>
+
       {/* Modos de práctica: índice editorial numerado */}
       <section className="space-y-5 border-t border-ink/12 pt-10">
         <SectionHeading
           eyebrow="Práctica libre"
-          title="Juegos y repaso"
-          description="Refuerza vocabulario y estructuras sin presión, en cuatro formatos."
+          title="Ejercicios variados"
+          description="Escucha, elige imágenes, escribe con el teclado especial, graba tu voz o arma oraciones."
         />
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {[
-            { num: '01', mode: 'flashcards', label: 'Tarjetas', desc: 'Voltea y recuerda en voz alta' },
-            { num: '02', mode: 'quiz', label: 'Quiz', desc: 'Elige la traducción correcta' },
-            { num: '03', mode: 'match', label: 'Emparejar', desc: 'Conecta palabra y sentido' },
-            { num: '04', mode: 'sentence', label: 'Oraciones', desc: 'Ordena expresiones reales' },
+            { num: '01', mode: 'images', label: 'Imágenes', desc: 'Escucha y elige la ilustración' },
+            { num: '02', mode: 'dictation', label: 'Dictado', desc: 'Escucha y escribe con teclado especial' },
+            { num: '03', mode: 'speak', label: 'Hablar', desc: 'Grábate y compara tu voz' },
+            { num: '04', mode: 'flashcards', label: 'Tarjetas', desc: 'Voltea y evalúa tu memoria' },
+            { num: '05', mode: 'quiz', label: 'Quiz', desc: 'Traduce en dos direcciones' },
+            { num: '06', mode: 'match', label: 'Emparejar', desc: 'Conecta palabra y sentido' },
+            { num: '07', mode: 'sentence', label: 'Oraciones', desc: 'Ordena expresiones reales' },
           ].map((item) => (
             <Link
               key={item.mode}
@@ -245,7 +305,7 @@ export function LanguagePage() {
                   className="text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink"
                 />
               </div>
-              <div className="mt-6">
+              <div className="mt-5">
                 <p className="font-display text-xl font-semibold text-ink">{item.label}</p>
                 <p className="mt-1 text-xs leading-relaxed text-muted">{item.desc}</p>
               </div>

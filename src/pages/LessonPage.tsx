@@ -2,8 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { LANGUAGE_MAP, CATEGORY_MAP } from '../data/languages'
 import { getLesson, getCurriculum } from '../data/curriculum'
+import { getCultureCapsules } from '../data/culture'
 import { getWords, buildTranslationOptions, buildNativeOptions } from '../lib/vocabulary'
 import { useProgress } from '../lib/progress'
+import { TerritoryFlag, WordIllustration } from '../components/CulturalVisuals'
 import { Button, Badge, StepProgress, AudioButton } from '../components/ui'
 import { TextileBorder } from '../components/TextilePattern'
 import { Icon } from '../components/Icon'
@@ -145,7 +147,7 @@ export function LessonPage() {
     const correct = option === currentQuestion.correct
     setSelected(option)
     setAnswered(true)
-    recordAnswer(correct)
+    recordAnswer(correct, currentQuestion.entry.id)
     if (correct) setCorrectCount((count) => count + 1)
   }
 
@@ -210,9 +212,13 @@ export function LessonPage() {
             <div className="surface overflow-hidden">
               <TextileBorder tone={language.accent === 'wayuu' ? 'gold' : 'terracotta'} />
               <div className="p-6 sm:p-10">
-                <Badge tone={language.accent === 'wayuu' ? 'ochre' : 'terracotta'}>
-                  {language.name} · {category?.label ?? lesson.category}
-                </Badge>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <TerritoryFlag territory={language.id} size="sm" />
+                  <Badge tone={language.accent === 'wayuu' ? 'ochre' : 'terracotta'}>
+                    {language.name} · {category?.label ?? lesson.category}
+                  </Badge>
+                </div>
+                <p className="mt-2 text-xs text-muted">{language.dialect}</p>
               <h1 className="mt-4 font-display text-3xl font-semibold text-ink sm:text-4xl">{lesson.title}</h1>
               <p className="native-word mt-2 text-lg font-medium text-muted">{lesson.subtitle}</p>
               <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted sm:text-base">{lesson.description}</p>
@@ -261,11 +267,14 @@ export function LessonPage() {
             <div className="surface flex flex-1 flex-col p-6 sm:p-8">
               <p className="eyebrow">{category?.label}</p>
               <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
-                <div>
-                  <p className="native-word font-display text-4xl font-semibold text-ink sm:text-5xl">{currentWord.palabra_nativa}</p>
-                  <p className="mt-2 text-base italic text-muted">[{currentWord.guia_fonetica}]</p>
+                <div className="flex items-start gap-4">
+                  <WordIllustration entry={currentWord} size="lg" />
+                  <div>
+                    <p className="native-word font-display text-4xl font-semibold text-ink sm:text-5xl">{currentWord.palabra_nativa}</p>
+                    <p className="mt-2 text-base italic text-muted">/{currentWord.guia_fonetica}/</p>
+                  </div>
                 </div>
-                <AudioButton text={currentWord.palabra_nativa} />
+                <AudioButton text={currentWord.palabra_nativa} audioUrl={currentWord.audio_url} />
               </div>
 
               <p className="mt-5 font-display text-2xl font-semibold text-jungle-800">{currentWord.traduccion_espanol}</p>
@@ -415,6 +424,24 @@ export function LessonPage() {
                     ? 'Has ganado XP completo por completar esta lección por primera vez. ¡Sigue tejiendo tu camino!'
                     : 'Has repasado esta lección y ganado un pequeño refuerzo de XP. Repetir también es aprender.'}
                 </p>
+
+                {/* Microhistoria cultural al cerrar una unidad */}
+                {(() => {
+                  const unit = curriculum.units.find((u) => u.id === lesson.unitId)
+                  const isLastInUnit = unit && unit.lessonIds[unit.lessonIds.length - 1] === lesson.id
+                  const story = isLastInUnit ? getCultureCapsules(languageId)[0] : null
+                  if (!story) return null
+                  return (
+                    <div className="mt-6 rounded-2xl border border-ink/12 bg-sand-50 p-4 text-left">
+                      <p className="eyebrow">Microhistoria cultural de la unidad</p>
+                      <p className="mt-1 font-display text-base font-semibold text-ink">{story.title}</p>
+                      <p className="mt-1.5 line-clamp-3 text-xs leading-relaxed text-muted">{story.body}</p>
+                      <p className="mt-2 text-xs font-semibold text-jungle-700">
+                        {story.keyword} — <span className="font-normal text-muted">{story.keywordTranslation}</span>
+                      </p>
+                    </div>
+                  )
+                })()}
 
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
                   {nextLessonInPath ? (

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Icon } from './Icon'
+import { TerritoryFlag } from './CulturalVisuals'
 import { ProgressBar } from './ui'
 import { getCurriculum } from '../data/curriculum'
 import { countWords } from '../lib/vocabulary'
@@ -55,12 +56,15 @@ export function LanguageCard({ language }: { language: LanguageInfo }) {
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className={cn('text-[0.68rem] font-semibold uppercase tracking-[0.18em]', accent.text)}>
-            {language.family}
-          </p>
-          <h3 className="mt-2 font-display text-3xl font-semibold text-ink">{language.name}</h3>
+          <div className="flex items-center gap-2.5">
+            <TerritoryFlag territory={language.id} size="md" />
+            <p className={cn('text-[0.68rem] font-semibold uppercase tracking-[0.18em]', accent.text)}>
+              {language.family}
+            </p>
+          </div>
+          <h3 className="mt-2.5 font-display text-3xl font-semibold text-ink">{language.name}</h3>
           <p className="native-word mt-0.5 font-display text-base italic text-muted">
-            {language.nativeName}
+            {language.nativeName} · <span className="not-italic text-xs">{language.dialect}</span>
           </p>
         </div>
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink/12 text-ink transition-all duration-200 group-hover:border-ink group-hover:bg-ink group-hover:text-cream">
@@ -120,8 +124,9 @@ export function UpcomingLanguageCard({
   const accent = ACCENTS[language.accent] ?? ACCENTS.nasa
   return (
     <div className="flex flex-col border-t border-ink/15 pt-5">
-      <div className="flex items-baseline justify-between gap-2">
-        <span className="font-display text-xs italic text-muted">
+      <div className="flex items-center justify-between gap-2">
+        <span className="inline-flex items-center gap-2 font-display text-xs italic text-muted">
+          <TerritoryFlag territory={language.id} size="sm" />
           {index ? `0${index}` : 'Pronto'} · {language.family}
         </span>
         <span className="inline-flex items-center gap-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-muted">

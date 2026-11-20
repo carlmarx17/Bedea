@@ -6,19 +6,37 @@ import { getSentences } from '../data/sentences'
 import { useProgress } from '../lib/progress'
 import { Button, Badge, StepProgress, AudioButton, EmptyState } from '../components/ui'
 import { TextileBorder } from '../components/TextilePattern'
+import {
+  DictationMode,
+  ImageMatchMode,
+  SpeakCompareMode,
+  SrsReviewMode,
+} from '../components/ExtendedPracticeModes'
 import { Icon } from '../components/Icon'
 import { cn, shuffle } from '../lib/utils'
-import type { VocabularyEntry } from '../types'
+import type { PracticeMode, VocabularyEntry } from '../types'
 
-type Mode = 'flashcards' | 'quiz' | 'match' | 'sentence'
+const ALL_MODES: PracticeMode[] = [
+  'flashcards',
+  'quiz',
+  'match',
+  'sentence',
+  'images',
+  'dictation',
+  'speak',
+  'srs',
+  'mistakes',
+]
 
 export function PracticePage() {
   const { languageId = '', mode = '' } = useParams()
   const navigate = useNavigate()
   const [sessionKey, setSessionKey] = useState(0)
   const language = LANGUAGE_MAP[languageId]
-  const normalizedMode = (['flashcards', 'quiz', 'match', 'sentence'].includes(mode) ? mode : 'flashcards') as Mode
+  const normalizedMode = (ALL_MODES.includes(mode as PracticeMode) ? mode : 'flashcards') as PracticeMode
   const restart = () => setSessionKey((k) => k + 1)
+  const exit = () => navigate(`/lengua/${languageId}`)
+  const renderCompletion = (props: Parameters<typeof Completion>[0]) => <Completion {...props} />
 
   if (!language || language.status !== 'available') {
     return (
@@ -37,16 +55,31 @@ export function PracticePage() {
     <div className="min-h-dvh bg-sand-50">
       <div className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col px-4 py-5 sm:px-6 sm:py-8">
         {normalizedMode === 'flashcards' && (
-          <FlashcardsMode key={`fc-${sessionKey}`} languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} onRestart={restart} />
+          <FlashcardsMode key={`fc-${sessionKey}`} languageId={languageId} onExit={exit} onRestart={restart} />
         )}
         {normalizedMode === 'quiz' && (
-          <QuizMode key={`qz-${sessionKey}`} languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} onRestart={restart} />
+          <QuizMode key={`qz-${sessionKey}`} languageId={languageId} onExit={exit} onRestart={restart} />
         )}
         {normalizedMode === 'match' && (
-          <MatchMode key={`mt-${sessionKey}`} languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} onRestart={restart} />
+          <MatchMode key={`mt-${sessionKey}`} languageId={languageId} onExit={exit} onRestart={restart} />
         )}
         {normalizedMode === 'sentence' && (
-          <SentenceMode key={`st-${sessionKey}`} languageId={languageId} onExit={() => navigate(`/lengua/${languageId}`)} onRestart={restart} />
+          <SentenceMode key={`st-${sessionKey}`} languageId={languageId} onExit={exit} onRestart={restart} />
+        )}
+        {normalizedMode === 'images' && (
+          <ImageMatchMode key={`im-${sessionKey}`} languageId={languageId} onExit={exit} onRestart={restart} renderCompletion={renderCompletion} />
+        )}
+        {normalizedMode === 'dictation' && (
+          <DictationMode key={`dt-${sessionKey}`} languageId={languageId} onExit={exit} onRestart={restart} renderCompletion={renderCompletion} />
+        )}
+        {normalizedMode === 'speak' && (
+          <SpeakCompareMode key={`sp-${sessionKey}`} languageId={languageId} onExit={exit} onRestart={restart} renderCompletion={renderCompletion} />
+        )}
+        {normalizedMode === 'srs' && (
+          <SrsReviewMode key={`srs-${sessionKey}`} languageId={languageId} variant="srs" onExit={exit} onRestart={restart} renderCompletion={renderCompletion} />
+        )}
+        {normalizedMode === 'mistakes' && (
+          <SrsReviewMode key={`err-${sessionKey}`} languageId={languageId} variant="mistakes" onExit={exit} onRestart={restart} renderCompletion={renderCompletion} />
         )}
       </div>
     </div>
@@ -59,7 +92,7 @@ export function PracticePage() {
 
 function FlashcardsMode({ languageId, onExit, onRestart }: { languageId: string; onExit: () => void; onRestart: () => void }) {
   const words = useMemo(() => shuffle(getWords(languageId)).slice(0, 10), [languageId])
-  const { addXp, markWordsSeen } = useProgress()
+  const { addXp, markWordsSeen, recordSrsReview } = useProgress()
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
   const [known, setKnown] = useState(0)
@@ -71,6 +104,7 @@ function FlashcardsMode({ languageId, onExit, onRestart }: { languageId: string;
 
   const rate = (remembered: boolean) => {
     if (remembered) setKnown((value) => value + 1)
+    recordSrsReview(current.id, remembered)
     markWordsSeen([current.id])
     if (index < words.length - 1) {
       setIndex((value) => value + 1)
@@ -189,7 +223,7 @@ function QuizMode({ languageId, onExit, onRestart }: { languageId: string; onExi
     const isCorrect = option === question.entry.traduccion_espanol
     setSelected(option)
     setAnswered(true)
-    recordAnswer(isCorrect)
+    recordAnswer(isCorrect, question.entry.id)
     markWordsSeen([question.entry.id])
     if (isCorrect) setCorrect((value) => value + 1)
   }

@@ -1,0 +1,19 @@
+{
+  "name": "Bedea · Voces Vivas de Colombia",
+  "short_name": "Bedea",
+  "description": "Aprende ẽbẽra-chamí y wayuunaiki con lecciones cortas, repetición espaciada, teclado especial y cápsulas culturales. Funciona sin internet.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F6F1E7",
+  "theme_color": "#11241C",
+  "lang": "es-CO",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

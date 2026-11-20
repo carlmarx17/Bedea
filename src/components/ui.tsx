@@ -229,19 +229,22 @@ export function EmptyState({
 
 export function AudioButton({
   text,
+  audioUrl,
   compact = false,
   className,
 }: {
   text: string
+  audioUrl?: string | null
   compact?: boolean
   className?: string
 }) {
-  const supported = isSpeechSupported()
+  const supported = Boolean(audioUrl) || isSpeechSupported()
   const [speaking, setSpeaking] = useState(false)
 
   const handleClick = () => {
     setSpeaking(true)
     const started = speak(text, 'embera', {
+      audioUrl,
       onEnd: () => setSpeaking(false),
     })
     if (!started) setSpeaking(false)
@@ -253,11 +256,13 @@ export function AudioButton({
       onClick={handleClick}
       disabled={!supported}
       title={
-        supported
-          ? 'Escuchar una pronunciación aproximada (voz sintética en español)'
-          : 'Tu navegador no permite reproducir voz'
+        audioUrl
+          ? 'Escuchar grabación de hablante nativo'
+          : supported
+            ? 'Escuchar una pronunciación aproximada (voz sintética en español)'
+            : 'Tu navegador no permite reproducir voz'
       }
-      aria-label={`Escuchar pronunciación aproximada de ${text}`}
+      aria-label={`Escuchar pronunciación de ${text}`}
       className={cn(
         'inline-flex items-center justify-center gap-1.5 rounded-full border font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40',
         speaking
@@ -268,7 +273,7 @@ export function AudioButton({
       )}
     >
       <Icon name="volume" size={compact ? 15 : 14} className={speaking ? 'animate-pulse' : undefined} />
-      {!compact && <span>{speaking ? 'Escuchando…' : 'Escuchar'}</span>}
+      {!compact && <span>{speaking ? 'Escuchando…' : audioUrl ? 'Voz nativa' : 'Escuchar'}</span>}
     </button>
   )
 }

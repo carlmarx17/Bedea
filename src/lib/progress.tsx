@@ -8,9 +8,15 @@ import {
   type ReactNode,
 } from 'react'
 import { getEarnedMedalIds } from '../data/medals'
-import { DAILY_GOAL, createInitialProgress, loadProgress, saveProgress } from './storage'
+import { reviewSrsCard } from './srs'
+import {
+  createInitialProgress,
+  loadProgress,
+  normalizeProgress,
+  saveProgress,
+} from './storage'
 import { dateKey, isYesterday } from './utils'
-import type { LanguageId, ProgressState } from '../types'
+import type { DailyGoalOption, LanguageId, ProgressState } from '../types'
 
 export interface LevelInfo {
   index: number
@@ -50,32 +56,56 @@ export function getLevelInfo(xp: number): LevelInfo {
   }
 }
 
+function daysBetween(prevKey: string, nextKey: string): number {
+  const [py, pm, pd] = prevKey.split('-').map(Number)
+  const [ny, nm, nd] = nextKey.split('-').map(Number)
+  const a = new Date(py, (pm || 1) - 1, pd || 1).getTime()
+  const b = new Date(ny, (nm || 1) - 1, nd || 1).getTime()
+  return Math.round((b - a) / (1000 * 60 * 60 * 24))
+}
+
 interface ProgressContextValue {
   progress: ProgressState
   level: LevelInfo
-  dailyGoal: number
+  dailyGoal: DailyGoalOption
   earnedMedals: string[]
   addXp: (amount: number) => void
   completeLesson: (languageId: LanguageId, lessonId: string, xp: number) => boolean
-  recordAnswer: (correct: boolean) => void
+  recordAnswer: (correct: boolean, wordId?: string) => void
+  recordSrsReview: (wordId: string, remembered: boolean) => void
   markWordsSeen: (ids: string[]) => void
   setLastLanguage: (languageId: LanguageId) => void
+  setDailyGoal: (goal: DailyGoalOption) => void
+  importProgressJson: (raw: string) => boolean
   resetProgress: () => void
 }
 
 const ProgressContext = createContext<ProgressContextValue | null>(null)
 
-/** Aplica XP y actualiza la racha diaria de forma consistente. */
+/** Aplica XP, actualiza la racha diaria y usa protector de racha si faltaste 1 día. */
 function withXp(state: ProgressState, amount: number): ProgressState {
   const today = dateKey()
   const newDay = state.dailyDate !== today
   let streak = state.streak
+  let streakFreezes = state.streakFreezes
 
   if (newDay) {
     if (state.lastStudyDate && isYesterday(state.lastStudyDate, today)) {
       streak = Math.max(1, streak) + 1
+      if (streak % 5 === 0 && streakFreezes < 3) {
+        streakFreezes += 1
+      }
     } else if (state.lastStudyDate === today) {
       streak = Math.max(1, streak)
+    } else if (
+      state.lastStudyDate &&
+      daysBetween(state.lastStudyDate, today) === 2 &&
+      streak > 0 &&
+      streakFreezes > 0
+    ) {
+      // Protector de racha automático: salva la racha si solo faltaste un día.
+      streakFreezes -= 1
+      streak += 1
     } else {
       streak = 1
     }
@@ -87,6 +117,7 @@ function withXp(state: ProgressState, amount: number): ProgressState {
     ...state,
     xp: state.xp + amount,
     streak,
+    streakFreezes,
     lastStudyDate: today,
     dailyXp: newDay ? amount : state.dailyXp + amount,
     dailyDate: today,
@@ -97,14 +128,12 @@ function withXp(state: ProgressState, amount: number): ProgressState {
 export function ProgressProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState<ProgressState>(() => loadProgress())
 
-  // Persistencia inmediata: toda mutación se guarda en localStorage.
   useEffect(() => {
     saveProgress(progress)
   }, [progress])
 
   const earnedMedals = useMemo(() => getEarnedMedalIds(progress), [progress])
 
-  // Mantiene el campo medals sincronizado con los logros calculados.
   useEffect(() => {
     setProgress((state) => {
       if (
@@ -138,7 +167,6 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
               },
             }
           : state
-        // La primera vez se gana el XP completo; repetir da un pequeño refuerzo.
         return withXp(nextState, isNew ? xp : Math.max(2, Math.round(xp * 0.2)))
       })
       return wasNew
@@ -146,11 +174,30 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     [progress.completedLessons],
   )
 
-  const recordAnswer = useCallback((correct: boolean) => {
+  const recordAnswer = useCallback((correct: boolean, wordId?: string) => {
+    setProgress((state) => {
+      const nextCards = wordId
+        ? {
+            ...state.cards,
+            [wordId]: reviewSrsCard(state.cards[wordId], correct),
+          }
+        : state.cards
+      return {
+        ...state,
+        correctAnswers: state.correctAnswers + (correct ? 1 : 0),
+        totalAnswers: state.totalAnswers + 1,
+        cards: nextCards,
+      }
+    })
+  }, [])
+
+  const recordSrsReview = useCallback((wordId: string, remembered: boolean) => {
     setProgress((state) => ({
       ...state,
-      correctAnswers: state.correctAnswers + (correct ? 1 : 0),
-      totalAnswers: state.totalAnswers + 1,
+      cards: {
+        ...state.cards,
+        [wordId]: reviewSrsCard(state.cards[wordId], remembered),
+      },
     }))
   }, [])
 
@@ -170,6 +217,22 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     )
   }, [])
 
+  const setDailyGoal = useCallback((goal: DailyGoalOption) => {
+    setProgress((state) => (state.dailyGoal === goal ? state : { ...state, dailyGoal: goal }))
+  }, [])
+
+  const importProgressJson = useCallback((raw: string): boolean => {
+    try {
+      const parsed = JSON.parse(raw) as Partial<ProgressState>
+      if (!parsed || typeof parsed !== 'object') return false
+      const normalized = normalizeProgress(parsed)
+      setProgress(normalized)
+      return true
+    } catch {
+      return false
+    }
+  }, [])
+
   const resetProgress = useCallback(() => {
     setProgress(createInitialProgress())
   }, [])
@@ -178,13 +241,16 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     () => ({
       progress,
       level: getLevelInfo(progress.xp),
-      dailyGoal: DAILY_GOAL,
+      dailyGoal: progress.dailyGoal,
       earnedMedals,
       addXp,
       completeLesson,
       recordAnswer,
+      recordSrsReview,
       markWordsSeen,
       setLastLanguage,
+      setDailyGoal,
+      importProgressJson,
       resetProgress,
     }),
     [
@@ -193,8 +259,11 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       addXp,
       completeLesson,
       recordAnswer,
+      recordSrsReview,
       markWordsSeen,
       setLastLanguage,
+      setDailyGoal,
+      importProgressJson,
       resetProgress,
     ],
   )

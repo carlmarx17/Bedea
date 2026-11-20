@@ -1,21 +1,44 @@
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useProgress } from '../lib/progress'
 import { useBrand } from '../lib/brand'
+import { DAILY_GOAL_OPTIONS } from '../lib/storage'
 import { MEDALS } from '../data/medals'
 import { AVAILABLE_LANGUAGES } from '../data/languages'
 import { getCurriculum } from '../data/curriculum'
 import { getWords } from '../lib/vocabulary'
+import { TerritoryFlag } from '../components/CulturalVisuals'
 import { SectionHeading, StatCard, ProgressBar, Badge, Button } from '../components/ui'
 import { Icon } from '../components/Icon'
-import { cn, dateKey, formatNumber } from '../lib/utils'
+import { cn, dateKey, downloadJson, formatNumber } from '../lib/utils'
 
 export function ProgressPage() {
-  const { progress, level, dailyGoal, earnedMedals, resetProgress } = useProgress()
+  const {
+    progress,
+    level,
+    dailyGoal,
+    earnedMedals,
+    setDailyGoal,
+    importProgressJson,
+    resetProgress,
+  } = useProgress()
   const { brand } = useBrand()
+  const [importStatus, setImportStatus] = useState<'idle' | 'ok' | 'error'>('idle')
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const todayXp = progress.dailyDate === dateKey() ? progress.dailyXp : 0
   const dailyPercent = Math.min(100, (todayXp / dailyGoal) * 100)
   const totalCompleted = Object.values(progress.completedLessons).flat().length
   const accuracy = progress.totalAnswers === 0 ? 0 : Math.round((progress.correctAnswers / progress.totalAnswers) * 100)
+
+  const handleImportFile = (file: File | undefined) => {
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      const ok = importProgressJson(String(reader.result ?? ''))
+      setImportStatus(ok ? 'ok' : 'error')
+    }
+    reader.readAsText(file)
+  }
 
   return (
     <div className="space-y-8 sm:space-y-10">
@@ -28,7 +51,13 @@ export function ProgressPage() {
       {/* Resumen */}
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard icon="zap" label="Experiencia total" value={`${formatNumber(progress.xp)} XP`} hint={`Nivel: ${level.title}`} tone="ochre" />
-        <StatCard icon="flame" label="Racha" value={`${progress.streak} ${progress.streak === 1 ? 'día' : 'días'}`} hint="Vuelve mañana para mantenerla" tone="terracotta" />
+        <StatCard
+          icon="flame"
+          label="Racha"
+          value={`${progress.streak} ${progress.streak === 1 ? 'día' : 'días'}`}
+          hint={`${progress.streakFreezes} ${progress.streakFreezes === 1 ? 'protector' : 'protectores'} activos`}
+          tone="terracotta"
+        />
         <StatCard icon="graduation" label="Lecciones" value={totalCompleted} hint="completadas en total" tone="jungle" />
         <StatCard icon="target" label="Precisión" value={`${accuracy}%`} hint={`${progress.correctAnswers} de ${progress.totalAnswers} respuestas`} tone="sand" />
       </section>
@@ -54,6 +83,34 @@ export function ProgressPage() {
                 ? '¡Cumpliste tu meta de hoy! Cada palabra suma.'
                 : `Te faltan ${Math.max(0, dailyGoal - todayXp)} XP para tu meta de hoy.`}
             </p>
+            <div className="mt-4 border-t border-ink/10 pt-4">
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                Ritmo diario elegible
+              </p>
+              <div className="mt-2.5 grid grid-cols-3 gap-2">
+                {DAILY_GOAL_OPTIONS.map((opt) => {
+                  const active = dailyGoal === opt.xp
+                  return (
+                    <button
+                      key={opt.xp}
+                      type="button"
+                      onClick={() => setDailyGoal(opt.xp)}
+                      className={cn(
+                        'rounded-xl border px-3 py-2 text-left transition-colors',
+                        active
+                          ? 'border-ink bg-ink text-cream'
+                          : 'border-ink/12 bg-sand-50 text-ink hover:border-ink/30',
+                      )}
+                    >
+                      <p className="text-xs font-semibold">{opt.label}</p>
+                      <p className={cn('text-[0.68rem]', active ? 'text-ochre-200' : 'text-muted')}>
+                        {opt.minutes} ({opt.xp} XP)
+                      </p>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
           </div>
 
           <div className="surface p-6">
@@ -90,11 +147,14 @@ export function ProgressPage() {
                 return (
                   <div key={language.id}>
                     <div className="flex items-center justify-between gap-3">
-                      <div>
-                        <p className="font-display text-base font-semibold text-ink">{language.name}</p>
-                        <p className="text-xs text-muted">
-                          {done} de {total} lecciones · {seenInLang} de {langWordIds.size} palabras vistas
-                        </p>
+                      <div className="flex items-center gap-2.5">
+                        <TerritoryFlag territory={language.id} size="sm" />
+                        <div>
+                          <p className="font-display text-base font-semibold text-ink">{language.name}</p>
+                          <p className="text-xs text-muted">
+                            {done} de {total} lecciones · {seenInLang} de {langWordIds.size} palabras vistas
+                          </p>
+                        </div>
                       </div>
                       <span className="text-sm font-semibold tabular-nums text-muted">{Math.round(percent)}%</span>
                     </div>
@@ -155,27 +215,63 @@ export function ProgressPage() {
         </section>
       </div>
 
-      {/* Zona de cuidado */}
+      {/* Respaldo, transferencia y reinicio */}
       <section className="surface-muted p-5 sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h3 className="font-display text-base font-semibold text-ink">Datos guardados en este dispositivo</h3>
+          <div className="max-w-xl">
+            <h3 className="font-display text-base font-semibold text-ink">
+              Tu progreso en este dispositivo (sin cuenta, 100% offline)
+            </h3>
             <p className="mt-1 text-sm text-muted">
-              Tu progreso, racha y medallas se guardan en localStorage. Puedes reiniciarlos si quieres empezar de cero.
+              Exporta tu progreso como archivo JSON para pasarlo a otro celular o guardarlo como respaldo.
+              Esquema v{progress.schemaVersion}.
             </p>
+            {importStatus === 'ok' && (
+              <p className="mt-2 text-xs font-semibold text-jungle-700">
+                ✓ Progreso importado correctamente.
+              </p>
+            )}
+            {importStatus === 'error' && (
+              <p className="mt-2 text-xs font-semibold text-coral-600">
+                No pudimos leer ese archivo. Asegúrate de usar un respaldo JSON de Bedea.
+              </p>
+            )}
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            className="border-coral-400/40 text-coral-600 hover:bg-red-50"
-            onClick={() => {
-              if (window.confirm('¿Seguro que quieres borrar tu progreso? Esta acción no se puede deshacer.')) {
-                resetProgress()
-              }
-            }}
-          >
-            <Icon name="trash" size={15} /> Reiniciar progreso
-          </Button>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => downloadJson(`bedea-progreso-${dateKey()}.json`, progress)}
+            >
+              <Icon name="download" size={15} /> Exportar respaldo
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <Icon name="upload" size={15} /> Importar
+            </Button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="application/json,.json"
+              className="hidden"
+              onChange={(e) => handleImportFile(e.target.files?.[0])}
+            />
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-coral-400/40 text-coral-600 hover:bg-red-50"
+              onClick={() => {
+                if (window.confirm('¿Seguro que quieres borrar tu progreso? Esta acción no se puede deshacer.')) {
+                  resetProgress()
+                }
+              }}
+            >
+              <Icon name="trash" size={15} /> Reiniciar
+            </Button>
+          </div>
         </div>
       </section>
     </div>

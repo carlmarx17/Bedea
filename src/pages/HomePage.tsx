@@ -8,6 +8,7 @@ import { getCultureCapsules } from '../data/culture'
 import { getWordOfTheDay, countWords } from '../lib/vocabulary'
 import { LanguageCard, UpcomingLanguageCard } from '../components/LanguageCard'
 import { CultureCard } from '../components/CultureCard'
+import { TerritoryFlag, WordIllustration } from '../components/CulturalVisuals'
 import { Button, SectionHeading, ProgressBar, AudioButton } from '../components/ui'
 import { Icon } from '../components/Icon'
 import { cn, dateKey } from '../lib/utils'
@@ -38,9 +39,10 @@ export function HomePage() {
       {/* Portada editorial: abierta sobre el papel, sin cajas oscuras con orbes */}
       <section className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start lg:gap-12">
         <div className="animate-fade-up pt-1 sm:pt-4">
-          <p className="eyebrow">
-            {brand.subtitle} · Colombia
-          </p>
+          <div className="inline-flex items-center gap-2.5">
+            <TerritoryFlag territory="colombia" size="sm" />
+            <p className="eyebrow">{brand.subtitle} · Colombia</p>
+          </div>
           <h1 className="mt-4 font-display text-[2.5rem] font-semibold leading-[1.04] tracking-[-0.03em] text-ink sm:text-5xl lg:text-[3.85rem]">
             Las voces indígenas de Colombia,{' '}
             <span className="font-normal italic text-terracotta-600">palabra a palabra.</span>
@@ -136,16 +138,30 @@ export function HomePage() {
 
             <div className="p-6 sm:p-7">
               <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="native-word font-display text-4xl font-semibold leading-tight text-cream sm:text-[2.75rem]">
-                    {specimenWord.palabra_nativa}
-                  </p>
-                  <p className="mt-1.5 text-sm italic text-sand-200/70">
-                    /{specimenWord.guia_fonetica}/
-                  </p>
+                <div className="flex items-start gap-4">
+                  <WordIllustration
+                    entry={specimenWord}
+                    size="md"
+                    className="border-white/15 bg-sand-50"
+                  />
+                  <div>
+                    <div className="mb-1.5 flex items-center gap-2">
+                      <TerritoryFlag territory={specimenWord.language} size="sm" />
+                      <span className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-sand-200/70">
+                        {specimenWord.language === 'embera' ? 'Ẽbẽra-Chamí' : 'Wayuunaiki'}
+                      </span>
+                    </div>
+                    <p className="native-word font-display text-3xl font-semibold leading-tight text-cream sm:text-[2.45rem]">
+                      {specimenWord.palabra_nativa}
+                    </p>
+                    <p className="mt-1 text-sm italic text-sand-200/70">
+                      /{specimenWord.guia_fonetica}/
+                    </p>
+                  </div>
                 </div>
                 <AudioButton
                   text={specimenWord.palabra_nativa}
+                  audioUrl={specimenWord.audio_url}
                   compact
                   className="border-white/20 bg-white/10 text-cream hover:border-ochre-300/60 hover:bg-white/15"
                 />

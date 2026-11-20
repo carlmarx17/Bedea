@@ -1,7 +1,9 @@
 /**
- * Pronunciación aproximada con la Web Speech API.
- * No existe una voz ẽbẽra ni wayuunaiki en los navegadores: usamos una voz
- * en español a velocidad lenta y avisamos siempre que es una aproximación.
+ * Reproducción de audio de vocabulario.
+ * 1) Si la entrada tiene `audio_url` (grabación de hablante nativo en .opus o .mp3),
+ *    reproduce ese archivo primero.
+ * 2) Si no hay grabación aún o falla la carga, usa Web Speech API en español lento
+ *    como aproximación y lo indica en la interfaz.
  */
 
 export type SpeechLanguage = 'embera' | 'wayuunaiki' | string
@@ -11,6 +13,7 @@ export function isSpeechSupported(): boolean {
 }
 
 let cachedVoices: SpeechSynthesisVoice[] = []
+let activeAudio: HTMLAudioElement | null = null
 
 function getVoices(): SpeechSynthesisVoice[] {
   if (!isSpeechSupported()) return []
@@ -19,19 +22,60 @@ function getVoices(): SpeechSynthesisVoice[] {
   return cachedVoices
 }
 
-// Las voces se cargan de forma asíncrona en algunos navegadores.
 if (isSpeechSupported()) {
   window.speechSynthesis.onvoiceschanged = () => {
     cachedVoices = window.speechSynthesis.getVoices()
   }
 }
 
+export function stopSpeaking(): void {
+  if (activeAudio) {
+    activeAudio.pause()
+    activeAudio.currentTime = 0
+    activeAudio = null
+  }
+  if (isSpeechSupported()) window.speechSynthesis.cancel()
+}
+
 export function speak(
   text: string,
   _language: SpeechLanguage = 'embera',
+  callbacks?: { onStart?: () => void; onEnd?: () => void; audioUrl?: string | null },
+): boolean {
+  stopSpeaking()
+
+  // Prioridad 1: grabación nativa (.opus / .mp3)
+  if (callbacks?.audioUrl && typeof Audio !== 'undefined') {
+    const audio = new Audio(callbacks.audioUrl)
+    activeAudio = audio
+    audio.onplay = () => callbacks.onStart?.()
+    audio.onended = () => {
+      activeAudio = null
+      callbacks.onEnd?.()
+    }
+    audio.onerror = () => {
+      activeAudio = null
+      // Fallback silencioso a síntesis si el archivo no existe todavía
+      speakSynthetic(text, callbacks)
+    }
+    audio.play().catch(() => {
+      activeAudio = null
+      speakSynthetic(text, callbacks)
+    })
+    return true
+  }
+
+  return speakSynthetic(text, callbacks)
+}
+
+function speakSynthetic(
+  text: string,
   callbacks?: { onStart?: () => void; onEnd?: () => void },
 ): boolean {
-  if (!isSpeechSupported() || !text.trim()) return false
+  if (!isSpeechSupported() || !text.trim()) {
+    callbacks?.onEnd?.()
+    return false
+  }
   const synth = window.speechSynthesis
   synth.cancel()
 
@@ -53,8 +97,4 @@ export function speak(
   }
   synth.speak(utterance)
   return true
-}
-
-export function stopSpeaking(): void {
-  if (isSpeechSupported()) window.speechSynthesis.cancel()
 }

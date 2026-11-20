@@ -1,4 +1,5 @@
 import { AudioButton } from './ui'
+import { TerritoryFlag, WordIllustration } from './CulturalVisuals'
 import { CATEGORY_MAP, LANGUAGE_MAP } from '../data/languages'
 import type { VocabularyEntry } from '../types'
 import { cn } from '../lib/utils'
@@ -13,18 +14,12 @@ interface WordCardProps {
 export function WordCard({ entry, onOpen, className }: WordCardProps) {
   const category = CATEGORY_MAP[entry.category]
   const language = LANGUAGE_MAP[entry.language]
-  const isEmbera = entry.language === 'embera'
 
   const content = (
     <>
       <div className="flex items-center justify-between gap-3">
         <span className="inline-flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
-          <span
-            className={cn(
-              'h-2 w-2 rounded-full',
-              isEmbera ? 'bg-terracotta-500' : 'bg-ochre-500',
-            )}
-          />
+          <TerritoryFlag territory={entry.language} size="sm" />
           <span className="text-ink/80">{language?.name ?? entry.language}</span>
           <span aria-hidden="true">·</span>
           <span>{entry.source === 'manual' ? 'Manual' : 'Complemento'}</span>
@@ -33,15 +28,20 @@ export function WordCard({ entry, onOpen, className }: WordCardProps) {
           className="relative z-10"
           onClick={(event) => event.stopPropagation()}
         >
-          <AudioButton text={entry.palabra_nativa} compact />
+          <AudioButton text={entry.palabra_nativa} audioUrl={entry.audio_url} compact />
         </div>
       </div>
 
-      <p className="native-word mt-4 font-display text-[1.65rem] font-semibold leading-tight text-ink">
-        {entry.palabra_nativa}
-      </p>
-      <p className="mt-1 text-xs italic text-muted">/{entry.guia_fonetica}/</p>
-      <p className="mt-3 text-sm font-semibold text-jungle-700">{entry.traduccion_espanol}</p>
+      <div className="mt-4 flex items-start gap-3.5">
+        <WordIllustration entry={entry} size="sm" />
+        <div className="min-w-0 flex-1">
+          <p className="native-word font-display text-[1.45rem] font-semibold leading-tight text-ink">
+            {entry.palabra_nativa}
+          </p>
+          <p className="mt-0.5 text-xs italic text-muted">/{entry.guia_fonetica}/</p>
+          <p className="mt-1.5 text-sm font-semibold text-jungle-700">{entry.traduccion_espanol}</p>
+        </div>
+      </div>
 
       <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-muted">
         <span className="native-word font-medium text-ink/80">“{entry.ejemplo_uso}”</span>{' '}

@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { AVAILABLE_LANGUAGES, CATEGORIES, CATEGORY_MAP, LANGUAGE_MAP } from '../data/languages'
 import { searchWords, VOCABULARY_META } from '../lib/vocabulary'
-import { downloadJson, cn } from '../lib/utils'
+import { downloadJson } from '../lib/utils'
 import { WordCard } from '../components/WordCard'
+import { TerritoryFlag, WordIllustration } from '../components/CulturalVisuals'
 import { Icon } from '../components/Icon'
 import { SectionHeading, EmptyState, Badge, AudioButton, Modal, Button } from '../components/ui'
 import type { CategoryId, LanguageId, VocabularyEntry } from '../types'
@@ -138,21 +139,25 @@ export function DictionaryPage() {
         {selected && (
           <div className="space-y-5">
             <div className="flex flex-wrap items-start justify-between gap-4">
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge tone={selected.language === 'embera' ? 'terracotta' : 'ochre'}>
-                    {LANGUAGE_MAP[selected.language]?.name}
-                  </Badge>
-                  <Badge tone="sand">{CATEGORY_MAP[selected.category]?.label}</Badge>
-                  <Badge tone={selected.source === 'manual' ? 'jungle' : 'ochre'}>
-                    {selected.source === 'manual' ? 'Manual' : 'Complemento'}
-                  </Badge>
+              <div className="flex items-start gap-4">
+                <WordIllustration entry={selected} size="lg" />
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <TerritoryFlag territory={selected.language} size="sm" />
+                    <Badge tone={selected.language === 'embera' ? 'terracotta' : 'ochre'}>
+                      {LANGUAGE_MAP[selected.language]?.name}
+                    </Badge>
+                    <Badge tone="sand">{CATEGORY_MAP[selected.category]?.label}</Badge>
+                    <Badge tone={selected.source === 'manual' ? 'jungle' : 'ochre'}>
+                      {selected.source === 'manual' ? 'Manual' : 'Complemento'}
+                    </Badge>
+                  </div>
+                  <p className="native-word mt-3 font-display text-3xl font-semibold text-ink sm:text-4xl">{selected.palabra_nativa}</p>
+                  <p className="mt-1 text-base italic text-muted">/{selected.guia_fonetica}/</p>
+                  <p className="mt-2 font-display text-2xl font-semibold text-jungle-800">{selected.traduccion_espanol}</p>
                 </div>
-                <p className="native-word mt-4 font-display text-4xl font-semibold text-ink">{selected.palabra_nativa}</p>
-                <p className="mt-1 text-base italic text-muted">[{selected.guia_fonetica}]</p>
-                <p className="mt-3 font-display text-2xl font-semibold text-jungle-800">{selected.traduccion_espanol}</p>
               </div>
-              <AudioButton text={selected.palabra_nativa} />
+              <AudioButton text={selected.palabra_nativa} audioUrl={selected.audio_url} />
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">

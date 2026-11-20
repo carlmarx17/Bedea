@@ -41,6 +41,8 @@ export interface LanguageInfo {
   id: LanguageId
   name: string
   nativeName: string
+  dialect: string
+  orthography: string
   family: string
   region: string
   speakers: string
@@ -117,14 +119,29 @@ export interface Medal {
   requirement: string
 }
 
+export interface SrsCardState {
+  due: string
+  interval: number
+  easeFactor: number
+  reps: number
+  lapses: number
+  lastResult: 'good' | 'again'
+}
+
+export type DailyGoalOption = 30 | 50 | 80
+
 export interface ProgressState {
+  schemaVersion: number
   xp: number
   streak: number
+  streakFreezes: number
+  dailyGoal: DailyGoalOption
   lastStudyDate: string | null
   dailyXp: number
   dailyDate: string
   completedLessons: Record<LanguageId, string[]>
   seenWords: string[]
+  cards: Record<string, SrsCardState>
   correctAnswers: number
   totalAnswers: number
   medals: string[]
@@ -132,7 +149,16 @@ export interface ProgressState {
   totalSessions: number
 }
 
-export type PracticeMode = 'flashcards' | 'quiz' | 'match' | 'sentence'
+export type PracticeMode =
+  | 'flashcards'
+  | 'quiz'
+  | 'match'
+  | 'sentence'
+  | 'images'
+  | 'dictation'
+  | 'speak'
+  | 'srs'
+  | 'mistakes'
 
 export interface BrandPreset {
   id: string
