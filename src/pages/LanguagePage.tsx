@@ -178,9 +178,9 @@ export function LanguagePage() {
 
         {/* Columna derecha: progreso y palabra del día */}
         <aside className="space-y-4">
-          <div className="rounded-2xl bg-ink p-6 text-cream">
+          <div className="rounded-md bg-ink p-6 text-cream">
             <div className="flex items-baseline justify-between">
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-ochre-300">
+              <p className="font-display text-sm italic text-ochre-300">
                 Tu avance
               </p>
               <span className="text-xs tabular-nums text-sand-200/75">{Math.round(percent)}%</span>
@@ -284,21 +284,21 @@ export function LanguagePage() {
         />
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {[
-            { num: '01', mode: 'images', label: 'Imágenes', desc: 'Escucha y elige la ilustración' },
-            { num: '02', mode: 'dictation', label: 'Dictado', desc: 'Escucha y escribe con teclado especial' },
-            { num: '03', mode: 'speak', label: 'Hablar', desc: 'Grábate y compara tu voz' },
-            { num: '04', mode: 'flashcards', label: 'Tarjetas', desc: 'Voltea y evalúa tu memoria' },
-            { num: '05', mode: 'quiz', label: 'Quiz', desc: 'Traduce en dos direcciones' },
-            { num: '06', mode: 'match', label: 'Emparejar', desc: 'Conecta palabra y sentido' },
-            { num: '07', mode: 'sentence', label: 'Oraciones', desc: 'Ordena expresiones reales' },
+            { icon: 'image', mode: 'images', label: 'Imágenes', desc: 'Escucha y elige la ilustración' },
+            { icon: 'keyboard', mode: 'dictation', label: 'Dictado', desc: 'Escucha y escribe con teclado especial' },
+            { icon: 'mic', mode: 'speak', label: 'Hablar', desc: 'Grábate y compara tu voz' },
+            { icon: 'layers', mode: 'flashcards', label: 'Tarjetas', desc: 'Voltea y evalúa tu memoria' },
+            { icon: 'target', mode: 'quiz', label: 'Quiz', desc: 'Traduce en dos direcciones' },
+            { icon: 'puzzle', mode: 'match', label: 'Emparejar', desc: 'Conecta palabra y sentido' },
+            { icon: 'pen', mode: 'sentence', label: 'Oraciones', desc: 'Ordena expresiones reales' },
           ].map((item) => (
             <Link
               key={item.mode}
               to={`/lengua/${languageId}/practica/${item.mode}`}
               className="surface group flex flex-col justify-between p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-ink/30"
             >
-              <div className="flex items-center justify-between text-xs font-medium text-muted">
-                <span className="font-display italic">{item.num}</span>
+              <div className="flex items-center justify-between text-muted">
+                <Icon name={item.icon} size={17} className="text-terracotta-600" />
                 <Icon
                   name="arrow-up-right"
                   size={15}

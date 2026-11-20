@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { BrandLockup } from './BrandMark'
 import { Icon } from './Icon'
-import { TextileBorder } from './TextilePattern'
+import { GarzonQuote, PreAlphaBanner } from './ProjectNotice'
+import { REPO_URL } from '../config/project'
 import { useBrand } from '../lib/brand'
 import { useProgress } from '../lib/progress'
 import { cn, dateKey } from '../lib/utils'
@@ -42,7 +43,9 @@ export function Layout() {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      {/* Cabecera editorial superior */}
+      <PreAlphaBanner />
+
+      {/* Cabecera superior */}
       <header className="sticky top-0 z-30 border-b border-ink/10 bg-sand-50/90 backdrop-blur-md">
         <div className="container-app flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]">
           <Link to="/" aria-label={`${brand.name}, ir al inicio`} className="shrink-0">
@@ -73,6 +76,15 @@ export function Layout() {
                 </Link>
               )
             })}
+            <Link
+              to="/acerca"
+              className={cn(
+                'relative ml-2 border-l border-ink/12 px-3.5 py-2 text-sm font-medium transition-colors',
+                location.pathname.startsWith('/acerca') ? 'text-ink' : 'text-muted hover:text-ink',
+              )}
+            >
+              Sobre Bedea
+            </Link>
           </nav>
 
           {/* Estado discreto: racha, XP y ajustes */}
@@ -113,34 +125,40 @@ export function Layout() {
       {/* Contenido principal */}
       <main
         key={location.pathname}
-        className="container-app flex-1 animate-fade-in pb-28 pt-8 sm:pt-12 lg:pb-20 lg:pt-14"
+        className="container-app flex-1 animate-fade-in pb-16 pt-8 sm:pt-12 lg:pb-20 lg:pt-14"
       >
         <Outlet />
       </main>
 
-      {/* Colofón editorial */}
-      <footer className="mt-auto hidden border-t border-ink/12 bg-sand-100/50 lg:block">
-        <TextileBorder tone="terracotta" className="opacity-35" />
+      {/* Pie de página */}
+      <footer className="mt-auto border-t border-ink/12 bg-sand-100/60 pb-24 lg:pb-0">
         <div className="container-app py-10">
-          <div className="grid gap-8 md:grid-cols-[1.2fr_1fr_auto] md:items-end">
-            <div>
-              <p className="font-display text-lg font-semibold text-ink">
-                {brand.name} <span className="font-normal italic text-muted">— {brand.subtitle}</span>
+          <div className="grid gap-10 md:grid-cols-[1.3fr_1fr]">
+            <GarzonQuote variant="compact" />
+            <div className="space-y-3 text-xs leading-relaxed text-muted">
+              <p>
+                <span className="font-semibold text-ink">{brand.name}</span> es un proyecto hecho desde el
+                respeto, sin ánimo de lucro y todavía en pre-alfa. Faltan muchas palabras, grabaciones de
+                hablantes y revisión comunitaria.
               </p>
-              <p className="mt-2 max-w-md text-xs leading-relaxed text-muted">
-                Archivo vivo y espacio de aprendizaje dedicado a las lenguas indígenas de Colombia.
-                Construido con respeto a las comunidades hablantes y sus territorios.
+              <p>
+                Fuente base: Manual de enseñanza y escritura ẽbẽra-chamí (2013). El módulo wayuunaiki está
+                pendiente de revisión con hablantes.
               </p>
-            </div>
-            <p className="text-xs leading-relaxed text-muted">
-              Fuente base:{' '}
-              <span className="font-medium text-ink">Manual de enseñanza y escritura ẽbẽra-chamí (2013)</span>.
-              El módulo wayuunaiki se encuentra abierto a revisión comunitaria.
-            </p>
-            <div className="flex items-center gap-4 text-xs font-medium text-muted">
-              <Link to="/diccionario" className="hover:text-ink">Diccionario</Link>
-              <Link to="/cultura" className="hover:text-ink">Cultura</Link>
-              <Link to="/ajustes" className="hover:text-ink">Identidad</Link>
+              <p className="flex flex-wrap gap-x-4 gap-y-1 font-medium">
+                <Link to="/acerca" className="text-ink underline decoration-ink/25 underline-offset-2 hover:decoration-ink">
+                  Cómo contribuir
+                </Link>
+                <a
+                  href={REPO_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-ink underline decoration-ink/25 underline-offset-2 hover:decoration-ink"
+                >
+                  Código en GitHub
+                </a>
+                <Link to="/ajustes" className="hover:text-ink">Ajustes</Link>
+              </p>
             </div>
           </div>
         </div>

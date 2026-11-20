@@ -18,9 +18,9 @@ export function WordCard({ entry, onOpen, className }: WordCardProps) {
   const content = (
     <>
       <div className="flex items-center justify-between gap-3">
-        <span className="inline-flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">
+        <span className="inline-flex items-center gap-2 text-xs text-muted">
           <TerritoryFlag territory={entry.language} size="sm" />
-          <span className="text-ink/80">{language?.name ?? entry.language}</span>
+          <span className="font-medium text-ink/85">{language?.name ?? entry.language}</span>
           <span aria-hidden="true">·</span>
           <span>{entry.source === 'manual' ? 'Manual' : 'Complemento'}</span>
         </span>

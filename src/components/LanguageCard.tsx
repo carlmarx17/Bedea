@@ -58,7 +58,7 @@ export function LanguageCard({ language }: { language: LanguageInfo }) {
         <div>
           <div className="flex items-center gap-2.5">
             <TerritoryFlag territory={language.id} size="md" />
-            <p className={cn('text-[0.68rem] font-semibold uppercase tracking-[0.18em]', accent.text)}>
+            <p className={cn('font-display text-sm italic', accent.text)}>
               {language.family}
             </p>
           </div>
@@ -74,7 +74,7 @@ export function LanguageCard({ language }: { language: LanguageInfo }) {
 
       {/* Saludo destacado como espécimen tipográfico */}
       <div className="mt-6 border-y border-ink/10 py-4">
-        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
+        <p className="text-xs text-muted">
           Saludo tradicional
         </p>
         <p className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-0.5">

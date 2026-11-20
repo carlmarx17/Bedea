@@ -10,6 +10,7 @@ import { DictionaryPage } from './pages/DictionaryPage'
 import { CulturePage } from './pages/CulturePage'
 import { ProgressPage } from './pages/ProgressPage'
 import { SettingsPage } from './pages/SettingsPage'
+import { AboutPage } from './pages/AboutPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
               <Route path="/cultura" element={<CulturePage />} />
               <Route path="/progreso" element={<ProgressPage />} />
               <Route path="/ajustes" element={<SettingsPage />} />
+              <Route path="/acerca" element={<AboutPage />} />
               <Route path="/inicio" element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>

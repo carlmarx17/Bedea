@@ -18,7 +18,7 @@ export function CultureCard({
   return (
     <article
       className={cn(
-        'group relative flex flex-col overflow-hidden rounded-2xl border p-6 transition-all duration-200 sm:p-7',
+        'group relative flex flex-col overflow-hidden rounded-md border p-6 transition-all duration-200 sm:p-7',
         featured
           ? 'border-ink bg-ink text-cream'
           : 'border-ink/10 bg-cream text-ink hover:border-ink/25',
@@ -29,7 +29,7 @@ export function CultureCard({
       <div className="flex items-center justify-between gap-3">
         <span
           className={cn(
-            'inline-flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.16em]',
+            'inline-flex items-center gap-2 font-display text-sm italic',
             featured ? 'text-ochre-300' : 'text-terracotta-600',
           )}
         >

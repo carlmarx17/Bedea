@@ -58,7 +58,7 @@ export default {
         cream: '#FCF9F3',
       },
       fontFamily: {
-        display: ['Fraunces', 'Georgia', 'serif'],
+        display: ['Alegreya', 'Noto Serif', 'Georgia', 'serif'],
         sans: ['Noto Sans', 'system-ui', 'sans-serif'],
         native: ['Noto Sans', 'system-ui', 'sans-serif'],
       },

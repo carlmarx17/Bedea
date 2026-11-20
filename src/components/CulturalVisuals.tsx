@@ -428,7 +428,7 @@ export function WordIllustration({
               fill="#11241C"
               fontSize="24"
               fontWeight="700"
-              fontFamily="Fraunces, Georgia, serif"
+              fontFamily="Alegreya, Georgia, serif"
             >
               {numberValue}
             </text>
